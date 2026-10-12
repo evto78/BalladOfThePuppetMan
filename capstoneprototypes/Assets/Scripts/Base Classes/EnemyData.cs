@@ -7,6 +7,8 @@ public class EnemyData : ScriptableObject
 {
     [Header("Functional")]
     public int id;
+    public int maxHP;
+    public ElementalTypes type;
 
     [Header("Flavor")]
     public string enemyName;

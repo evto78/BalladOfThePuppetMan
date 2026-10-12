@@ -6,7 +6,7 @@ using static PlayerSkill;
 
 public class SpreadsheetToScriptableObject
 {
-    private static string enemyDataCSVPath = "/Scripts/Spreadsheet Importing/CSVs/Enemies.csv", skillsCSVPath = "/Scripts/Spreadsheet Importing/CSVs/Player Skills.csv"; //String paths for CSV files
+    private static string enemyDataCSVPath = "/Scripts/Spreadsheet Importing/CSVs/Enemies.csv", skillsCSVPath = "/Scripts/Spreadsheet Importing/CSVs/Player Skills.csv", enemyEncountersDataCSVPath = "/Scripts/Spreadsheet Importing/CSVs/Enemy Encounters.csv"; //String paths for CSV files
     private const string dataListPath = "Assets/Scripts/Spreadsheet Importing/DataList.asset"; //String path for the data list housing all created assets
 
     //Function that returns the data list from said path if found
@@ -67,6 +67,68 @@ public class SpreadsheetToScriptableObject
             dataList.allPlayerSkills.Add(skill); //Adds the current skill to the skill list in the data list
         }
         //Saves the assets
+        EditorUtility.SetDirty(dataList); //Overwrites the data list
+        AssetDatabase.SaveAssets();
+    }
+
+    [MenuItem("Generation/Generate Enemies")] //Ceates a new selection under the "Generation" tab in the unity editor to generate skills
+    public static void GenerateEnemies()
+    {
+        DataList dataList = GetDataList();
+
+        string[] allLines = File.ReadAllLines(Application.dataPath + enemyDataCSVPath);
+
+        dataList.allEnemies.Clear();
+
+        for (int i = 1; i < allLines.Length; i++)
+        {
+            string[] splitData = allLines[i].Split(',');
+
+            EnemyData enemy = new EnemyData();
+            enemy.id = int.Parse(splitData[0]);
+            enemy.enemyName = splitData[1];
+            enemy.type = Enum.Parse<ElementalTypes>(splitData[2]);
+            enemy.maxHP = int.Parse(splitData[3]);
+
+            AssetDatabase.CreateAsset(enemy, $"Assets/Resources/Enemies/{enemy.enemyName}.asset");
+            dataList.allEnemies.Add(enemy);
+        }
+
+        EditorUtility.SetDirty(dataList); //Overwrites the data list
+        AssetDatabase.SaveAssets();
+    }
+
+    //WIP (ENEMIES MUST BE FINISHED FIRST)
+    [MenuItem("Generation/Generate Encounters")] //Ceates a new selection under the "Generation" tab in the unity editor to generate skills
+    public static void GenerateEncounters()
+    {
+        DataList dataList = GetDataList();
+
+        string[] allLines = File.ReadAllLines(Application.dataPath + enemyEncountersDataCSVPath);
+
+        dataList.allEncounters.Clear();
+
+        for (int i = 1; i < allLines.Length; i++)
+        {
+            string[] splitData = allLines[i].Split(',');
+
+            EncountersData encounter = ScriptableObject.CreateInstance<EncountersData>();
+            encounter.encounterID = int.Parse(splitData[0]);
+            for (int j = 1; j < splitData.Length; j++)
+            {
+                for (int k = 0; k < dataList.allEnemies.Count; k++)
+                {
+                    if (splitData[j] == dataList.allEnemies[k].name)
+                    {
+                        encounter.enemies.Add(dataList.allEnemies[k]);
+                    }
+                }
+            }
+
+            AssetDatabase.CreateAsset(encounter, $"Assets/Resources/Encounters/Encounter {encounter.encounterID}.asset");
+            dataList.allEncounters.Add(encounter);
+        }
+
         EditorUtility.SetDirty(dataList); //Overwrites the data list
         AssetDatabase.SaveAssets();
     }
