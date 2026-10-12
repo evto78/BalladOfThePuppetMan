@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Prototype 2/proto2.unity
     guid: 474c2987ffea3eb4091f37b5ba372b0e
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 6953ecbc9f22c784d9cc23176eca54eb
+  - enabled: 1
     path: Assets/Scenes/Combat.unity
     guid: bbf3a2d6a0c3663469aa6c5dab2caa1e
   m_configObjects: {}
