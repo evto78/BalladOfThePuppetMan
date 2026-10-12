@@ -13,4 +13,5 @@ public class EnemyData : ScriptableObject
     [Header("Flavor")]
     public string enemyName;
     public string enemyDescription;
+    public Sprite enemySprite;
 }
