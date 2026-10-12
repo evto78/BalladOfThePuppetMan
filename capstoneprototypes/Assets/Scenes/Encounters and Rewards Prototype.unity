@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 10063302}
   - component: {fileID: 10063301}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
