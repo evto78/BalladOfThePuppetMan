@@ -27,7 +27,9 @@ public class PlayerSpriteAnimator : MonoBehaviour
         activeSprite = 0;
         activeSpritePriority = 0;
 
-        CheckTimeline(perfectActive, perfectLanded);
+        if (!timeline.combatPause && timeline.combatActive) { CheckTimeline(perfectActive, perfectLanded); }
+
+
 
         sr.sprite = spriteList[activeSprite];
     }
@@ -45,19 +47,20 @@ public class PlayerSpriteAnimator : MonoBehaviour
             }
         }
 
-        //WIP!! ADD PRIORITIES AND ALSO ATTACK WIND UPS!
-        //parries also need to be added.
+        //WIP!! ADD PRIORITIES! ADD GETTING HIT! AND PARRIES!!!
+        if (nextSkill != null)
+        {
+            float nextSkillTime = timeline.TimeFromIndex(nextSkillIndex);
+            if (nextSkillTime - timeline.timePassed < nextSkill.prepTime / 4f) { activeSprite = 5; } //Attack Wind Up 2
+            if (nextSkillTime - timeline.timePassed < nextSkill.prepTime / 2f) { activeSprite = 4; } //Attack Wind Up 1
+        }
         if (prevSkill != null)
         {
             float prevSkillTime = timeline.TimeFromIndex(prevSkillIndex);
-            if (timeline.timePassed - prevSkillTime < 0.05f && perfectLanded) { activeSprite = 6; } // Perfect Attack Active
-            else if (timeline.timePassed - prevSkillTime < 0.1f) { activeSprite = 7; } // Attack Active
-            else if (timeline.timePassed - prevSkillTime < 0.15f) { activeSprite = 8; } // Attack Follow Through 1
-            else if (timeline.timePassed - prevSkillTime < 0.2f) { activeSprite = 9; } // Attack Follow Through 2
-        }
-        if (nextSkill != null)
-        {
-
+            if (timeline.timePassed - prevSkillTime < 0.1f && perfectLanded) { activeSprite = 6; } // Perfect Attack Active
+            else if (timeline.timePassed - prevSkillTime < 0.15f) { activeSprite = 7; } // Attack Active
+            else if (timeline.timePassed - prevSkillTime < 0.2f) { activeSprite = 8; } // Attack Follow Through 1
+            else if (timeline.timePassed - prevSkillTime < 0.25f) { activeSprite = 9; } // Attack Follow Through 2
         }
     }
 }
