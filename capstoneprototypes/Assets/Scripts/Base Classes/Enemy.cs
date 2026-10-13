@@ -35,11 +35,11 @@ public class Enemy : MonoBehaviour
     }
 
     [Header("Visuals")]
-    public List<List<Sprite>> globalSpriteData; //A list containing every enemies sprite data so it can pull from it to set its sprite list.
-    public List<Sprite> spriteList; //0: idle, 1: windup, 2: attack, 3: hurt, 4+ is for extra sprites / attacks.
+    EnemySpriteLibrary spriteLib; // the database of all sprites
+    List<Sprite> spriteList; //0: idle, 1: windup, 2: attack, 3: hurt, 4+ is for extra sprites / attacks.
     public SpriteRenderer sr;
-    public Image attackCircle;
     int activeSprite;
+    float hitTimer = 0f; //When more than 1, count down and force display hurt animation.
 
     [Header("Stats")]
     public int mhp;
@@ -59,6 +59,10 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        spriteLib = GameObject.Find("EnemySpriteLibrary").GetComponent<EnemySpriteLibrary>();
+
+        if (myData != null) { SetEnemyData(-1, myData); } //If data is set in editor, use that data
+
         hp = mhp;
 
         timeline = GameObject.Find("Timeline").GetComponent<TimelineManager>();
@@ -86,8 +90,10 @@ public class Enemy : MonoBehaviour
         hp = mhp;
         elementalType = myData.type;
         attackPatterns = myData.attackPatterns;
+        
+        if (spriteLib == null) { spriteLib = GameObject.Find("EnemySpriteLibrary").GetComponent<EnemySpriteLibrary>(); }
 
-        spriteList = globalSpriteData[myData.id];
+        spriteList = spriteLib.globalSpriteList[myData.id].spriteList;
     }
 
     private void OnDisable()
@@ -182,7 +188,6 @@ public class Enemy : MonoBehaviour
             }
             if (action.playAnim)
             {
-                attackCircle.fillAmount = relitiveTime / action.delayBeforeAction;
             }
         }
         else if (prevRelitiveTime < action.delayBeforeAction)
@@ -191,7 +196,6 @@ public class Enemy : MonoBehaviour
             if (action.playAnim) 
             { 
                 activeSprite = 2; 
-                attackCircle.fillAmount = 1; 
             }
 
             //ActivateAction(action);
@@ -202,19 +206,21 @@ public class Enemy : MonoBehaviour
             if (relitiveTime < action.delayBeforeAction + action.animWinddownEnd && action.playAnim)
             {
                 activeSprite = 2; //attack anim
-                attackCircle.fillAmount = 1;
             }
             else if (action.playAnim)
             {
                 activeSprite = 0; //idle anim
-                attackCircle.fillAmount = 0;
             }
         }
     }
 
     void UpdateVisuals()
     {
-        sr.sprite = spriteList[activeSprite];
+        if (hitTimer > 0) { sr.sprite = spriteList[3]; hitTimer -= Time.deltaTime; } // Force set hit animation
+        else
+        {
+            sr.sprite = spriteList[activeSprite];
+        }
     }
 
     public void Attack(TimelineManager.TimelineEvent attackEvent)
@@ -226,12 +232,13 @@ public class Enemy : MonoBehaviour
     public void PrepareForNextRound()
     {
         activeSprite = 0;
-        attackCircle.fillAmount = 0;
         UpdateVisuals();
     }
 
     public void TakeDamage(int damage)
     {
+        hitTimer = 0.25f;
+
         hp -= damage;
 
         if (hp <= 0) { Die(); }
