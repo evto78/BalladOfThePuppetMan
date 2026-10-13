@@ -50,12 +50,18 @@ public class Enemy : MonoBehaviour
     float curTimelineIndex; //The amount of time passed according to the current index of the timeline relative to its resolution. Accurate to all timeline distortions.
     PlayerActionManager player;
     AudioManager audioMan;
-    public List<AttackPattern> attackPatterns;
+    public EnemyData myData;
+    List<AttackPattern> attackPatterns;
     int curRound;
     public List<int> patternByRound;
 
     private void Awake()
     {
+        mhp = myData.maxHP;
+        hp = mhp;
+        elementalType = myData.type;
+        attackPatterns = myData.attackPatterns;
+
         timeline = GameObject.Find("Timeline").GetComponent<TimelineManager>();
         player = GameObject.Find("Player").GetComponent<PlayerActionManager>();
         audioMan = GameObject.Find("AudioManager").GetComponent<AudioManager>();

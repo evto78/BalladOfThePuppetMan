@@ -517,34 +517,6 @@ MonoBehaviour:
   attackCircle: {fileID: 1358928813875460856}
   mhp: 20
   hp: 20
-  attackPatterns:
-  - timelineChangePriority: 2
-    timelineCombatTimePref: 6
-    timelineCombatSpeedPref: 1
-    actionSequence:
-    - actionType: 4
-      damage: 0
-      delayBeforeAction: 2
-      delayAfterAction: 0
-      playAnim: 0
-      animWindupStart: 0
-      animWinddownEnd: 0
-    - actionType: 2
-      damage: 1
-      delayBeforeAction: 1
-      delayAfterAction: 1
-      playAnim: 1
-      animWindupStart: 0.5
-      animWinddownEnd: 0.5
-  - timelineChangePriority: 2
-    timelineCombatTimePref: 12
-    timelineCombatSpeedPref: 1
-    actionSequence:
-    - actionType: 2
-      damage: 1
-      delayBeforeAction: 1
-      delayAfterAction: 1
-      playAnim: 1
-      animWindupStart: 0.5
-      animWinddownEnd: 0.5
+  elementalType: 0
+  myData: {fileID: 11400000, guid: 8a6bfae9491c86f49a7c58fd3839d14d, type: 2}
   patternByRound: 0000000001000000
