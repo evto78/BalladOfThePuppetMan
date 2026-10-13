@@ -13,6 +13,9 @@ public class PlayerSpriteAnimator : MonoBehaviour
     int activeSprite;
     int activeSpritePriority;
 
+    public float parryOverrideTimer = 0f;
+    public float hitOverrideTimer = 0f;
+
     void Start()
     {
         player = GetComponent<PlayerActionManager>();
@@ -27,14 +30,13 @@ public class PlayerSpriteAnimator : MonoBehaviour
         activeSprite = 0;
         activeSpritePriority = 0;
 
-        if (!timeline.combatPause && timeline.combatActive) { CheckTimeline(perfectActive, perfectLanded); }
-
-
+        if (!timeline.combatPause && timeline.combatActive) { CheckTimeline(parryActive, parryLanded, perfectActive, perfectLanded); }
+        else { parryOverrideTimer = 0; }
 
         sr.sprite = spriteList[activeSprite];
     }
     // Am I about to attack, lets check the timeline!!!
-    void CheckTimeline(bool perfectActive, bool perfectLanded)
+    void CheckTimeline(bool parryActive, bool parryLanded, bool perfectActive, bool perfectLanded)
     {
         PlayerSkill nextSkill = null; int nextSkillIndex = 999999;
         PlayerSkill prevSkill = null; int prevSkillIndex = -1;
@@ -46,6 +48,9 @@ public class PlayerSpriteAnimator : MonoBehaviour
                 if ((tEvent.timelineIndex < timeline.eventIndex) && (tEvent.timelineIndex > prevSkillIndex)) { prevSkill = tEvent.playerSkill; prevSkillIndex = tEvent.timelineIndex; }
             }
         }
+
+        if (parryActive) { activeSprite = 2; }
+        else if (player.curParryCooldown > 0) { activeSprite = 1; }
 
         //WIP!! ADD PRIORITIES! ADD GETTING HIT! AND PARRIES!!!
         if (nextSkill != null)
@@ -62,5 +67,11 @@ public class PlayerSpriteAnimator : MonoBehaviour
             else if (timeline.timePassed - prevSkillTime < 0.2f) { activeSprite = 8; } // Attack Follow Through 1
             else if (timeline.timePassed - prevSkillTime < 0.25f) { activeSprite = 9; } // Attack Follow Through 2
         }
+
+        if (hitOverrideTimer > 0) { activeSprite = 10; hitOverrideTimer -= Time.deltaTime; }
+
+        if (parryLanded) { activeSprite = 3; parryOverrideTimer = 0.1f; }
+        else if (parryOverrideTimer > 0) { activeSprite = 3; parryOverrideTimer -= Time.deltaTime; }
+
     }
 }

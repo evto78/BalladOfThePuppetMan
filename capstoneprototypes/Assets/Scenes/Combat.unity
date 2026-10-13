@@ -15500,6 +15500,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7005099938305749997, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1394760278, guid: e04e2cf9939d72843a88b36fca82121d, type: 3}
+    - target: {fileID: 7005099938305749997, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -15551,6 +15559,8 @@ MonoBehaviour:
   - {fileID: -1366735636, guid: e04e2cf9939d72843a88b36fca82121d, type: 3}
   - {fileID: -1122667257, guid: e04e2cf9939d72843a88b36fca82121d, type: 3}
   - {fileID: -1921464670, guid: e04e2cf9939d72843a88b36fca82121d, type: 3}
+  parryOverrideTimer: 0
+  hitOverrideTimer: 0
 --- !u!1001 &3241559207093764999
 PrefabInstance:
   m_ObjectHideFlags: 0

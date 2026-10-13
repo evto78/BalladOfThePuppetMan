@@ -24,13 +24,13 @@ public class PlayerActionManager : MonoBehaviour
 
     public float parryWindow;
     public float parryCooldown;
-    float curParryCooldown = 0;
+    public float curParryCooldown = 0;
     bool parryActive;
     bool parryLanded;
 
     public float perfectWindow;
     public float perfectCooldown;
-    float curPerfectCooldown = 0;
+    public float curPerfectCooldown = 0;
     bool perfectActive;
     bool perfectLanded;
 
@@ -170,42 +170,13 @@ public class PlayerActionManager : MonoBehaviour
 
         fillBar.fillAmount = (float)hp / (float)mhp;
         energyFill.fillAmount = (Mathf.CeilToInt((visualEnergyLeft / (float)maxEnergy) * 16f)) / 16f;
-        //Debug.Log(Mathf.CeilToInt(((float)hp / (float)mhp) * healthBarStates.Count));
         healthBar.sprite = healthBarStates[Mathf.FloorToInt(((float)hp/(float)mhp)*(healthBarStates.Count-1))];
-
-        if (updatedSprite) { return; }
-
-        //if (parryLanded) { activeSprite = 3; }
-        //else if (perfectLanded) { activeSprite = 4; }
-        //else if (parryActive) { activeSprite = 2; }
-        //else if (curParryCooldown > 0) { activeSprite = 1; }
-        //else { activeSprite = 0; }
-        //sr.sprite = sprites[activeSprite];
-
-        updatedSprite = true;
     }
 
-    bool updatedSprite = false;
     void LateUpdate()
     {
         UpdateVisuals();
         psAnim.UpdateVisuals(parryActive, parryLanded, perfectActive, perfectLanded);
-        updatedSprite = false;
-    }
-
-    Coroutine animRoutine;
-    IEnumerator PlayAnimation(int animationIndex)
-    {
-        float tempTimer = 0.1f;
-        while(tempTimer > 0)
-        {
-            //activeSprite = animationIndex;
-            //sr.sprite = sprites[activeSprite];
-            updatedSprite = true;
-            tempTimer -= Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }      
-        yield return null;
     }
 
     public IEnumerator ReactableEvent(TimelineManager.TimelineEvent onComingEvent)
@@ -322,6 +293,7 @@ public class PlayerActionManager : MonoBehaviour
     void TakeDamage(int dmg)
     {
         hp -= dmg;
+        psAnim.hitOverrideTimer = 0.1f;
         if (hp <= 0) { Die(); }
     }
 
@@ -335,15 +307,11 @@ public class PlayerActionManager : MonoBehaviour
     {
         parryLanded = true;
         foreach (ParticleSystem ps in parryParticles) { ps.Stop(); ps.Play(); }
-        //if (animRoutine != null) { StopCoroutine(animRoutine); }
-        //animRoutine = StartCoroutine(PlayAnimation(3));
     }
 
     void PerfectLanded()
     {
         perfectLanded = true;
         foreach (ParticleSystem ps in perfectParticles) { ps.Stop(); ps.Play(); }
-        //if (animRoutine != null) { StopCoroutine(animRoutine); }
-        //animRoutine = StartCoroutine(PlayAnimation(4));
     }
 }
