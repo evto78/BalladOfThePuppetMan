@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: DataList
   m_EditorClassIdentifier: 
   allEnemies:
-  - {fileID: 11400000, guid: 64a6f32d25975294594319acce3b41a5, type: 2}
-  - {fileID: 11400000, guid: 9c8b701b63429914c9c909e39e50fa54, type: 2}
-  - {fileID: 11400000, guid: efa08772316ba154f91d8d162fa5fda9, type: 2}
+  - {fileID: 11400000, guid: ddd2c1cbbfe30db489ef3e271d0d5c41, type: 2}
+  - {fileID: 11400000, guid: 8a6bfae9491c86f49a7c58fd3839d14d, type: 2}
+  - {fileID: 11400000, guid: 69b9d84f21e15fb449f5463d978df7b9, type: 2}
   allPlayerSkills:
   - {fileID: 11400000, guid: 869b4dae75bb68d4ebe1cc8f724e2d57, type: 2}
   - {fileID: 11400000, guid: bff9eb2721618074c86abd0fbc3ecac9, type: 2}
   - {fileID: 11400000, guid: da63581a4adc80c409095e98cf4d740d, type: 2}
   - {fileID: 11400000, guid: 1deef270444d1894fa91e6adeb1c1ec1, type: 2}
   allEncounters:
-  - {fileID: 11400000, guid: b8b88cd437d8009478c08164a0951965, type: 2}
-  - {fileID: 11400000, guid: 447eb9e427596ba41b02586d321af8f7, type: 2}
-  - {fileID: 11400000, guid: ccb85e5b1d1796b40a433921a881bb33, type: 2}
-  - {fileID: 11400000, guid: 9a4d431a16716f74d94dad8f4f28259d, type: 2}
+  - {fileID: 11400000, guid: 81cad993b47828847bb0439c014a9e22, type: 2}
+  - {fileID: 11400000, guid: bae1960e09ff37746b85c20a0dce4916, type: 2}
+  - {fileID: 11400000, guid: 193df820bcea3ee438e2ff25032f5c3e, type: 2}
+  - {fileID: 11400000, guid: 26fbf9ebfb89571499538aaa3288fa03, type: 2}
