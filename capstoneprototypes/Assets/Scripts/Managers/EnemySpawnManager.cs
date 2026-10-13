@@ -5,29 +5,34 @@ using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
 {
-    public GameObject[] spawnPoints; //Used for final spawning logic
+    public Transform[] spawns;
     public DataList dl;
-    public GameObject enemyPrefab; //Used for final spawning logic
+    public GameObject[] enemies;
 
-    //Only used for testing features delete them
-    public TextMeshProUGUI[] enemyName;
-    public GameObject[] enemy;
+    List<GameObject> enemiesAlive = new List<GameObject>();
+
 
     public void SpawnEnemies()
     {
+        RemoveAllEnemies();
         int encounterIndex = Random.Range(0, dl.allEncounters.Count);
         List<EnemyData> validEnemies = dl.allEncounters[encounterIndex].enemies;
 
-        for (int i = 0; i < enemy.Length; i++)
-        {
-            enemy[i].SetActive(false);
-        }
-
         for (int i = 0; i < validEnemies.Count; i++)
         {
-            //Tests if encounter spawning logic works
-            enemy[i].SetActive(true);
-            enemyName[i].text = validEnemies[i].enemyName;
+            enemiesAlive.Add(Instantiate(enemies[validEnemies[i].id], spawns[i].position, Quaternion.identity));
+        }
+    }
+
+    public void RemoveAllEnemies()
+    {
+        if (enemiesAlive.Count > 0)
+        {
+            for (int i = 0; i < enemiesAlive.Count; i++)
+            {
+                Destroy(enemiesAlive[i]);
+            }
+            enemiesAlive.Clear();
         }
     }
 }

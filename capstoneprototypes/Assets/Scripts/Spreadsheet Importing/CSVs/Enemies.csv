@@ -1,5 +1,5 @@
-ID,Enemy Name,Element Type,Max HP,
-0,Shameling,None,10,
-1,NewYear,None,20,
-2,Shamefool,None,20,
+ID,Enemy Name,Element Type,Max HP,PatternByRound
+0,Shameling,None,10,0
+1,NewYear,None,20,0-1
+2,Shamefool,None,20,0
 ,,,,
