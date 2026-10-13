@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e04e2cf9939d72843a88b36fca82121d
+guid: f4840fe9d44b70c41946075385babdfb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d66b43f227ae2124a83e5c12b932a491
-      internalID: -1394760278
+      spriteID: 96750a84441e9f34aad75be8761a02c8
+      internalID: 1928479980
       vertices: []
       indices: 
       edges: []
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc3c7c75f1025ad48958cb3b84c0afaf
-      internalID: 1014727910
+      spriteID: 0d470795de3784045ae7fd7da8b26b24
+      internalID: 1735301062
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_AttackWind1
+      name: P_Windup1
       rect:
         serializedVersion: 2
         x: 64
@@ -153,14 +153,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c70c77ab35f587848aa70993605bc757
-      internalID: -812682247
+      spriteID: 0a2e1b70fe829d44da399c3d67e9b766
+      internalID: 342086560
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_ActiveParry
+      name: P_Hurt
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e7cd614a64ad4949a385b6db99c5e56
+      internalID: 1506307125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: P_ParryActive
       rect:
         serializedVersion: 2
         x: 32
@@ -174,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0e380ab3d11ca034ab668d4cf8be3b22
-      internalID: 184935432
+      spriteID: a46803251363a0b42988ea216bdbb43d
+      internalID: 168160439
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_AttackWind2
+      name: P_Windup2
       rect:
         serializedVersion: 2
         x: 64
@@ -195,8 +216,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 20857ebc0f3dc80438f03276b46b6508
-      internalID: 434198822
+      spriteID: 15e13bb6073339f44b194afe0cde4420
+      internalID: 731232601
       vertices: []
       indices: 
       edges: []
@@ -216,14 +237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dff37f0b408136842a89cebca3c6f146
-      internalID: -301129883
+      spriteID: 5109f1ffe8d58064a85fd77438f1779e
+      internalID: 878876358
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_PerfectAttack
+      name: P_PerfectLanded
       rect:
         serializedVersion: 2
         x: 64
@@ -237,8 +258,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7859c57a5137cd49a43676b44732f9f
-      internalID: 2117425573
+      spriteID: 69628af7e89713040ae10280c6cb95fd
+      internalID: -736365860
       vertices: []
       indices: 
       edges: []
@@ -258,14 +279,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2aa23c785fa5044f85425bf6cc252c3
-      internalID: -1366735636
+      spriteID: 23483903558d859499bc18941d635ea7
+      internalID: 2118661395
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_AttackFollow1
+      name: P_FollowThrough1
       rect:
         serializedVersion: 2
         x: 64
@@ -279,14 +300,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6291d4628fdc012479d4e171274b6540
-      internalID: -1122667257
+      spriteID: da06e25d48638cd4eb61a4fe904de1a1
+      internalID: -469475358
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: P_AttackFollow2
+      name: P_FollowThrough2
       rect:
         serializedVersion: 2
         x: 64
@@ -300,8 +321,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c00b036bb3cce242a53781a2bcd5a22
-      internalID: -1921464670
+      spriteID: fc69d893f1de2294089953338c77dcea
+      internalID: -1822368204
       vertices: []
       indices: 
       edges: []
@@ -317,16 +338,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      P_ActiveParry: 184935432
-      P_Attack: -1366735636
-      P_AttackFollow1: -1122667257
-      P_AttackFollow2: -1921464670
-      P_AttackWind1: -812682247
-      P_AttackWind2: 434198822
-      P_Block: 1014727910
-      P_Idle: -1394760278
-      P_ParryLanded: -301129883
-      P_PerfectAttack: 2117425573
+      P_Attack: 2118661395
+      P_Block: 1735301062
+      P_FollowThrough1: -469475358
+      P_FollowThrough2: -1822368204
+      P_Hurt: 1506307125
+      P_Idle: 1928479980
+      P_ParryActive: 168160439
+      P_ParryLanded: 878876358
+      P_PerfectLanded: -736365860
+      P_Windup1: 342086560
+      P_Windup2: 731232601
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
