@@ -95,7 +95,7 @@ public class SpreadsheetToScriptableObject
             string[] patternByRoundSplitData = enemySplitData[4].Split('-');
             for (int j = 0; j < patternByRoundSplitData.Length; j++)
             {
-                enemy.patternByRound.Add(int.Parse(patternByRoundSplitData[i]));
+                enemy.patternByRound.Add(int.Parse(patternByRoundSplitData[j]));
             }
 
             int previousPatternID = -1;

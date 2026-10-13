@@ -90,7 +90,9 @@ public class Enemy : MonoBehaviour
         hp = mhp;
         elementalType = myData.type;
         attackPatterns = myData.attackPatterns;
-        
+        patternByRound = myData.patternByRound;
+
+
         if (spriteLib == null) { spriteLib = GameObject.Find("EnemySpriteLibrary").GetComponent<EnemySpriteLibrary>(); }
 
         spriteList = spriteLib.globalSpriteList[myData.id].spriteList;

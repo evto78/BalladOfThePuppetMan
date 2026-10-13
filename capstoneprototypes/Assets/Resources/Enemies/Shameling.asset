@@ -34,6 +34,7 @@ MonoBehaviour:
       playAnim: 1
       animWindupStart: 0.25
       animWinddownEnd: 0.25
+  patternByRound: 00000000
   enemyName: Shameling
   enemyDescription: 
   enemySprite: {fileID: 0}

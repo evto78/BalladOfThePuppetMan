@@ -45,6 +45,7 @@ MonoBehaviour:
       playAnim: 1
       animWindupStart: 0.5
       animWinddownEnd: 0.5
+  patternByRound: 0000000001000000
   enemyName: NewYear
   enemyDescription: 
   enemySprite: {fileID: 0}

@@ -41,6 +41,7 @@ MonoBehaviour:
       playAnim: 1
       animWindupStart: 0.125
       animWinddownEnd: 0.125
+  patternByRound: 00000000
   enemyName: Shamefool
   enemyDescription: 
   enemySprite: {fileID: 0}
