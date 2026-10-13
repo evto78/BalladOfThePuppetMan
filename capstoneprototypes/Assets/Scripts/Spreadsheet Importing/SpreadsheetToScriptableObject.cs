@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -6,7 +7,7 @@ using static PlayerSkill;
 
 public class SpreadsheetToScriptableObject
 {
-    private static string enemyDataCSVPath = "/Scripts/Spreadsheet Importing/CSVs/Enemies.csv", skillsCSVPath = "/Scripts/Spreadsheet Importing/CSVs/Player Skills.csv", enemyEncountersDataCSVPath = "/Scripts/Spreadsheet Importing/CSVs/Enemy Encounters.csv"; //String paths for CSV files
+    private static string enemyDataCSVPath = "/Scripts/Spreadsheet Importing/CSVs/Enemies.csv", attackPatternsDataCSVPath = "/Scripts/Spreadsheet Importing/CSVs/Attack Patterns.csv", skillsCSVPath = "/Scripts/Spreadsheet Importing/CSVs/Player Skills.csv", enemyEncountersDataCSVPath = "/Scripts/Spreadsheet Importing/CSVs/Enemy Encounters.csv"; //String paths for CSV files
     private const string dataListPath = "Assets/Scripts/Spreadsheet Importing/DataList.asset"; //String path for the data list housing all created assets
 
     //Function that returns the data list from said path if found
@@ -76,29 +77,84 @@ public class SpreadsheetToScriptableObject
     {
         DataList dataList = GetDataList();
 
-        string[] allLines = File.ReadAllLines(Application.dataPath + enemyDataCSVPath);
+        string[] allEnemyLines = File.ReadAllLines(Application.dataPath + enemyDataCSVPath);
+        string[] allAttackPatternLines = File.ReadAllLines(Application.dataPath + attackPatternsDataCSVPath);
 
         dataList.allEnemies.Clear();
 
-        for (int i = 1; i < allLines.Length; i++)
+        for (int i = 1; i < allEnemyLines.Length; i++)
         {
-            string[] splitData = allLines[i].Split(',');
+            string[] enemySplitData = allEnemyLines[i].Split(',');
 
-            EnemyData enemy = new EnemyData();
-            enemy.id = int.Parse(splitData[0]);
-            enemy.enemyName = splitData[1];
-            enemy.type = Enum.Parse<ElementalTypes>(splitData[2]);
-            enemy.maxHP = int.Parse(splitData[3]);
+            EnemyData enemy = ScriptableObject.CreateInstance<EnemyData>();
+            enemy.id = int.Parse(enemySplitData[0]);
+            enemy.enemyName = enemySplitData[1];
+            enemy.type = Enum.Parse<ElementalTypes>(enemySplitData[2]);
+            enemy.maxHP = int.Parse(enemySplitData[3]);
+
+            int previousPatternID = -1;
+            Enemy.AttackPattern previousPatten = null;
+
+            for (int j = 1; j < allAttackPatternLines.Length; j++)
+            {
+                string[] attackPatternSplitData = allAttackPatternLines[j].Split(',');
+
+                if (int.Parse(attackPatternSplitData[0]) == enemy.id)
+                {
+
+                    if (previousPatternID != int.Parse(attackPatternSplitData[1]))
+                    {
+                        Enemy.AttackPattern newPattern = new Enemy.AttackPattern();
+                        newPattern.timelineChangePriority = int.Parse(attackPatternSplitData[2]);
+                        newPattern.timelineCombatTimePref = float.Parse(attackPatternSplitData[3]);
+                        newPattern.timelineCombatSpeedPref = float.Parse(attackPatternSplitData[4]);
+
+                        Enemy.Action newAction = new Enemy.Action();
+                        newAction.actionType = Enum.Parse<TimelineManager.EventType>(attackPatternSplitData[5]);
+                        newAction.damage = int.Parse(attackPatternSplitData[6]);
+                        newAction.delayBeforeAction = float.Parse(attackPatternSplitData[7]);
+                        newAction.delayAfterAction = float.Parse(attackPatternSplitData[8]);
+                        newAction.playAnim = bool.Parse(attackPatternSplitData[9]);
+                        newAction.animWindupStart = float.Parse(attackPatternSplitData[10]);
+                        newAction.animWinddownEnd = float.Parse(attackPatternSplitData[11]);
+
+                        if (previousPatten != null)
+                        {
+                            enemy.attackPatterns.Add(previousPatten);
+                        }
+                        previousPatten = newPattern;
+                        previousPatten.actionSequence.Add(newAction);
+                    }
+                    else
+                    {
+                        Enemy.Action newAction = new Enemy.Action();
+                        newAction.actionType = Enum.Parse<TimelineManager.EventType>(attackPatternSplitData[5]);
+                        newAction.damage = int.Parse(attackPatternSplitData[6]);
+                        newAction.delayBeforeAction = float.Parse(attackPatternSplitData[7]);
+                        newAction.delayAfterAction = float.Parse(attackPatternSplitData[8]);
+                        newAction.playAnim = bool.Parse(attackPatternSplitData[9]);
+                        newAction.animWindupStart = float.Parse(attackPatternSplitData[10]);
+                        newAction.animWinddownEnd = float.Parse(attackPatternSplitData[11]);
+
+                        previousPatten.actionSequence.Add(newAction);
+                    }
+                    
+                    previousPatternID = int.Parse(attackPatternSplitData[1]);
+                }
+            }
+            if (previousPatten != null && !enemy.attackPatterns.Contains(previousPatten))
+            {
+                enemy.attackPatterns.Add(previousPatten);
+            }
 
             AssetDatabase.CreateAsset(enemy, $"Assets/Resources/Enemies/{enemy.enemyName}.asset");
             dataList.allEnemies.Add(enemy);
         }
 
-        EditorUtility.SetDirty(dataList); //Overwrites the data list
+        EditorUtility.SetDirty(dataList);
         AssetDatabase.SaveAssets();
     }
 
-    //WIP (ENEMIES MUST BE FINISHED FIRST)
     [MenuItem("Generation/Generate Encounters")] //Ceates a new selection under the "Generation" tab in the unity editor to generate skills
     public static void GenerateEncounters()
     {
@@ -129,7 +185,7 @@ public class SpreadsheetToScriptableObject
             dataList.allEncounters.Add(encounter);
         }
 
-        EditorUtility.SetDirty(dataList); //Overwrites the data list
+        EditorUtility.SetDirty(dataList);
         AssetDatabase.SaveAssets();
     }
 }

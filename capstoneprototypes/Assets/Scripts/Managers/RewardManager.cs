@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RewardManager : MonoBehaviour
 {
-    
     public GameObject rewardUI;
     public PlayerSkill[] skills;
     public GameObject skillReplacementUI;
@@ -14,12 +13,14 @@ public class RewardManager : MonoBehaviour
 
 
     //Used for testing purposes only
-    public PlayerSkill[] playerSkills;
+    PlayerSkill[] playerSkills;
     public GameObject combat, rewards;
 
     //Used for testing purposes only
     private void Start()
     {
+        playerSkills = new PlayerSkill[4];
+
         for (int i = 0; i < playerSkills.Length; i++)
         {
             playerSkills[i] = dl.allPlayerSkills[i];
@@ -55,5 +56,4 @@ public class RewardManager : MonoBehaviour
         combat.SetActive(combatEnabled);
         rewards.SetActive(!combatEnabled);
     }
-    
 }

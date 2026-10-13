@@ -9,6 +9,7 @@ public class EnemyData : ScriptableObject
     public int id;
     public int maxHP;
     public ElementalTypes type;
+    public List<Enemy.AttackPattern> attackPatterns = new List<Enemy.AttackPattern>();
 
     [Header("Flavor")]
     public string enemyName;
