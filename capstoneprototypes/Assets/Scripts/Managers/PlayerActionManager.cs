@@ -293,7 +293,7 @@ public class PlayerActionManager : MonoBehaviour
     void TakeDamage(int dmg)
     {
         hp -= dmg;
-        psAnim.hitOverrideTimer = 0.1f;
+        psAnim.hitOverrideTimer = 0.25f;
         if (hp <= 0) { Die(); }
     }
 
