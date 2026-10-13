@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RewardManager : MonoBehaviour
 {
+    
     public GameObject rewardUI;
     public PlayerSkill[3] skills;
     public GameObject skillReplacementUI;
@@ -11,6 +12,7 @@ public class RewardManager : MonoBehaviour
 
     PlayerSkill selectedSkill;
 
+    
     //Used for testing purposes only
     PlayerSkill[4] playerSkills;
     public GameObject combat, rewards;
@@ -24,6 +26,7 @@ public class RewardManager : MonoBehaviour
         }
     }
 
+    
     public void RandomizeRewards()
     {
         for (int i = 0; i < skills.Length; i++)
@@ -45,10 +48,12 @@ public class RewardManager : MonoBehaviour
         ChangeGameState(true);
     }
 
+    
     //Function just for testing
     public void ChangeGameState(bool combatEnabled)
     {
         combat.SetActive(combatEnabled);
         rewards.SetActive(!combatEnabled);
     }
+    
 }
