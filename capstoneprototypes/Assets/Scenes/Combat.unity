@@ -15779,6 +15779,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shameling
       objectReference: {fileID: 0}
+    - target: {fileID: 2573266613902475739, guid: 3a69146743ec96346bdeb3841e554ce9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2742526880035886883, guid: 3a69146743ec96346bdeb3841e554ce9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4

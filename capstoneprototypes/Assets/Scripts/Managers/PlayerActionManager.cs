@@ -42,14 +42,13 @@ public class PlayerActionManager : MonoBehaviour
     [Header("Visuals")]
     public List<ParticleSystem> parryParticles;
     public List<ParticleSystem> perfectParticles;
-    public List<Sprite> sprites;
-    int activeSprite = 0;
     public Image energyFill;
     float visualEnergyLeft;
     public SpriteRenderer healthBar;
     public List<Sprite> healthBarStates;
 
     [Header("References")]
+    PlayerSpriteAnimator psAnim;
     TimelineManager timeline;
     AudioManager audioMan;
     GeneralAnimator gAnim;
@@ -62,6 +61,7 @@ public class PlayerActionManager : MonoBehaviour
         audioMan = GameObject.Find("AudioManager").GetComponent<AudioManager>();
 
         gAnim = GetComponent<GeneralAnimator>();
+        psAnim = GetComponent<PlayerSpriteAnimator>();
 
         statData.AddRange(Resources.LoadAll<StatusEffect>("StatusEffects"));
         SortStatusEffectData();
@@ -175,12 +175,12 @@ public class PlayerActionManager : MonoBehaviour
 
         if (updatedSprite) { return; }
 
-        if (parryLanded) { activeSprite = 3; }
-        else if (perfectLanded) { activeSprite = 4; }
-        else if (parryActive) { activeSprite = 2; }
-        else if (curParryCooldown > 0) { activeSprite = 1; }
-        else { activeSprite = 0; }
-        sr.sprite = sprites[activeSprite];
+        //if (parryLanded) { activeSprite = 3; }
+        //else if (perfectLanded) { activeSprite = 4; }
+        //else if (parryActive) { activeSprite = 2; }
+        //else if (curParryCooldown > 0) { activeSprite = 1; }
+        //else { activeSprite = 0; }
+        //sr.sprite = sprites[activeSprite];
 
         updatedSprite = true;
     }
@@ -189,6 +189,7 @@ public class PlayerActionManager : MonoBehaviour
     void LateUpdate()
     {
         UpdateVisuals();
+        psAnim.UpdateVisuals(parryActive, parryLanded, perfectActive, perfectLanded);
         updatedSprite = false;
     }
 
@@ -198,8 +199,8 @@ public class PlayerActionManager : MonoBehaviour
         float tempTimer = 0.1f;
         while(tempTimer > 0)
         {
-            activeSprite = animationIndex;
-            sr.sprite = sprites[activeSprite];
+            //activeSprite = animationIndex;
+            //sr.sprite = sprites[activeSprite];
             updatedSprite = true;
             tempTimer -= Time.deltaTime;
             yield return new WaitForEndOfFrame();
@@ -334,15 +335,15 @@ public class PlayerActionManager : MonoBehaviour
     {
         parryLanded = true;
         foreach (ParticleSystem ps in parryParticles) { ps.Stop(); ps.Play(); }
-        if (animRoutine != null) { StopCoroutine(animRoutine); }
-        animRoutine = StartCoroutine(PlayAnimation(3));
+        //if (animRoutine != null) { StopCoroutine(animRoutine); }
+        //animRoutine = StartCoroutine(PlayAnimation(3));
     }
 
     void PerfectLanded()
     {
         perfectLanded = true;
         foreach (ParticleSystem ps in perfectParticles) { ps.Stop(); ps.Play(); }
-        if (animRoutine != null) { StopCoroutine(animRoutine); }
-        animRoutine = StartCoroutine(PlayAnimation(4));
+        //if (animRoutine != null) { StopCoroutine(animRoutine); }
+        //animRoutine = StartCoroutine(PlayAnimation(4));
     }
 }
