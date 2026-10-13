@@ -18,6 +18,7 @@ MonoBehaviour:
   target: 1
   intensity: 6
   perfectMultiplier: 2
+  elementalType: 0
   skillName: Heavy Bash
-  skillDescription: Hit a single enemy for 6 DMG.
+  skillDescription: Deals 6 damage with a 2x perfect multiplier.
   perfectable: 1

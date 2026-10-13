@@ -1,2 +1,5 @@
-ID,Skill Name,Element Type,Cost (energy),PrepTime (seconds),Target,Intensity (Damage / Heal),Prefect Multiplier,Perfectable?
-0,Test Skill,None,2,3,SingleEnemy,5,1.5,TRUE
+ID,Skill Name,Element Type,Cost (energy),PrepTime (seconds),Target,Intensity (Damage / Heal),Prefect Multiplier,Perfectable?,Skill Description
+0,Bash,None,1,2,SingleEnemy,2,1.5,TRUE,Deals 2 damage with a 1.5x perfect multiplier.
+1,Heavy Bash,None,2,3,SingleEnemy,6,2,TRUE,Deals 6 damage with a 2x perfect multiplier.
+2,Wait,None,0,1,Self,0,1,FALSE,Just waits 1 second.
+3,Focus,None,1,2,Self,1,2,FALSE,Your next attack will do 50% more damage for each stack of Focus. Lose all Focus when taking damage.

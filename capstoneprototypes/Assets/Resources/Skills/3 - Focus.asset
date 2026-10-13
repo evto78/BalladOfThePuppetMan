@@ -18,7 +18,8 @@ MonoBehaviour:
   target: 0
   intensity: 1
   perfectMultiplier: 2
+  elementalType: 0
   skillName: Focus
-  skillDescription: Gain 1 stack of "Focus". Each stack of Focus makes your next
-    attack do 50% more damage. Lose all stacks of focus when taking damage.
-  perfectable: 1
+  skillDescription: Your next attack will do 50% more damage for each stack of Focus.
+    Lose all Focus when taking damage.
+  perfectable: 0

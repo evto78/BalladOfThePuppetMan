@@ -58,7 +58,7 @@ public class SpreadsheetToScriptableObject
             skill.perfectMultiplier = float.Parse(splitData[7]);
             skill.perfectable = bool.Parse(splitData[8]);
 
-            skill.skillDescription = $"{skill.skillName}\nElemental Type: {skill.elementalType}\n\n{typeDisplay}: {skill.intensity}\nTarget: {skill.target}\nPerfect Mult: {skill.perfectMultiplier}x";
+            skill.skillDescription = splitData[9];
 
             //Set skill file name
             string fileName = $"{skill.id} - {skill.skillName}";

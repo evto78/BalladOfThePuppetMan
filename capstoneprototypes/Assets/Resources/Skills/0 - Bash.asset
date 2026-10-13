@@ -18,6 +18,7 @@ MonoBehaviour:
   target: 1
   intensity: 2
   perfectMultiplier: 1.5
+  elementalType: 0
   skillName: Bash
-  skillDescription: Hit a single enemy for 2 DMG.
+  skillDescription: Deals 2 damage with a 1.5x perfect multiplier.
   perfectable: 1
