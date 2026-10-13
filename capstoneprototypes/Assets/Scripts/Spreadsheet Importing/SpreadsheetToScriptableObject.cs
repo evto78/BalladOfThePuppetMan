@@ -92,6 +92,12 @@ public class SpreadsheetToScriptableObject
             enemy.type = Enum.Parse<ElementalTypes>(enemySplitData[2]);
             enemy.maxHP = int.Parse(enemySplitData[3]);
 
+            string[] patternByRoundSplitData = enemySplitData[4].Split('-');
+            for (int j = 0; j < patternByRoundSplitData.Length; j++)
+            {
+                enemy.patternByRound.Add(int.Parse(patternByRoundSplitData[i]));
+            }
+
             int previousPatternID = -1;
             Enemy.AttackPattern previousPatten = null;
 
