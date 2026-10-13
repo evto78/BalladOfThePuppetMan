@@ -170,13 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e9fa8221803bfd45adc5729f77eb9a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteList:
-  - {fileID: -440818168, guid: f65028d8e7db6cb43baba9f25593a23e, type: 3}
-  - {fileID: -1646363796, guid: f65028d8e7db6cb43baba9f25593a23e, type: 3}
-  - {fileID: 1988324856, guid: f65028d8e7db6cb43baba9f25593a23e, type: 3}
-  - {fileID: 1239828162, guid: f65028d8e7db6cb43baba9f25593a23e, type: 3}
   sr: {fileID: 5527803406950479304}
-  attackCircle: {fileID: 7715435569857874182}
   mhp: 10
   hp: 10
   elementalType: 0
