@@ -11963,20 +11963,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   globalSpriteList:
   - spriteList:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    - {fileID: -440818168, guid: f65028d8e7db6cb43baba9f25593a23e, type: 3}
+    - {fileID: -1646363796, guid: f65028d8e7db6cb43baba9f25593a23e, type: 3}
+    - {fileID: 1988324856, guid: f65028d8e7db6cb43baba9f25593a23e, type: 3}
+    - {fileID: 1239828162, guid: f65028d8e7db6cb43baba9f25593a23e, type: 3}
   - spriteList:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    - {fileID: 21300000, guid: 56057f97d4bb780469c95550b42797c8, type: 3}
+    - {fileID: 21300000, guid: 56057f97d4bb780469c95550b42797c8, type: 3}
+    - {fileID: 21300000, guid: 56057f97d4bb780469c95550b42797c8, type: 3}
+    - {fileID: 21300000, guid: 56057f97d4bb780469c95550b42797c8, type: 3}
   - spriteList:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    - {fileID: 21300000, guid: 949033ba8f4c43c49ba575126aa4cf63, type: 3}
+    - {fileID: 21300000, guid: 949033ba8f4c43c49ba575126aa4cf63, type: 3}
+    - {fileID: 21300000, guid: 949033ba8f4c43c49ba575126aa4cf63, type: 3}
+    - {fileID: 21300000, guid: 949033ba8f4c43c49ba575126aa4cf63, type: 3}
 --- !u!4 &1671116926
 Transform:
   m_ObjectHideFlags: 0
@@ -15327,7 +15327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8794168709281493107, guid: 2d6e8a46944fe07498e630b6e3553f1b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
