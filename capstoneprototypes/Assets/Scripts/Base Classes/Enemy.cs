@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,6 +35,7 @@ public class Enemy : MonoBehaviour
     }
 
     [Header("Visuals")]
+    public List<List<Sprite>> globalSpriteData; //A list containing every enemies sprite data so it can pull from it to set its sprite list.
     public List<Sprite> spriteList; //0: idle, 1: windup, 2: attack, 3: hurt, 4+ is for extra sprites / attacks.
     public SpriteRenderer sr;
     public Image attackCircle;
@@ -57,10 +59,7 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
-        mhp = myData.maxHP;
         hp = mhp;
-        elementalType = myData.type;
-        attackPatterns = myData.attackPatterns;
 
         timeline = GameObject.Find("Timeline").GetComponent<TimelineManager>();
         player = GameObject.Find("Player").GetComponent<PlayerActionManager>();
@@ -73,6 +72,22 @@ public class Enemy : MonoBehaviour
     {
         curTimePassed = 0;
         activeSprite = 0;
+    }
+
+    //Data is optional, but if it is given, it is prefered.
+    public void SetEnemyData(int id, EnemyData data)
+    {
+        if (data == null && id >= 0) { myData = Resources.Load <EnemyData> ("Enemies/" + id.ToString()); }
+        else { myData = data; }
+
+        if (myData == null) { Debug.LogError("ENEMY DATA NOT FOUND!"); }
+
+        mhp = myData.maxHP;
+        hp = mhp;
+        elementalType = myData.type;
+        attackPatterns = myData.attackPatterns;
+
+        spriteList = globalSpriteData[myData.id];
     }
 
     private void OnDisable()
