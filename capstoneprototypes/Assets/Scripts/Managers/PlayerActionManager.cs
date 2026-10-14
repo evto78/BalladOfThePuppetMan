@@ -291,13 +291,30 @@ public class PlayerActionManager : MonoBehaviour
         {
             PlayerSkill skill = equippedSkills[skillSlotIndex];
 
-            if (timeline.combatTime - timeSpent < skill.prepTime) { Debug.LogError("Not enough time to use skill."); return; }
+            bool skillIsPlaceable = timeline.combatTime - timeSpent >= skill.prepTime;
 
             int timeIndex = timeline.IndexFromTime(timeSpent + skill.prepTime);
             int timePassedIndex = timeline.IndexFromTime(timeSpent);
 
-            timeline.PreviewSkill(timeIndex, timePassedIndex, equippedSkills[skillSlotIndex]);
+            timeline.PreviewSkill(timeIndex, timePassedIndex, equippedSkills[skillSlotIndex], skillIsPlaceable);
         }
+    }
+
+    //Called by the skill blocks when clicked
+    public void AttemptRemoveSkill(TimelineManager.TimelineEvent tEvent)
+    {
+        if (tEvent.skillBlock != null)
+        {
+            timeline.RemoveEventAndMarker(tEvent, true);
+        }
+    }
+
+    //Called by the timeline when sucsessfully removed
+    public void SkillRemoved(TimelineManager.TimelineEvent tEvent)
+    {
+        //Recover resources spent on that skill
+        timeSpent -= tEvent.playerSkill.prepTime;
+        energy += tEvent.playerSkill.cost;
     }
 
     void AddStatusEffect(int id, int stacks)

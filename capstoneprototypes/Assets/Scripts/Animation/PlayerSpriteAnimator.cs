@@ -44,8 +44,8 @@ public class PlayerSpriteAnimator : MonoBehaviour
         {
             if (tEvent.eventType == TimelineManager.EventType.PlayerAtk)
             {
-                if ((tEvent.timelineIndex > timeline.eventIndex) && (tEvent.timelineIndex < nextSkillIndex)) { nextSkill = tEvent.playerSkill; nextSkillIndex = tEvent.timelineIndex; }
-                if ((tEvent.timelineIndex < timeline.eventIndex) && (tEvent.timelineIndex > prevSkillIndex)) { prevSkill = tEvent.playerSkill; prevSkillIndex = tEvent.timelineIndex; }
+                if ((tEvent.timelineIndex > timeline.eventIndex) && (tEvent.timelineIndex < nextSkillIndex) && tEvent.playerSkill.perfectable) { nextSkill = tEvent.playerSkill; nextSkillIndex = tEvent.timelineIndex; }
+                if ((tEvent.timelineIndex < timeline.eventIndex) && (tEvent.timelineIndex > prevSkillIndex) && tEvent.playerSkill.perfectable) { prevSkill = tEvent.playerSkill; prevSkillIndex = tEvent.timelineIndex; }
             }
         }
 

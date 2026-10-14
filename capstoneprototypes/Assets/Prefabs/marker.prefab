@@ -68,7 +68,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1ef0d22deb90b374b9efefb0dd86d5d3, type: 3}
   - {fileID: 21300000, guid: d43865481ad1b5447ad408d198bdf3e8, type: 3}
   - {fileID: 0}
-  baseSortingOrder: 40
+  baseSortingOrder: 50
+  bgSr: {fileID: 0}
   myReadout: {fileID: 7399167942500756297}
 --- !u!1 &2278674127587579479
 GameObject:

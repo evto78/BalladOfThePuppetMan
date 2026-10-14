@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
+using static TimelineManager;
 
 public class TimelineManager : MonoBehaviour
 {
@@ -21,6 +23,7 @@ public class TimelineManager : MonoBehaviour
         //Player skill
         public PlayerSkill playerSkill;
         public Enemy enemyTargeted;
+        public GameObject skillBlock;
     }
     public enum EventType { EnemyAtk, PlayerAtk, SpeedUp, SpeedDown, None, ReverseStart, ReverseEnd, PortalStart, PortalEnd }
 
@@ -129,6 +132,7 @@ public class TimelineManager : MonoBehaviour
         foreach (TimelineEvent e in eventList)
         {
             Destroy(e.markerTrans.gameObject);
+            if (e.skillBlock != null) { Destroy(e.skillBlock); }
             e.removed = true;
         }
 
@@ -182,6 +186,18 @@ public class TimelineManager : MonoBehaviour
     }
     public void EndCombat()
     {
+        //Clean up the rest of the events
+        foreach (TimelineEvent e in eventList)
+        {
+            Destroy(e.markerTrans.gameObject);
+            if (e.skillBlock != null) { Destroy(e.skillBlock); }
+            e.removed = true;
+        }
+        for (int i = 0; i < eventList.Count; i++)
+        {
+            eventList.RemoveAt(0);
+        }
+
         combatActive = false;
         combatPause = true;
         timePassed = 0;
@@ -216,6 +232,7 @@ public class TimelineManager : MonoBehaviour
 
         if (eventIndex > resolution) { EndRound(); }
     }
+    TimelineEvent mostRecentAddedEvent = null;
     public void AddMarker(int index, EventType eventType, Enemy enemyOwner, Enemy.Action enemyAction, PlayerSkill playerSkill, Enemy enemyTargeted)
     {
         TimelineEvent newEvent = new TimelineEvent();
@@ -225,36 +242,74 @@ public class TimelineManager : MonoBehaviour
         newEvent.enemyAction = enemyAction;
         newEvent.playerSkill = playerSkill;
         newEvent.enemyTargeted = enemyTargeted;
+        newEvent.skillBlock = null;
 
-        RectTransform newMarker = Instantiate(markerPrefab, transform.GetChild(0)).GetComponent<RectTransform>();
-        MarkerObject markObj = newMarker.GetComponent<MarkerObject>();
-        markObj.SetType(eventType);
-        newMarker.transform.localPosition = new Vector3(Mathf.Lerp(minMaxPos.x, minMaxPos.y, index / resolution), 0, 0);
-        newMarker.gameObject.SetActive(true);
+        RectTransform newMarker = null;
+        if ((playerSkill != null && playerSkill.perfectable) || playerSkill == null)
+        {
+            newMarker = Instantiate(markerPrefab, transform.GetChild(0)).GetComponent<RectTransform>();
+            MarkerObject markObj = newMarker.GetComponent<MarkerObject>();
+            markObj.SetType(eventType);
+            newMarker.transform.localPosition = new Vector3(Mathf.Lerp(minMaxPos.x, minMaxPos.y, index / resolution), 0, 0);
+            newMarker.gameObject.SetActive(true);
+        }
 
         newEvent.markerTrans = newMarker;
         
         eventList.Add(newEvent);
+
+        mostRecentAddedEvent = newEvent;
+    }
+    public void MoveEvent(TimelineEvent tEvent, int newIndex)
+    {
+        tEvent.timelineIndex = newIndex;
+
+        Vector3 newPos = new Vector3(Mathf.Lerp(minMaxPos.x, minMaxPos.y, newIndex / resolution), 0, 0);
+        if (tEvent.markerTrans != null)
+        {
+            tEvent.markerTrans.transform.localPosition = newPos;
+        }
+        if (tEvent.skillBlock != null)
+        {
+            tEvent.skillBlock.transform.localPosition = newPos;
+        }
+    }
+    public void CondensePlayerSkillEvents()
+    {
+
     }
     public void AddSkillBlock(int index, int timePassedIndex)
     {
         SkillBlock newBlock = Instantiate(skillBlockPrefab, transform.GetChild(0)).GetComponent<SkillBlock>();
         Vector3 initialPos = new Vector3(Mathf.Lerp(minMaxPos.x, minMaxPos.y, timePassedIndex / resolution), 0, 0);
         Vector3 endPos = new Vector3(Mathf.Lerp(minMaxPos.x, minMaxPos.y, index / resolution), 0, 0);
-        newBlock.SetUpBlock(initialPos, endPos);
+        newBlock.SetUpBlock(initialPos, endPos, mostRecentAddedEvent);
         newBlock.gameObject.SetActive(true);
+
+        mostRecentAddedEvent.skillBlock = newBlock.gameObject;
     }
-    public void PreviewSkill(int index, int timePassedIndex, PlayerSkill skill)
+    public void PreviewSkill(int index, int timePassedIndex, PlayerSkill skill, bool skillIsPlaceable)
     {
         skillBlockPrefab.SetActive(true);
         SkillBlock previewBlock = skillBlockPrefab.GetComponent<SkillBlock>();
         Vector3 initialPos = new Vector3(Mathf.Lerp(minMaxPos.x, minMaxPos.y, timePassedIndex / resolution), 0, 0);
         Vector3 endPos = new Vector3(Mathf.Lerp(minMaxPos.x, minMaxPos.y, index / resolution), 0, 0);
-        previewBlock.SetUpBlock(initialPos, endPos);
+        previewBlock.SetUpBlock(initialPos, endPos, null);
+
+        if (!skillIsPlaceable) {  }
+
+        if (skill.perfectable)
+        {
+            markerPrefab.SetActive(true);
+            MarkerObject markObj = markerPrefab.GetComponent<MarkerObject>();
+            markObj.SetType(EventType.PlayerAtk);
+            markerPrefab.transform.localPosition = new Vector3(Mathf.Lerp(minMaxPos.x, minMaxPos.y, index / resolution), 0, 0);
+        }
     }
     public void StopPreviewSkillBlock()
     {
         skillBlockPrefab.SetActive(false);
+        markerPrefab.SetActive(false);
     }
     void RunEvent(TimelineEvent tEvent)
     {
@@ -275,16 +330,18 @@ public class TimelineManager : MonoBehaviour
     {
         foreach (TimelineEvent tEvent in eventList)
         {
-            if (tEvent.enemyOwner == enemy) { RemoveEventAndMarker(tEvent); }
+            if (tEvent.enemyOwner == enemy) { RemoveEventAndMarker(tEvent, false); }
         }
     }
-    void RemoveEventAndMarker(TimelineEvent tEvent)
+    public void RemoveEventAndMarker(TimelineEvent tEvent, bool playerRemoved)
     {
         //Doesn't REMOVE the event and marker so that everything can run smoothly.
         //Instead, disable that event, and hide the markers for it.
         //It will be cleaned up when the round ends anyways.
         tEvent.removed = true;
         tEvent.markerTrans.gameObject.SetActive(false);
+        if (tEvent.skillBlock != null) { tEvent.skillBlock.SetActive(false); }
+        if (playerRemoved) { player.SkillRemoved(tEvent); }
     }
     public float TimeFromIndex(int index)
     {

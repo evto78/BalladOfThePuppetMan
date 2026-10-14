@@ -9,6 +9,8 @@ public class SkillBlock : MonoBehaviour
     public Transform middleSegment;
 
     List<SpriteRenderer> srs;
+    PlayerActionManager player;
+    TimelineManager.TimelineEvent representedEvent;
 
     bool isHoveredOver;
     float hoverTime;
@@ -17,13 +19,16 @@ public class SkillBlock : MonoBehaviour
 
     private void Awake()
     {
+        player = GameObject.Find("Player").GetComponent<PlayerActionManager>();
         srs = new List<SpriteRenderer>();
         srs.AddRange(GetComponentsInChildren<SpriteRenderer>());
         hoverTime = 0f;
     }
 
-    public void SetUpBlock(Vector3 initialPos, Vector3 endPos)
+    public void SetUpBlock(Vector3 initialPos, Vector3 endPos, TimelineManager.TimelineEvent tEvent)
     {
+        representedEvent = tEvent;
+
         transform.localPosition = initialPos;
         float relEnd = endPos.x - initialPos.x;
         rightBorder.transform.localPosition = new Vector3(relEnd, rightBorder.transform.localPosition.y, 0);
@@ -43,6 +48,8 @@ public class SkillBlock : MonoBehaviour
         {
             sr.color = Color.Lerp(idleColor, hoverColor, hoverTime);
         }
+
+        if (isHoveredOver && Input.GetMouseButtonUp(0) && representedEvent != null) { player.AttemptRemoveSkill(representedEvent); }
     }
 
     public bool IsTouchingMouse(GameObject g)
