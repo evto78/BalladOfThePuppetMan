@@ -50,6 +50,7 @@ public class TimelineManager : MonoBehaviour
     public GameObject spotlight;
     public Image fillBar;
     public GameObject markerPrefab;
+    public GameObject skillBlockPrefab;
     PlayerActionManager player;
     public Transform thresholdBar;
     AudioManager audioMan;
@@ -234,6 +235,26 @@ public class TimelineManager : MonoBehaviour
         newEvent.markerTrans = newMarker;
         
         eventList.Add(newEvent);
+    }
+    public void AddSkillBlock(int index, int timePassedIndex)
+    {
+        SkillBlock newBlock = Instantiate(skillBlockPrefab, transform.GetChild(0)).GetComponent<SkillBlock>();
+        Vector3 initialPos = new Vector3(Mathf.Lerp(minMaxPos.x, minMaxPos.y, timePassedIndex / resolution), 0, 0);
+        Vector3 endPos = new Vector3(Mathf.Lerp(minMaxPos.x, minMaxPos.y, index / resolution), 0, 0);
+        newBlock.SetUpBlock(initialPos, endPos);
+        newBlock.gameObject.SetActive(true);
+    }
+    public void PreviewSkill(int index, int timePassedIndex, PlayerSkill skill)
+    {
+        skillBlockPrefab.SetActive(true);
+        SkillBlock previewBlock = skillBlockPrefab.GetComponent<SkillBlock>();
+        Vector3 initialPos = new Vector3(Mathf.Lerp(minMaxPos.x, minMaxPos.y, timePassedIndex / resolution), 0, 0);
+        Vector3 endPos = new Vector3(Mathf.Lerp(minMaxPos.x, minMaxPos.y, index / resolution), 0, 0);
+        previewBlock.SetUpBlock(initialPos, endPos);
+    }
+    public void StopPreviewSkillBlock()
+    {
+        skillBlockPrefab.SetActive(false);
     }
     void RunEvent(TimelineEvent tEvent)
     {

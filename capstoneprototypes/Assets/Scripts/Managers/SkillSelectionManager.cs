@@ -24,12 +24,14 @@ public class SkillSelectionManager : MonoBehaviour
     void Update()
     {
         bool hovering = false;
+        player.timeline.StopPreviewSkillBlock();
         for (int i = 0; i < skillButtons.Count; i++)
         {
             if (IsTouchingMouse(skillButtons[i])) 
             {
                 hovering = true;
                 readout.text = player.equippedSkills[i].skillDescription;
+                player.PreviewSkill(i);
             }
         }
         if (!hovering)

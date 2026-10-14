@@ -49,7 +49,7 @@ public class PlayerActionManager : MonoBehaviour
 
     [Header("References")]
     PlayerSpriteAnimator psAnim;
-    TimelineManager timeline;
+    public TimelineManager timeline;
     AudioManager audioMan;
     GeneralAnimator gAnim;
     public SpriteRenderer sr;
@@ -264,13 +264,32 @@ public class PlayerActionManager : MonoBehaviour
         {
             PlayerSkill skill = equippedSkills[skillSlotIndex];
 
-            if (timeline.combatTime < skill.prepTime) { Debug.LogError("Not enough time to use skill."); return; }
+            if (timeline.combatTime - timeSpent < skill.prepTime) { Debug.LogError("Not enough time to use skill."); return; }
             if (energy < skill.cost) { Debug.LogError("Not enough energy to use skill."); return; }
 
             int timeIndex = timeline.IndexFromTime(timeSpent + skill.prepTime);
+            int timePassedIndex = timeline.IndexFromTime(timeSpent);
+
             timeline.AddMarker(timeIndex, TimelineManager.EventType.PlayerAtk, null, null, skill, timeline.activeEnemies[0]);
+            timeline.AddSkillBlock(timeIndex, timePassedIndex);
             timeSpent += skill.prepTime;
             energy -= skill.cost;
+        }
+    }
+
+    //Called by the skill selection buttons when hovered over
+    public void PreviewSkill(int skillSlotIndex)
+    {
+        if (timeline.combatActive && timeline.combatPause)
+        {
+            PlayerSkill skill = equippedSkills[skillSlotIndex];
+
+            if (timeline.combatTime - timeSpent < skill.prepTime) { Debug.LogError("Not enough time to use skill."); return; }
+
+            int timeIndex = timeline.IndexFromTime(timeSpent + skill.prepTime);
+            int timePassedIndex = timeline.IndexFromTime(timeSpent);
+
+            timeline.PreviewSkill(timeIndex, timePassedIndex, equippedSkills[skillSlotIndex]);
         }
     }
 
