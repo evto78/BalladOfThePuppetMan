@@ -251,17 +251,27 @@ public class PlayerActionManager : MonoBehaviour
 
         switch (skill.id)
         {
-            case 0: attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); break; //Strike
-            case 1: attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); break; //Bash
-            case 2: attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); break; //Heavy Bash
+            case 0: StandardAttack(attackEvent, skill, perfectMult); break; //Strike
+            case 1: StandardAttack(attackEvent, skill, perfectMult); break; //Bash
+            case 2: StandardAttack(attackEvent, skill, perfectMult); break; //Heavy Bash
             case 4: AddStatusEffect(0, Mathf.CeilToInt(skill.intensity * perfectMult)); break; //Focus
-            case 5: attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); break; //Barrage
-            case 6: attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); break; //Headbutt
-            case 7: attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); break; //Calm Punch
-            case 8: attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); AddStatusEffect(0, Mathf.CeilToInt(skill.intensity * perfectMult)); break; //Focused Strike
-            case 9: attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); break; //Strong Swing
-            case 10: attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); break; //Poke
+            case 5: StandardAttack(attackEvent, skill, perfectMult); break; //Barrage
+            case 6: StandardAttack(attackEvent, skill, perfectMult); break; //Headbutt
+            case 7: StandardAttack(attackEvent, skill, perfectMult); break; //Calm Punch
+            case 8: StandardAttack(attackEvent, skill, perfectMult); AddStatusEffect(0, Mathf.CeilToInt(skill.intensity * perfectMult)); break; //Focused Strike
+            case 9: StandardAttack(attackEvent, skill, perfectMult); break; //Strong Swing
+            case 10: StandardAttack(attackEvent, skill, perfectMult); break; //Poke
         }
+    }
+
+    void StandardAttack(TimelineManager.TimelineEvent attackEvent, PlayerSkill skill, float perfectMult)
+    {
+        //If enemy previously targeted is gone, aim for another enemy.
+        if (attackEvent.enemyTargeted == null && timeline.activeEnemies.Count > 0) { attackEvent.enemyTargeted = timeline.activeEnemies[0]; }
+        //If no enemies are left alive, cancel the attack.
+        else if (timeline.activeEnemies.Count == 0) { return; }
+        //Do the attack.
+        attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType)));
     }
 
     //Called by the skill selection buttons when clicked

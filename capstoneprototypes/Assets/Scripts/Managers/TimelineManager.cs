@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 using UnityEngine.UI;
 using static TimelineManager;
@@ -276,7 +277,61 @@ public class TimelineManager : MonoBehaviour
     }
     public void CondensePlayerSkillEvents()
     {
+        //Get all player events
+        List<TimelineEvent> playerEvents = new List<TimelineEvent>();
+        List<int> eventStarts = new List<int>();
 
+        foreach (TimelineEvent tEvent in eventList)
+        {
+            if (tEvent.eventType == EventType.PlayerAtk) 
+            {
+                eventStarts.Add(tEvent.timelineIndex - IndexFromTime(tEvent.playerSkill.prepTime));
+                playerEvents.Add(tEvent);
+            }
+        }
+
+        //Sort the player events
+        for (int y = 0; y < playerEvents.Count; y++)
+        {
+            int earliestEventIndex = -1;
+            int earliestEventTime = 999999;
+            for (int i = y; i < playerEvents.Count; i++)
+            {
+                if (eventStarts[i] < earliestEventTime) { earliestEventIndex = i; earliestEventTime = eventStarts[i]; }
+            }
+            if (earliestEventIndex != -1)
+            {
+                int oldIndex = earliestEventIndex;
+                //Rearrange player events to put the earliest at the start
+                playerEvents.Add(null);
+                playerEvents[playerEvents.Count - 1] = playerEvents[y];
+                playerEvents[y] = playerEvents[oldIndex];
+                playerEvents[oldIndex] = playerEvents[playerEvents.Count - 1];
+                playerEvents.RemoveAt(playerEvents.Count - 1);
+
+                //Rearrange event starts to put the earliest at the start
+                eventStarts.Add(-1);
+                eventStarts[eventStarts.Count - 1] = eventStarts[y];
+                eventStarts[y] = eventStarts[oldIndex];
+                eventStarts[oldIndex] = eventStarts[eventStarts.Count - 1];
+                eventStarts.RemoveAt(eventStarts.Count - 1);
+            }
+            else { break; } //If nothing earlier was found, list is sorted.
+        }
+
+        //Move the player events into place
+        for (int i = 0; i < playerEvents.Count; i++)
+        {
+            if (i == 0) 
+            {
+                MoveEvent(playerEvents[i], playerEvents[i].timelineIndex - eventStarts[i]);
+            }
+            else
+            {
+                int dist = eventStarts[i] - playerEvents[i - 1].timelineIndex;
+                MoveEvent(playerEvents[i], playerEvents[i].timelineIndex - dist);
+            }
+        }
     }
     public void AddSkillBlock(int index, int timePassedIndex)
     {
@@ -339,9 +394,9 @@ public class TimelineManager : MonoBehaviour
         //Instead, disable that event, and hide the markers for it.
         //It will be cleaned up when the round ends anyways.
         tEvent.removed = true;
-        tEvent.markerTrans.gameObject.SetActive(false);
+        if (tEvent.markerTrans != null) { tEvent.markerTrans.gameObject.SetActive(false); }
         if (tEvent.skillBlock != null) { tEvent.skillBlock.SetActive(false); }
-        if (playerRemoved) { player.SkillRemoved(tEvent); }
+        if (playerRemoved) { player.SkillRemoved(tEvent); CondensePlayerSkillEvents(); }
     }
     public float TimeFromIndex(int index)
     {
