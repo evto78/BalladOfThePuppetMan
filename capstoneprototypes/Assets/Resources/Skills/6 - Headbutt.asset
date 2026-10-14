@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e4c19e84dd55b34c8f809c0a669f1bd, type: 3}
+  m_Name: 6 - Headbutt
+  m_EditorClassIdentifier: 
+  id: 6
+  cost: 3
+  prepTime: 3
+  target: 1
+  intensity: 4
+  perfectMultiplier: 2
+  elementalType: 2
+  skillName: Headbutt
+  skillDescription: Deals 4 green damage 2ith 2x perfect multiplier.
+  perfectable: 1

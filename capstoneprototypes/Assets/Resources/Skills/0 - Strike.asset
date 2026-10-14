@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e4c19e84dd55b34c8f809c0a669f1bd, type: 3}
-  m_Name: 0 - Bash
+  m_Name: 0 - Strike
   m_EditorClassIdentifier: 
   id: 0
-  cost: 1
-  prepTime: 2
+  cost: 0
+  prepTime: 3
   target: 1
-  intensity: 2
-  perfectMultiplier: 1.5
+  intensity: 1
+  perfectMultiplier: 1
   elementalType: 0
-  skillName: Bash
-  skillDescription: Deals 2 damage with a 1.5x perfect multiplier.
-  perfectable: 1
+  skillName: Strike
+  skillDescription: Deals 1 neutral damage with no perfect multiplier.
+  perfectable: 0

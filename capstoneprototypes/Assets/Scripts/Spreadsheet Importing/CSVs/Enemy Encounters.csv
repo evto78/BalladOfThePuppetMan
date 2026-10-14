@@ -1,5 +1,5 @@
-ID,Enemy 1,Enemy 2,Enemy 3,Enemy 4,Enemy 5
-0,Shameling,Shameling,None,None,None
-1,Shameling,NewYear,None,None,None
-2,Shameling,Shamefool,None,None,None
-3,Shameling,Shameling,Shamefool,None,None
+ID,Enemy 1,Enemy 2,Enemy 3,Enemy 4,Enemy 5,Enemy 1 offset,Enemy 2 offset,Enemy 3 offset,Enemy 4 offset,Enemy 5 offset
+0,Shameling,Shameling,None,None,None,0,0.5,0,0,0
+1,Shameling,NewYear,None,None,None,0,0,0,0,0
+2,Shameling,Shamefool,None,None,None,0,0,0,0,0
+3,Shameling,Shameling,Shamefool,None,None,0,0.5,0,0,0

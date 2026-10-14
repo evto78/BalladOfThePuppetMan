@@ -10,16 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e4c19e84dd55b34c8f809c0a669f1bd, type: 3}
-  m_Name: 3 - Focus
+  m_Name: 9 - Strong Swing
   m_EditorClassIdentifier: 
-  id: 3
-  cost: 1
-  prepTime: 2
-  target: 0
-  intensity: 1
+  id: 9
+  cost: 4
+  prepTime: 5
+  target: 1
+  intensity: 5
   perfectMultiplier: 2
-  elementalType: 0
-  skillName: Focus
-  skillDescription: Your next attack will do 50% more damage for each stack of Focus.
-    Lose all Focus when taking damage.
-  perfectable: 0
+  elementalType: 1
+  skillName: Strong Swing
+  skillDescription: Deals 5 red damage with 2x perfect multiplier.
+  perfectable: 1

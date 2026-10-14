@@ -1,5 +1,12 @@
 ID,Skill Name,Element Type,Cost (energy),PrepTime (seconds),Target,Intensity (Damage / Heal),Prefect Multiplier,Perfectable?,Skill Description
-0,Bash,None,1,2,SingleEnemy,2,1.5,TRUE,Deals 2 damage with a 1.5x perfect multiplier.
-1,Heavy Bash,None,2,3,SingleEnemy,6,2,TRUE,Deals 6 damage with a 2x perfect multiplier.
-2,Wait,None,0,1,Self,0,1,FALSE,Just waits 1 second.
-3,Focus,None,1,2,Self,1,2,FALSE,Your next attack will do 50% more damage for each stack of Focus. Lose all Focus when taking damage.
+0,Strike,None,0,3,SingleEnemy,1,1,FALSE,Deals 1 neutral damage with no perfect multiplier.
+1,Bash,None,1,2,SingleEnemy,2,1.5,TRUE,Deals 2 neutral damage with 1.5x perfect multiplier.
+2,Heavy Bash,None,2,3,SingleEnemy,6,2,TRUE,Deals 6 neutral damage with 2x perfect multiplier.
+3,Wait,None,0,1,Self,0,1,FALSE,Just waits 1 second.
+4,Focus,None,1,2,Self,1,2,FALSE,Your next attack will do 50% more damage for each stack of Focus. Lose all Focus when taking damage.
+5,Barrage,Red,1,1,SingleEnemy,1,1.5,TRUE,Deals 1 red damage with 1.5x perfect multiplier.
+6,Headbutt,Green,3,3,SingleEnemy,4,2,TRUE,Deals 4 green damage 2ith 2x perfect multiplier.
+7,Calm Punch,Blue,2,2,SingleEnemy,2,1.5,TRUE,Deals 2 blue damage with 1.5x perfect multiplier.
+8,Focused Strike,Blue,1,2,SingleEnemy,1,1.5,TRUE,Deals 1 blue damage with 1.5x perfect multiplier. Applies 1 stack of focus.
+9,Strong Swing,Red,4,5,SingleEnemy,5,2,TRUE,Deals 5 red damage with 2x perfect multiplier.
+10,Poke,Green,1,1,SingleEnemy,1,1.5,TRUE,Deals 1 green damage with 1.5x perfect multiplier.

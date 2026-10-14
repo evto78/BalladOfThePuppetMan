@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   maxHP: 20
-  type: 0
+  type: 3
   attackPatterns:
   - timelineChangePriority: 1
     timelineCombatTimePref: 6

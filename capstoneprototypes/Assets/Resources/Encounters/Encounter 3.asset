@@ -17,3 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ddd2c1cbbfe30db489ef3e271d0d5c41, type: 2}
   - {fileID: 11400000, guid: ddd2c1cbbfe30db489ef3e271d0d5c41, type: 2}
   - {fileID: 11400000, guid: 69b9d84f21e15fb449f5463d978df7b9, type: 2}
+  offset:
+  - 0
+  - 0.5
+  - 0

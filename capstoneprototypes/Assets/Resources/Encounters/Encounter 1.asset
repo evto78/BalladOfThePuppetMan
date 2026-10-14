@@ -16,3 +16,6 @@ MonoBehaviour:
   enemies:
   - {fileID: 11400000, guid: ddd2c1cbbfe30db489ef3e271d0d5c41, type: 2}
   - {fileID: 11400000, guid: 8a6bfae9491c86f49a7c58fd3839d14d, type: 2}
+  offset:
+  - 0
+  - 0

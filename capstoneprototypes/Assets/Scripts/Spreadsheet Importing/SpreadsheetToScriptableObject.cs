@@ -176,13 +176,15 @@ public class SpreadsheetToScriptableObject
 
             EncountersData encounter = ScriptableObject.CreateInstance<EncountersData>();
             encounter.encounterID = int.Parse(splitData[0]);
-            for (int j = 1; j < splitData.Length; j++)
+            for (int j = 1; j <= 5; j++)
             {
+                string enemyName = splitData[j];
                 for (int k = 0; k < dataList.allEnemies.Count; k++)
                 {
-                    if (splitData[j] == dataList.allEnemies[k].name)
+                    if (enemyName == dataList.allEnemies[k].name)
                     {
                         encounter.enemies.Add(dataList.allEnemies[k]);
+                        encounter.offset.Add(float.Parse(splitData[j+5]));
                     }
                 }
             }

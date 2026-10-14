@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e4c19e84dd55b34c8f809c0a669f1bd, type: 3}
-  m_Name: 1 - Heavy Bash
+  m_Name: 3 - Wait
   m_EditorClassIdentifier: 
-  id: 1
-  cost: 2
-  prepTime: 3
-  target: 1
-  intensity: 6
-  perfectMultiplier: 2
+  id: 3
+  cost: 0
+  prepTime: 1
+  target: 0
+  intensity: 0
+  perfectMultiplier: 1
   elementalType: 0
-  skillName: Heavy Bash
-  skillDescription: Deals 6 damage with a 2x perfect multiplier.
-  perfectable: 1
+  skillName: Wait
+  skillDescription: Just waits 1 second.
+  perfectable: 0

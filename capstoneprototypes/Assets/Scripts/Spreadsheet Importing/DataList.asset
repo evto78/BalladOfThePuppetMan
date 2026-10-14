@@ -17,10 +17,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8a6bfae9491c86f49a7c58fd3839d14d, type: 2}
   - {fileID: 11400000, guid: 69b9d84f21e15fb449f5463d978df7b9, type: 2}
   allPlayerSkills:
-  - {fileID: 11400000, guid: 869b4dae75bb68d4ebe1cc8f724e2d57, type: 2}
-  - {fileID: 11400000, guid: bff9eb2721618074c86abd0fbc3ecac9, type: 2}
-  - {fileID: 11400000, guid: da63581a4adc80c409095e98cf4d740d, type: 2}
-  - {fileID: 11400000, guid: 1deef270444d1894fa91e6adeb1c1ec1, type: 2}
+  - {fileID: 11400000, guid: cffceb8e2c519c04597e536c484c1eef, type: 2}
+  - {fileID: 11400000, guid: a869c62217e5ae94cb906ee8944e808b, type: 2}
+  - {fileID: 11400000, guid: f0f93e43decb1b94ca1c75b227cbaca3, type: 2}
+  - {fileID: 11400000, guid: e603506f7eb4b1d4cb61a3690e9b4e05, type: 2}
+  - {fileID: 11400000, guid: c1ca2c352ae34e44f8a331bf34df78c1, type: 2}
+  - {fileID: 11400000, guid: 2a3e4ac2c7526fd4da0f343bf326cf0d, type: 2}
+  - {fileID: 11400000, guid: 37fb8cc4d2265c44f9436db78fd9fcd4, type: 2}
+  - {fileID: 11400000, guid: 19fb4434d17e7ea42bb935ae838a17d8, type: 2}
+  - {fileID: 11400000, guid: 9ad5b487061685e4c95105ebad1b3041, type: 2}
+  - {fileID: 11400000, guid: 73f833ac7c18ee54ba385f90ab4a985a, type: 2}
+  - {fileID: 11400000, guid: dfc80f562c2c0204bb2043ba9f202c05, type: 2}
   allEncounters:
   - {fileID: 11400000, guid: 81cad993b47828847bb0439c014a9e22, type: 2}
   - {fileID: 11400000, guid: bae1960e09ff37746b85c20a0dce4916, type: 2}
