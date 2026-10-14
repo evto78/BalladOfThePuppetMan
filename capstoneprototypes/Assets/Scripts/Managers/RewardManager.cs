@@ -6,19 +6,23 @@ using UnityEngine.UI;
 
 public class RewardManager : MonoBehaviour
 {
-    public GameObject rewardUI;
+    public GameObject rewardUI, rewardSelectionUI;
     public PlayerSkill[] skills;
     public DataList dl;
     public TextMeshProUGUI[] rewardText;
     public Button[] skillReplacement;
+    public PlayerActionManager player;
 
     PlayerSkill selectedSkill;
 
 
     //Used for testing purposes only
-    public PlayerSkill[] playerSkills;
-    public GameObject combat, rewards;
     public TextMeshProUGUI[] currentSkillText;
+
+    private void Start()
+    {
+        RandomizeRewards();
+    }
 
     public void RandomizeRewards()
     {
@@ -29,7 +33,7 @@ public class RewardManager : MonoBehaviour
             skills[i] = dl.allPlayerSkills[randomSkillIndex];
             rewardText[i].text = skills[i].skillName;
         }
-        ChangeGameState(false);
+        rewardSelectionUI.SetActive(true);
     }
 
     public void SelectReward(int slotIndex)
@@ -45,12 +49,9 @@ public class RewardManager : MonoBehaviour
 
     public void ReplaceSkill(int slotIndex)
     {
-        playerSkills[slotIndex] = selectedSkill;
+        player.equippedSkills[slotIndex] = selectedSkill;
 
-        for (int i = 0; i < playerSkills.Length; i++)
-        {
-            currentSkillText[i].text = playerSkills[i].skillName;
-        }
+        UpdatePlayerSkillsUI();
 
         //Just for testing
         for (int i = 0; i < skillReplacement.Length; i++)
@@ -58,14 +59,14 @@ public class RewardManager : MonoBehaviour
             skillReplacement[i].interactable = false;
         }
 
-        ChangeGameState(true);
+        rewardSelectionUI.SetActive(false);
     }
 
-    
-    //Function just for testing
-    public void ChangeGameState(bool combatEnabled)
+    public void UpdatePlayerSkillsUI()
     {
-        combat.SetActive(combatEnabled);
-        rewards.SetActive(!combatEnabled);
+        for (int i = 0; i < player.equippedSkills.Count; i++)
+        {
+            currentSkillText[i].text = player.equippedSkills[i].skillName;
+        }
     }
 }

@@ -9,7 +9,7 @@ public class EnemySpawnManager : MonoBehaviour
     public DataList dl;
     public GameObject[] enemies;
 
-    void Start()
+    void Awake()
     {
         int encounter = Random.Range(0, dl.allEncounters.Count);
         SpawnEncounter(encounter);
