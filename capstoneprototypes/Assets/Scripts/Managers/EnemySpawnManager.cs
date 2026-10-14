@@ -9,30 +9,19 @@ public class EnemySpawnManager : MonoBehaviour
     public DataList dl;
     public GameObject[] enemies;
 
-    List<GameObject> enemiesAlive = new List<GameObject>();
-
-
-    public void SpawnEnemies()
+    void Start()
     {
-        RemoveAllEnemies();
-        int encounterIndex = Random.Range(0, dl.allEncounters.Count);
+        int encounter = Random.Range(0, dl.allEncounters.Count);
+        SpawnEncounter(encounter);
+    }
+
+    public void SpawnEncounter(int encounterIndex)
+    {
         List<EnemyData> validEnemies = dl.allEncounters[encounterIndex].enemies;
 
         for (int i = 0; i < validEnemies.Count; i++)
         {
-            enemiesAlive.Add(Instantiate(enemies[validEnemies[i].id], spawns[i].position, Quaternion.identity));
-        }
-    }
-
-    public void RemoveAllEnemies()
-    {
-        if (enemiesAlive.Count > 0)
-        {
-            for (int i = 0; i < enemiesAlive.Count; i++)
-            {
-                Destroy(enemiesAlive[i]);
-            }
-            enemiesAlive.Clear();
+            Instantiate(enemies[validEnemies[i].id], spawns[i].position, Quaternion.identity);
         }
     }
 }

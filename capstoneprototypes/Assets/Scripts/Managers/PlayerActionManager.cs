@@ -251,9 +251,16 @@ public class PlayerActionManager : MonoBehaviour
 
         switch (skill.id)
         {
-            case 0: attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); break; //Bash
-            case 1: attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); break; //Heavy Bash
-            case 3: AddStatusEffect(0, Mathf.CeilToInt(skill.intensity * perfectMult)); break; //Focus
+            case 0: attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); break; //Strike
+            case 1: attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); break; //Bash
+            case 2: attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); break; //Heavy Bash
+            case 4: AddStatusEffect(0, Mathf.CeilToInt(skill.intensity * perfectMult)); break; //Focus
+            case 5: attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); break; //Barrage
+            case 6: attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); break; //Headbutt
+            case 7: attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); break; //Calm Punch
+            case 8: attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); AddStatusEffect(0, Mathf.CeilToInt(skill.intensity * perfectMult)); break; //Focused Strike
+            case 9: attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); break; //Strong Swing
+            case 10: attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); break; //Poke
         }
     }
 
