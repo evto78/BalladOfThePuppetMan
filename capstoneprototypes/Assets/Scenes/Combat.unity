@@ -18972,7 +18972,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Skill number 4
+  m_text: Skill Number 4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8bdc093ab2105540a57321ddb1a7123, type: 2}
   m_sharedMaterial: {fileID: -4148658250172440944, guid: e8bdc093ab2105540a57321ddb1a7123, type: 2}
@@ -19647,6 +19647,18 @@ PrefabInstance:
     - target: {fileID: 204115080547676668, guid: d12ae89b957a4024bb2b285f48bbd2fe, type: 3}
       propertyPath: m_Name
       value: AudioSourcePrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988298911064684576, guid: d12ae89b957a4024bb2b285f48bbd2fe, type: 3}
+      propertyPath: musicVol
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988298911064684576, guid: d12ae89b957a4024bb2b285f48bbd2fe, type: 3}
+      propertyPath: effectVol
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988298911064684576, guid: d12ae89b957a4024bb2b285f48bbd2fe, type: 3}
+      propertyPath: masterVol
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5988298911064684576, guid: d12ae89b957a4024bb2b285f48bbd2fe, type: 3}
       propertyPath: activeGroup

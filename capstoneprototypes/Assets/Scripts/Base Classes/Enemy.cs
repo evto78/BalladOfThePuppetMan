@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
-using UnityEditor.Build;
 using UnityEngine;
-using UnityEngine.UI;
 
 //Base class for all enemies
 public class Enemy : MonoBehaviour
