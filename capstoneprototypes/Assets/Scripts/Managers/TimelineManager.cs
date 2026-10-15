@@ -129,7 +129,7 @@ public class TimelineManager : MonoBehaviour
 
         foreach (TimelineEvent e in eventList)
         {
-            Destroy(e.markerTrans.gameObject);
+            if (e.markerTrans != null) { Destroy(e.markerTrans.gameObject); }
             if (e.skillBlock != null) { Destroy(e.skillBlock); }
             e.removed = true;
         }
