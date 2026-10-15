@@ -11,8 +11,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     void Awake()
     {
-        int encounter = Random.Range(0, dl.allEncounters.Count);
-        SpawnEncounter(encounter);
+        SpawnRandomEncounter();
     }
 
     public void SpawnEncounter(int encounterIndex)
@@ -23,5 +22,11 @@ public class EnemySpawnManager : MonoBehaviour
         {
             Instantiate(enemies[validEnemies[i].id], spawns[i].position, Quaternion.identity);
         }
+    }
+
+    public void SpawnRandomEncounter()
+    {
+        int encounter = Random.Range(0, dl.allEncounters.Count);
+        SpawnEncounter(encounter);
     }
 }
