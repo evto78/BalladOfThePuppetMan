@@ -272,7 +272,6 @@ public class TimelineManager : MonoBehaviour
         }
         if (tEvent.skillBlock != null)
         {
-            //YOU ARE GIVING IT THE NEW POSITION!!! GIVE IT THE LEFT POSITION
             Vector3 newInitialPos = new Vector3(newPos.x - IndexFromTime(tEvent.playerSkill.prepTime), newPos.y, newPos.z);
             tEvent.skillBlock.transform.localPosition = newInitialPos;
         }
@@ -285,7 +284,7 @@ public class TimelineManager : MonoBehaviour
 
         foreach (TimelineEvent tEvent in eventList)
         {
-            if (tEvent.eventType == EventType.PlayerAtk) 
+            if (tEvent.eventType == EventType.PlayerAtk && !tEvent.removed) 
             {
                 eventStarts.Add(tEvent.timelineIndex - IndexFromTime(tEvent.playerSkill.prepTime));
                 playerEvents.Add(tEvent);
