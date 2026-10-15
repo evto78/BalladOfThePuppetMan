@@ -272,7 +272,9 @@ public class TimelineManager : MonoBehaviour
         }
         if (tEvent.skillBlock != null)
         {
-            tEvent.skillBlock.transform.localPosition = newPos;
+            //YOU ARE GIVING IT THE NEW POSITION!!! GIVE IT THE LEFT POSITION
+            Vector3 newInitialPos = new Vector3(newPos.x - IndexFromTime(tEvent.playerSkill.prepTime), newPos.y, newPos.z);
+            tEvent.skillBlock.transform.localPosition = newInitialPos;
         }
     }
     public void CondensePlayerSkillEvents()
