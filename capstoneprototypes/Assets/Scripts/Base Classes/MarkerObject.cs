@@ -14,6 +14,8 @@ public class MarkerObject : MonoBehaviour
 
     public void SetType(TimelineManager.EventType newType)
     {
+        bgSr.enabled = false;
+
         int typeIndex = newType.GetHashCode();
 
         sr.sprite = markerSprites[typeIndex];
