@@ -53,6 +53,7 @@ public class PlayerActionManager : MonoBehaviour
     GeneralAnimator gAnim;
     public SpriteRenderer sr;
     public Image fillBar;
+    public GameOverAnim gameOverAnim;
 
     private void Awake()
     {
@@ -353,6 +354,7 @@ public class PlayerActionManager : MonoBehaviour
     {
         Debug.Log("DEAD!");
         gameObject.SetActive(false);
+        gameOverAnim.PlayAnim();
     }
 
     void ParryLanded()
