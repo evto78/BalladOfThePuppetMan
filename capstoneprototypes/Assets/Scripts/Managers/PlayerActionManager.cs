@@ -84,15 +84,6 @@ public class PlayerActionManager : MonoBehaviour
         perfectLanded = false;
 
         statEffects = new List<StatusEffectInstance>();
-
-        if (equippedSkills == null || equippedSkills.Count < 4)
-        {
-            equippedSkills = new List<PlayerSkill>();
-            equippedSkills.Add(skillData[0]);
-            equippedSkills.Add(skillData[1]);
-            equippedSkills.Add(skillData[2]);
-            equippedSkills.Add(skillData[3]);
-        }
     }
 
     public void SkillSelectStart()
