@@ -77,9 +77,8 @@ public class TimelineManager : MonoBehaviour
     }
     private void Update()
     {
-        if (combatActive && !combatPause) { UpdateCombat(); }
+        if (combatActive && !combatPause) { UpdateCombat(); UpdateMetronome(); }
         else { UpdateVisuals(); }
-        if (combatActive) { UpdateMetronome(); }
     }
     void UpdateVisuals()
     {
@@ -95,6 +94,30 @@ public class TimelineManager : MonoBehaviour
         }
 
         thresholdBar.transform.localPosition = new Vector3(Mathf.Lerp(minMaxPos.x, minMaxPos.y, fillBar.fillAmount), 0, 0);
+
+        //Update marker bobbing
+        MarkerObject marker = null;
+        int relIndex;
+        float bobProgress;
+        foreach (TimelineEvent tEvent in eventList)
+        {
+            if (!tEvent.removed && tEvent.markerTrans != null && (tEvent.eventType == EventType.EnemyAtk || tEvent.eventType == EventType.PlayerAtk) )
+            {
+                if (combatActive)
+                {
+                    marker = tEvent.markerTrans.gameObject.GetComponent<MarkerObject>();
+
+                    relIndex = tEvent.timelineIndex - eventIndex;
+                    bobProgress = (float)relIndex / 12f;
+
+                    marker.UpdateBobbing(bobProgress);
+                }
+                else
+                {
+                    marker.UpdateBobbing(0f);
+                }
+            }
+        }
     }
     public void StartCombat()
     {
@@ -125,6 +148,7 @@ public class TimelineManager : MonoBehaviour
         combatPause = false;
 
         gdm.ChangeState(GameDataManager.State.RealTimeCombat);
+        metronomeTimer = 0;
 
         camGlide.isUp = true;
     }
@@ -258,9 +282,9 @@ public class TimelineManager : MonoBehaviour
         {
             newMarker = Instantiate(markerPrefab, transform.GetChild(0)).GetComponent<RectTransform>();
             MarkerObject markObj = newMarker.GetComponent<MarkerObject>();
-            markObj.SetType(eventType);
             newMarker.transform.localPosition = new Vector3(Mathf.Lerp(minMaxPos.x, minMaxPos.y, index / resolution), 0, 0);
             newMarker.gameObject.SetActive(true);
+            markObj.SetType(eventType);
         }
 
         newEvent.markerTrans = newMarker;
@@ -426,9 +450,6 @@ public class TimelineManager : MonoBehaviour
         if (metronomeTimer <= 0) 
         { 
             metronomeTimer += 1;
-
-            //If it is already playing, stop it. Commented out because metronome should stack when fast?
-            //if (audioMan.activeSources.Contains(metronomeSFX)) { audioMan.StopSound(metronomeSFX); }
 
             metronomeSFX = audioMan.PlaySound(0, AudioManager.SFXType.Effect, 1f, combatSpeed);
         }

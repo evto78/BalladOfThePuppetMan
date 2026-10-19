@@ -12,14 +12,19 @@ public class MarkerObject : MonoBehaviour
 
     public ReadoutOnHover myReadout;
 
+    float standardYPos;
+    public AnimationCurve bobbingCurve;
+
     public void SetType(TimelineManager.EventType newType)
     {
+        standardYPos = transform.localPosition.y;
+
         bgSr.enabled = false;
 
         int typeIndex = newType.GetHashCode();
 
         sr.sprite = markerSprites[typeIndex];
-        sr.sortingOrder = baseSortingOrder - typeIndex;
+        sr.sortingOrder = baseSortingOrder + typeIndex;
 
         myReadout.gameObject.SetActive(true);
 
@@ -31,5 +36,13 @@ public class MarkerObject : MonoBehaviour
             case 3: myReadout.readoutText = "At this point in the timeline, the timeline will slow down!"; break;
             case 4: myReadout.gameObject.SetActive(false); break;
         }
+    }
+
+    public void UpdateBobbing(float bobProgress)
+    {
+        if (bobProgress < 0) { bobProgress = (8f * ((bobProgress * -1f))); }
+        float modifiedProgress = bobbingCurve.Evaluate(bobProgress);
+        float newYPos = Mathf.Lerp(standardYPos + 1, standardYPos, modifiedProgress);
+        transform.localPosition = new Vector3(transform.localPosition.x, newYPos, transform.localPosition.z);
     }
 }

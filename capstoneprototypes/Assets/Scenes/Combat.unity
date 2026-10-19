@@ -20453,6 +20453,42 @@ PrefabInstance:
       propertyPath: bgSr
       value: 
       objectReference: {fileID: 1119129040}
+    - target: {fileID: 1362381657878366843, guid: a538145d0da965b48aeb3091da4e07ee, type: 3}
+      propertyPath: bobbingCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1362381657878366843, guid: a538145d0da965b48aeb3091da4e07ee, type: 3}
+      propertyPath: bobbingCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1362381657878366843, guid: a538145d0da965b48aeb3091da4e07ee, type: 3}
+      propertyPath: bobbingCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1362381657878366843, guid: a538145d0da965b48aeb3091da4e07ee, type: 3}
+      propertyPath: bobbingCurve.m_Curve.Array.data[0].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1362381657878366843, guid: a538145d0da965b48aeb3091da4e07ee, type: 3}
+      propertyPath: bobbingCurve.m_Curve.Array.data[1].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1362381657878366843, guid: a538145d0da965b48aeb3091da4e07ee, type: 3}
+      propertyPath: bobbingCurve.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1362381657878366843, guid: a538145d0da965b48aeb3091da4e07ee, type: 3}
+      propertyPath: bobbingCurve.m_Curve.Array.data[1].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1362381657878366843, guid: a538145d0da965b48aeb3091da4e07ee, type: 3}
+      propertyPath: bobbingCurve.m_Curve.Array.data[0].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1362381657878366843, guid: a538145d0da965b48aeb3091da4e07ee, type: 3}
+      propertyPath: bobbingCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7754005665647009317, guid: a538145d0da965b48aeb3091da4e07ee, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
