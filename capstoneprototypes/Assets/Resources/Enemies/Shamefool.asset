@@ -22,7 +22,7 @@ MonoBehaviour:
     actionSequence:
     - actionType: 4
       damage: 0
-      delayBeforeAction: 2
+      delayBeforeAction: 1
       delayAfterAction: 0
       playAnim: 0
       animWindupStart: 0

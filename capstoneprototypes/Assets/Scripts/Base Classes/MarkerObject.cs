@@ -40,7 +40,7 @@ public class MarkerObject : MonoBehaviour
 
     public void UpdateBobbing(float bobProgress)
     {
-        if (bobProgress < 0) { bobProgress = (8f * ((bobProgress * -1f))); }
+        if (bobProgress < 0) { bobProgress = (16f * ((bobProgress * -1f))); }
         float modifiedProgress = bobbingCurve.Evaluate(bobProgress);
         float newYPos = Mathf.Lerp(standardYPos + 1, standardYPos, modifiedProgress);
         transform.localPosition = new Vector3(transform.localPosition.x, newYPos, transform.localPosition.z);

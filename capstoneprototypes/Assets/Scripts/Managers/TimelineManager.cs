@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static TimelineManager;
 
 public class TimelineManager : MonoBehaviour
 {
@@ -41,6 +42,9 @@ public class TimelineManager : MonoBehaviour
     public Vector2 minMaxPos;
     public bool fillPixelByPixel;
     public float resolution;
+    public Sprite beatMarker;
+    public Sprite halfBeatMarker;
+    List<MarkerObject> beatMarkers = new List<MarkerObject>();
 
     [Header("Functional")]
     public List<TimelineEvent> eventList;
@@ -148,7 +152,7 @@ public class TimelineManager : MonoBehaviour
         combatPause = false;
 
         gdm.ChangeState(GameDataManager.State.RealTimeCombat);
-        metronomeTimer = 0;
+        metronomeTimer = 0; halfTick = false;
 
         camGlide.isUp = true;
     }
@@ -216,6 +220,23 @@ public class TimelineManager : MonoBehaviour
             combatTime = 6f;
             combatSpeed = 1f;
         }
+
+        //Prepare beat markers
+        foreach (MarkerObject marker in beatMarkers) { Destroy(marker.gameObject); }
+        beatMarkers = new List<MarkerObject>();
+
+        for (int i = 0; i <= combatTime; i++)
+        {
+            if (i == combatTime)
+            {
+                AddBeatMarker(IndexFromTime((float)i - 0.5f), false);
+            }
+            else if (i > 0)
+            {
+                AddBeatMarker(IndexFromTime(i), true);
+                AddBeatMarker(IndexFromTime((float)i - 0.5f), false);
+            }
+        }
     }
     public void EndCombat()
     {
@@ -264,6 +285,20 @@ public class TimelineManager : MonoBehaviour
         prevEventIndex = eventIndex;
 
         if (eventIndex > resolution) { EndRound(); }
+    }
+    public void AddBeatMarker(int index, bool full)
+    {
+        MarkerObject newMarker;
+        newMarker = Instantiate(markerPrefab, transform.GetChild(0)).GetComponent<MarkerObject>();
+        newMarker.transform.localPosition = new Vector3(Mathf.Lerp(minMaxPos.x, minMaxPos.y, index / resolution), 0, 0);
+        newMarker.gameObject.SetActive(true);
+        float alphaVal;
+        if (full) { newMarker.sr.sprite = beatMarker; alphaVal = 0.2f; } else {  newMarker.sr.sprite = halfBeatMarker; alphaVal = 0.1f; }
+        newMarker.sr.color = new Color(1, 1, 1, alphaVal);
+        newMarker.myReadout.gameObject.SetActive(false);
+        newMarker.bgSr.enabled = false;
+
+        beatMarkers.Add(newMarker);
     }
     TimelineEvent mostRecentAddedEvent = null;
     public void AddMarker(int index, EventType eventType, Enemy enemyOwner, Enemy.Action enemyAction, PlayerSkill playerSkill, Enemy enemyTargeted)
@@ -444,14 +479,23 @@ public class TimelineManager : MonoBehaviour
         return result;
     }
     AudioManager.SFXSource metronomeSFX;
+    bool halfTick = false;
     void UpdateMetronome()
     {
-        metronomeTimer -= Time.deltaTime * combatSpeed;
+        metronomeTimer -= Time.deltaTime * 2f * combatSpeed;
         if (metronomeTimer <= 0) 
         { 
             metronomeTimer += 1;
 
-            metronomeSFX = audioMan.PlaySound(0, AudioManager.SFXType.Effect, 1f, combatSpeed);
+            if (halfTick)
+            {
+                metronomeSFX = audioMan.PlaySound(0, AudioManager.SFXType.Effect, 1f, combatSpeed);
+            }
+            else
+            {
+                metronomeSFX = audioMan.PlaySound(0, AudioManager.SFXType.Effect, 1f, combatSpeed);
+            }
+            halfTick = !halfTick;
         }
     }
 }

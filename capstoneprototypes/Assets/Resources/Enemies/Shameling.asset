@@ -22,8 +22,8 @@ MonoBehaviour:
     actionSequence:
     - actionType: 0
       damage: 1
-      delayBeforeAction: 1
-      delayAfterAction: 1
+      delayBeforeAction: 0.5
+      delayAfterAction: 0.5
       playAnim: 1
       animWindupStart: 0.25
       animWinddownEnd: 0.25

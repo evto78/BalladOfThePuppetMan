@@ -3027,6 +3027,8 @@ MonoBehaviour:
   minMaxPos: {x: -80, y: 80}
   fillPixelByPixel: 1
   resolution: 160
+  beatMarker: {fileID: 21300000, guid: bc33d60e5c1bd6a45aaa29e99a1d502b, type: 3}
+  halfBeatMarker: {fileID: 21300000, guid: b61fd06bb9f2334409f90cbff9d750d9, type: 3}
   eventList: []
   activeEnemies: []
   camGlide: {fileID: 477290457}
@@ -20489,6 +20491,10 @@ PrefabInstance:
       propertyPath: bobbingCurve.m_Curve.Array.data[1].tangentMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6016725984415624637, guid: a538145d0da965b48aeb3091da4e07ee, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bc33d60e5c1bd6a45aaa29e99a1d502b, type: 3}
     - target: {fileID: 7754005665647009317, guid: a538145d0da965b48aeb3091da4e07ee, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
