@@ -54,9 +54,11 @@ public class PlayerActionManager : MonoBehaviour
     public SpriteRenderer sr;
     public Image fillBar;
     public GameOverAnim gameOverAnim;
+    GameDataManager gdm;
 
     private void Awake()
     {
+        gdm = GameObject.Find("GameDataManager").GetComponent<GameDataManager>();
         timeline = GameObject.Find("Timeline").GetComponent<TimelineManager>();
         audioMan = GameObject.Find("AudioManager").GetComponent<AudioManager>();
 
@@ -272,8 +274,9 @@ public class PlayerActionManager : MonoBehaviour
         {
             PlayerSkill skill = equippedSkills[skillSlotIndex];
 
-            if (timeline.combatTime - timeSpent < skill.prepTime) { Debug.LogError("Not enough time to use skill."); return; }
-            if (energy < skill.cost) { Debug.LogError("Not enough energy to use skill."); return; }
+            if (timeline.combatTime - timeSpent < skill.prepTime) { Debug.LogWarning("Not enough time to use skill."); return; }
+            if (energy < skill.cost) { Debug.LogWarning("Not enough energy to use skill."); return; }
+            if (timeline.activeEnemies.Count < 0) { Debug.LogWarning("No enemies!"); return; }
 
             int timeIndex = timeline.IndexFromTime(timeSpent + skill.prepTime);
             int timePassedIndex = timeline.IndexFromTime(timeSpent);
@@ -345,7 +348,7 @@ public class PlayerActionManager : MonoBehaviour
     {
         Debug.Log("DEAD!");
         gameObject.SetActive(false);
-        gameOverAnim.PlayAnim();
+        gdm.ChangeState(GameDataManager.State.GameOver);
     }
 
     void ParryLanded()
@@ -358,5 +361,11 @@ public class PlayerActionManager : MonoBehaviour
     {
         perfectLanded = true;
         foreach (ParticleSystem ps in perfectParticles) { ps.Stop(); ps.Play(); }
+    }
+
+    //Ran when a healing room is selected
+    public void HealRoom()
+    {
+        hp = mhp;
     }
 }

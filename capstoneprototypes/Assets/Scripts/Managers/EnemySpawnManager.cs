@@ -11,7 +11,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     void Awake()
     {
-        SpawnRandomEncounter();
+        //SpawnRandomEncounter();
     }
 
     public void SpawnEncounter(int encounterIndex)

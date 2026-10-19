@@ -15,8 +15,11 @@ public class RoomSelection : MonoBehaviour
     public List<SpriteRenderer> timeIcons;
     public List<Vector3> paths = new List<Vector3>();
     public int distance;
+    GameDataManager gdm;
     void Start()
     {
+        gdm = GameObject.Find("GameDataManager").GetComponent<GameDataManager>();
+
         distance = 0;
         if (paths.Count < 5) { GeneratePaths(); }
 
@@ -100,6 +103,30 @@ public class RoomSelection : MonoBehaviour
     void SelectRoom(int option)
     {
         //Go to the selected room!
+        float roomData = paths[distance].x;
+        switch (option)
+        {
+            case 0: roomData = paths[distance].x; break;
+            case 1: roomData = paths[distance].y; break;
+            case 2: roomData = paths[distance].z; break;
+        }
+        switch (Mathf.Abs(Mathf.RoundToInt(roomData)))
+        {
+            case 0: //COMBAT
+                Debug.Log("COMBAT Selected");
+                gdm.enemySpawnMan.SpawnRandomEncounter();
+                gdm.ChangeState(GameDataManager.State.StartCombat); 
+                break; 
+
+            case 1: //EVENT
+                Debug.Log("EVENT Selected"); 
+                break; 
+
+            case 2: //HEAL
+                Debug.Log("HEAL Selected"); 
+                gdm.player.HealRoom(); 
+                break; 
+        }
 
         distance++;
 

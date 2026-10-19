@@ -11,7 +11,6 @@ public class PlayerSpriteAnimator : MonoBehaviour
     public List<Sprite> spriteList;
 
     int activeSprite;
-    int activeSpritePriority;
 
     public float parryOverrideTimer = 0f;
     public float hitOverrideTimer = 0f;
@@ -21,14 +20,12 @@ public class PlayerSpriteAnimator : MonoBehaviour
         player = GetComponent<PlayerActionManager>();
         timeline = GameObject.Find("Timeline").GetComponent<TimelineManager>();
         activeSprite = 0;
-        activeSpritePriority = 0;
         sr.sprite = spriteList[0]; // set the sprite to idle.
     }
     // Called from player action manager
     public void UpdateVisuals(bool parryActive, bool parryLanded, bool perfectActive, bool perfectLanded)
     {
         activeSprite = 0;
-        activeSpritePriority = 0;
 
         if (!timeline.combatPause && timeline.combatActive) { CheckTimeline(parryActive, parryLanded, perfectActive, perfectLanded); }
         else { parryOverrideTimer = 0; }

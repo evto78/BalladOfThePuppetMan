@@ -56,9 +56,11 @@ public class TimelineManager : MonoBehaviour
     public Transform thresholdBar;
     AudioManager audioMan;
     public RoomSelection roomSelection;
+    GameDataManager gdm;
 
     private void Awake()
     {
+        gdm = GameObject.Find("GameDataManager").GetComponent<GameDataManager>();
         player = GameObject.Find("Player").GetComponent<PlayerActionManager>();
         audioMan = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
@@ -69,14 +71,15 @@ public class TimelineManager : MonoBehaviour
         roomSelection.gameObject.SetActive(false);
         combatPause = true;
         markerPrefab.SetActive(false);
+        camGlide.isUp = true;
 
-        StartCombat();
+        //StartCombat();
     }
     private void Update()
     {
         if (combatActive && !combatPause) { UpdateCombat(); }
+        else if (combatActive) { UpdateMetronome(); }
         else { UpdateVisuals(); }
-        UpdateMetronome();
     }
     void UpdateVisuals()
     {
@@ -98,6 +101,9 @@ public class TimelineManager : MonoBehaviour
         if (combatActive) { return; }
         combatActive = true;
         combatPause = true;
+
+        gdm.ChangeState(GameDataManager.State.TurnBasedCombat);
+
         roundNumber = 0;
 
         eventList = new List<TimelineEvent>();
@@ -118,11 +124,16 @@ public class TimelineManager : MonoBehaviour
         if (!combatActive) { return; }
         combatPause = false;
 
+        gdm.ChangeState(GameDataManager.State.RealTimeCombat);
+
         camGlide.isUp = true;
     }
     void EndRound()
     {
         combatPause = true;
+
+        gdm.ChangeState(GameDataManager.State.TurnBasedCombat);
+
         timePassed = 0;
         prevEventIndex = -1;
         roundNumber++;
@@ -205,7 +216,7 @@ public class TimelineManager : MonoBehaviour
 
         camGlide.isUp = true;
 
-        roomSelection.gameObject.SetActive(true);
+        gdm.ChangeState(GameDataManager.State.CombatEnd);
     }
     void UpdateCombat()
     {

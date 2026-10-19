@@ -22,6 +22,7 @@ public class AudioManager : MonoBehaviour
 
     public List<SFXSource> unactiveSources;
     public List<SFXSource> activeSources;
+    SFXSource musicSource;
     List<List<SFXObject>> sfxData; //0 is effect list, 1 is music list, 2 is UI list.
     List<SFXObject> effectAudioData;
     List<SFXObject> musicAudioData;
@@ -53,6 +54,12 @@ public class AudioManager : MonoBehaviour
         {
             unactiveSources.Add(CreateNewSource());
         }
+
+        //Make the music source
+        musicSource = new SFXSource();
+        AudioSource source = Instantiate(audioSourcePrefab, transform).GetComponent<AudioSource>();
+        source.gameObject.name = "SFXSource-MUSIC";
+        musicSource.source = source;
     }
     List<SFXObject> SortSFXObjectData(List<SFXObject> inputData)
     {
@@ -105,8 +112,8 @@ public class AudioManager : MonoBehaviour
             case SFXType.UI: sfxObj = sfxData[2][clipID]; volMod = uiVol; break;
         }
 
+        sfxSource.source.volume = vol; sfxSource.source.pitch = pitch;
         sfxSource.source.volume *= volMod; sfxSource.source.volume *= masterVol;
-        sfxSource.source.pitch *= pitch;
         sfxSource.source.clip = sfxObj.clip;
 
         sfxSource.source.Play();
@@ -131,5 +138,22 @@ public class AudioManager : MonoBehaviour
         newSFX.source = source;
 
         return newSFX;
+    }
+    public void PlayMusic(int clipID, float vol, float pitch)
+    {
+        SFXObject sfxObj = sfxData[1][clipID];
+        float volMod = musicVol;
+
+        musicSource.source.volume = vol; musicSource.source.pitch = pitch;
+        musicSource.source.volume *= volMod; musicSource.source.volume *= masterVol;
+        musicSource.source.clip = sfxObj.clip;
+
+        musicSource.source.Play();
+
+        musicSource.sfxObj = sfxObj;
+    }
+    public void StopMusic()
+    {
+        musicSource.source.Stop();
     }
 }
