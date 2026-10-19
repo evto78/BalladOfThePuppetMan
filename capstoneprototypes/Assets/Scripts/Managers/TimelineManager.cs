@@ -78,8 +78,8 @@ public class TimelineManager : MonoBehaviour
     private void Update()
     {
         if (combatActive && !combatPause) { UpdateCombat(); }
-        else if (combatActive) { UpdateMetronome(); }
         else { UpdateVisuals(); }
+        if (combatActive) { UpdateMetronome(); }
     }
     void UpdateVisuals()
     {
