@@ -293,7 +293,15 @@ public class PlayerActionManager : MonoBehaviour
             int timeIndex = timeline.IndexFromTime(timeSpent + skill.prepTime);
             int timePassedIndex = timeline.IndexFromTime(timeSpent);
 
-            timeline.AddMarker(timeIndex, TimelineManager.EventType.PlayerAtk, null, null, skill, timeline.activeEnemies[0]);
+            Enemy enemyTargeted;
+
+            if (targetedEnemy == null) { enemyTargeted = timeline.activeEnemies[0]; }
+            else
+            {
+                enemyTargeted = targetedEnemy;
+            }
+
+            timeline.AddMarker(timeIndex, TimelineManager.EventType.PlayerAtk, null, null, skill, enemyTargeted);
             timeline.AddSkillBlock(timeIndex, timePassedIndex);
             timeSpent += skill.prepTime;
             energy -= skill.cost;
