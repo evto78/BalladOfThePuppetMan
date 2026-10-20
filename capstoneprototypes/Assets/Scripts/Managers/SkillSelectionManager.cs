@@ -42,6 +42,11 @@ public class SkillSelectionManager : MonoBehaviour
                 {
                     readout.text = readoutObj.readoutText;
                     hovering = true;
+
+                    if (readoutObj.transform.parent.TryGetComponent<Enemy>(out Enemy enemyScript) && player.timeline.activeEnemies.Contains(enemyScript))
+                    {
+                        player.targetedEnemy = enemyScript;
+                    }
                 }
             }
         }

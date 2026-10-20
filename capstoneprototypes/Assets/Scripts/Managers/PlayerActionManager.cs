@@ -38,6 +38,9 @@ public class PlayerActionManager : MonoBehaviour
     public List<PlayerSkill> equippedSkills;
     public List<PlayerSkill> skillData;
 
+    public Enemy targetedEnemy;
+    public Transform targetUI;
+
     [Header("Visuals")]
     public List<ParticleSystem> parryParticles;
     public List<ParticleSystem> perfectParticles;
@@ -121,8 +124,10 @@ public class PlayerActionManager : MonoBehaviour
 
     void Update()
     {
-        //Manage Timers
-        curParryCooldown -= Time.deltaTime; if (curParryCooldown < 0) { curParryCooldown = 0; }
+        if (targetedEnemy != null) { targetUI.gameObject.SetActive(true); targetUI.position = targetedEnemy.transform.position; } else { targetUI.gameObject.SetActive(false); }
+
+            //Manage Timers
+            curParryCooldown -= Time.deltaTime; if (curParryCooldown < 0) { curParryCooldown = 0; }
         curPerfectCooldown -= Time.deltaTime; if (curPerfectCooldown < 0) { curPerfectCooldown = 0; }
 
         //Check if parry / perfect window is over
