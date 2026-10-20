@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     public class Action
     {
         public TimelineManager.EventType actionType;
+        public bool oneOff; //If true, the enemy will only do this action in the first loop of the action sequence.
+
         public int damage; //If the action is an attack, how much damage should it do? If the action is speed up / down, how much should the combat time change by?
 
         //Try to make the delay in 160ths. As a tip, 0.05 is 8/160, and so 0.025 is 4/160. Not strictly needed, but helps make timing make more sense!
@@ -52,6 +54,7 @@ public class Enemy : MonoBehaviour
     public EnemyData myData;
     List<AttackPattern> attackPatterns;
     int curRound;
+    int curLoop; //Number of times that the action sequence has looped this round.
     public List<int> patternByRound;
 
     private void Awake()
@@ -118,16 +121,21 @@ public class Enemy : MonoBehaviour
         AttackPattern curPattern = GetPatternFromRound(curRound);
 
         float accumulatedDelay = 0;
+        curLoop = 0;
         while (accumulatedDelay <= timeline.combatTime)
         {
             foreach (Action action in curPattern.actionSequence)
             {
-                accumulatedDelay += action.delayBeforeAction;
-                if (accumulatedDelay > timeline.combatTime) { break; }
-                int indexOfDelay = Mathf.FloorToInt((accumulatedDelay / timeline.combatTime) * timeline.resolution);
-                timeline.AddMarker(indexOfDelay, action.actionType, this, action, null, null);
-                accumulatedDelay += action.delayAfterAction;
+                if (curLoop == 0 || (curLoop > 0 && !action.oneOff)) // Only counts one offs in the first loop.
+                {
+                    accumulatedDelay += action.delayBeforeAction;
+                    if (accumulatedDelay > timeline.combatTime) { break; }
+                    int indexOfDelay = Mathf.FloorToInt((accumulatedDelay / timeline.combatTime) * timeline.resolution);
+                    timeline.AddMarker(indexOfDelay, action.actionType, this, action, null, null);
+                    accumulatedDelay += action.delayAfterAction;
+                }
             }
+            curLoop++;
         }
     }
     public AttackPattern GetPatternFromRound(int round)
@@ -157,21 +165,25 @@ public class Enemy : MonoBehaviour
         float accumulatedDelay = 0;
         bool actionFound = false;
         int loopLimit = 1000;
+        curLoop = 0;
         while (!actionFound)
         {
             foreach (Action action in curPattern.actionSequence)
             {
-                if (curTimePassed >= accumulatedDelay && curTimePassed < accumulatedDelay + action.delayBeforeAction + action.delayAfterAction)
+                if (curLoop == 0 || (curLoop > 0 && !action.oneOff)) // Only counts one offs in the first loop.
                 {
-                    actionFound = true;
-                    RunCurAction(action, curTimePassed - accumulatedDelay, timeline.prevTimePassed - accumulatedDelay); break;
-                }
-                else
-                {
-                    accumulatedDelay += action.delayBeforeAction + action.delayAfterAction;
+                    if (curTimePassed >= accumulatedDelay && curTimePassed < accumulatedDelay + action.delayBeforeAction + action.delayAfterAction)
+                    {
+                        actionFound = true;
+                        RunCurAction(action, curTimePassed - accumulatedDelay, timeline.prevTimePassed - accumulatedDelay); break;
+                    }
+                    else
+                    {
+                        accumulatedDelay += action.delayBeforeAction + action.delayAfterAction;
+                    }
                 }
             }
-            loopLimit--;
+            loopLimit--; curLoop++;
             if (loopLimit < 1) { Debug.LogError("ENEMY: " + gameObject.name + ", NO ACTION COULD BE FOUND!"); break; }
         }
     }
