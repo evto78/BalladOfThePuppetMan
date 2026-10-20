@@ -441,13 +441,16 @@ public class TimelineManager : MonoBehaviour
             case EventType.EnemyAtk: tEvent.enemyOwner.Attack(tEvent); break;
             case EventType.PlayerAtk: player.StartCoroutine(player.ReactableEvent(tEvent)); break;
             case EventType.SpeedUp: combatSpeed += tEvent.enemyAction.damage; break;
-            case EventType.SpeedDown: combatSpeed -= tEvent.enemyAction.damage; break;
+            case EventType.SpeedDown: combatSpeed /= 1f+tEvent.enemyAction.damage; break;
             case EventType.None: break;
             case EventType.ReverseStart: break;
             case EventType.ReverseEnd: break;
             case EventType.PortalStart: break;
             case EventType.PortalEnd: break;
         }
+
+        //Min speed is 1/4x and max speed is 4x 
+        combatSpeed = Mathf.Clamp(combatSpeed, 0.25f, 4);
     }
     public void EnemyDied(Enemy enemy)
     {
