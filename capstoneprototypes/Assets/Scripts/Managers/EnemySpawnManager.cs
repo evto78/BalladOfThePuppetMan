@@ -20,7 +20,8 @@ public class EnemySpawnManager : MonoBehaviour
 
         for (int i = 0; i < validEnemies.Count; i++)
         {
-            Instantiate(enemies[validEnemies[i].id], spawns[i].position, Quaternion.identity);
+            GameObject spawnedEnemy = Instantiate(enemies[validEnemies[i].id], spawns[i].position, Quaternion.identity);
+            spawnedEnemy.GetComponentInChildren<SpriteRenderer>().sortingOrder = Mathf.Abs(Mathf.RoundToInt(spawnedEnemy.transform.localPosition.y));
         }
     }
 

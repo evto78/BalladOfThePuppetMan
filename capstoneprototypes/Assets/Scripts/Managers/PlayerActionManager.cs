@@ -40,6 +40,8 @@ public class PlayerActionManager : MonoBehaviour
 
     public Enemy targetedEnemy;
     public Transform targetUI;
+    public GameObject largeTarget;
+    public GameObject smallTarget;
 
     [Header("Visuals")]
     public List<ParticleSystem> parryParticles;
@@ -124,7 +126,15 @@ public class PlayerActionManager : MonoBehaviour
 
     void Update()
     {
-        if (targetedEnemy != null) { targetUI.gameObject.SetActive(true); targetUI.position = targetedEnemy.transform.position; } else { targetUI.gameObject.SetActive(false); }
+        if (targetedEnemy != null) 
+        { 
+            targetUI.gameObject.SetActive(true); 
+            targetUI.position = targetedEnemy.transform.position; 
+            if (targetedEnemy.myData.id == 1) 
+            { largeTarget.SetActive(true); smallTarget.SetActive(false); }
+            else { largeTarget.SetActive(false); smallTarget.SetActive(true); }
+        } 
+        else { targetUI.gameObject.SetActive(false); }
 
             //Manage Timers
             curParryCooldown -= Time.deltaTime; if (curParryCooldown < 0) { curParryCooldown = 0; }
