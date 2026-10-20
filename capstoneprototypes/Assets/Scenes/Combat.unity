@@ -15580,15 +15580,25 @@ MonoBehaviour:
     - {fileID: 1988324856, guid: f65028d8e7db6cb43baba9f25593a23e, type: 3}
     - {fileID: 1239828162, guid: f65028d8e7db6cb43baba9f25593a23e, type: 3}
   - spriteList:
-    - {fileID: 21300000, guid: 56057f97d4bb780469c95550b42797c8, type: 3}
-    - {fileID: 21300000, guid: 56057f97d4bb780469c95550b42797c8, type: 3}
-    - {fileID: 21300000, guid: 56057f97d4bb780469c95550b42797c8, type: 3}
-    - {fileID: 21300000, guid: 56057f97d4bb780469c95550b42797c8, type: 3}
+    - {fileID: 613013465, guid: 4fad6606351117f4fa20f14a7dcc2401, type: 3}
+    - {fileID: 1853881926, guid: 4fad6606351117f4fa20f14a7dcc2401, type: 3}
+    - {fileID: -240292577, guid: 4fad6606351117f4fa20f14a7dcc2401, type: 3}
+    - {fileID: -63468480, guid: 4fad6606351117f4fa20f14a7dcc2401, type: 3}
   - spriteList:
-    - {fileID: 21300000, guid: 949033ba8f4c43c49ba575126aa4cf63, type: 3}
-    - {fileID: 21300000, guid: 949033ba8f4c43c49ba575126aa4cf63, type: 3}
-    - {fileID: 21300000, guid: 949033ba8f4c43c49ba575126aa4cf63, type: 3}
-    - {fileID: 21300000, guid: 949033ba8f4c43c49ba575126aa4cf63, type: 3}
+    - {fileID: -1006086426, guid: 6f257a20973cfa14786435c9c94450e6, type: 3}
+    - {fileID: -434419066, guid: 6f257a20973cfa14786435c9c94450e6, type: 3}
+    - {fileID: 1112695072, guid: 6f257a20973cfa14786435c9c94450e6, type: 3}
+    - {fileID: -1903189246, guid: 6f257a20973cfa14786435c9c94450e6, type: 3}
+  - spriteList:
+    - {fileID: 574487923, guid: 22372298d4e17094fb1415697bf48bb7, type: 3}
+    - {fileID: 577678413, guid: 22372298d4e17094fb1415697bf48bb7, type: 3}
+    - {fileID: 1805762620, guid: 22372298d4e17094fb1415697bf48bb7, type: 3}
+    - {fileID: 1169588453, guid: 22372298d4e17094fb1415697bf48bb7, type: 3}
+  - spriteList:
+    - {fileID: 575500908, guid: e8a60094df1848240b936527a4de2aeb, type: 3}
+    - {fileID: -460875397, guid: e8a60094df1848240b936527a4de2aeb, type: 3}
+    - {fileID: -368327341, guid: e8a60094df1848240b936527a4de2aeb, type: 3}
+    - {fileID: -1950601403, guid: e8a60094df1848240b936527a4de2aeb, type: 3}
 --- !u!4 &1671116926
 Transform:
   m_ObjectHideFlags: 0

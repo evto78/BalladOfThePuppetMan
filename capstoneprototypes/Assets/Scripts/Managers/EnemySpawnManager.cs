@@ -28,6 +28,10 @@ public class EnemySpawnManager : MonoBehaviour
     public void SpawnRandomEncounter()
     {
         int encounter = Random.Range(0, dl.allEncounters.Count);
+
+        // !!! - TEMP FIX - !!!
+        if (encounter == 6) { encounter = 0; }//IF Encounter would be the boss encounter (encounter 6) Set it to encounter 0 instead.
+
         SpawnEncounter(encounter);
     }
 }
