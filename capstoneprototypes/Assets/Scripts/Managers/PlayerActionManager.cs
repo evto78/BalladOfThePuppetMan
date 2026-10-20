@@ -265,7 +265,14 @@ public class PlayerActionManager : MonoBehaviour
     void StandardAttack(TimelineManager.TimelineEvent attackEvent, PlayerSkill skill, float perfectMult)
     {
         //If enemy previously targeted is gone, aim for another enemy.
-        if (attackEvent.enemyTargeted == null && timeline.activeEnemies.Count > 0) { attackEvent.enemyTargeted = timeline.activeEnemies[0]; }
+        if (attackEvent.enemyTargeted == null && timeline.activeEnemies.Count > 0) 
+        { 
+            if (targetedEnemy == null) { attackEvent.enemyTargeted = timeline.activeEnemies[0]; }
+            else
+            {
+                attackEvent.enemyTargeted = targetedEnemy;
+            }
+        }
         //If no enemies are left alive, cancel the attack.
         else if (timeline.activeEnemies.Count == 0) { return; }
         //Do the attack.
