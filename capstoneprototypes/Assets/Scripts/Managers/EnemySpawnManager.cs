@@ -22,6 +22,9 @@ public class EnemySpawnManager : MonoBehaviour
         {
             GameObject spawnedEnemy = Instantiate(enemies[validEnemies[i].id], spawns[i].position, Quaternion.identity);
             spawnedEnemy.GetComponentInChildren<SpriteRenderer>().sortingOrder = Mathf.Abs(Mathf.RoundToInt(spawnedEnemy.transform.localPosition.y));
+            Enemy enemyScript = spawnedEnemy.GetComponent<Enemy>();
+            enemyScript.SetEnemyData(-1, validEnemies[i]);
+            enemyScript.AddInitialOffset(dl.allEncounters[encounterIndex].offset[i]);
         }
     }
 

@@ -89,7 +89,23 @@ public class Enemy : MonoBehaviour
         mhp = myData.maxHP;
         hp = mhp;
         elementalType = myData.type;
-        attackPatterns = myData.attackPatterns;
+
+        attackPatterns = new List<AttackPattern>();
+        AttackPattern newPattern = new AttackPattern();
+        foreach (AttackPattern aPattern in myData.attackPatterns)
+        {
+            newPattern.timelineChangePriority = aPattern.timelineChangePriority;
+            newPattern.timelineCombatSpeedPref = aPattern.timelineCombatSpeedPref;
+            newPattern.timelineCombatTimePref = aPattern.timelineCombatTimePref;
+
+            foreach (Action a in aPattern.actionSequence)
+            {
+                newPattern.actionSequence.Add(a);
+            }
+
+            attackPatterns.Add(newPattern);
+        }
+
         patternByRound = myData.patternByRound;
 
 
@@ -223,6 +239,23 @@ public class Enemy : MonoBehaviour
                 activeSprite = 0; //idle anim
             }
         }
+    }
+
+    public void AddInitialOffset(float time)
+    {
+        AttackPattern firstPattern = GetPatternFromRound(0);
+        Action offsetAction = new Action();
+
+        offsetAction.actionType = TimelineManager.EventType.None;
+        offsetAction.oneOff = true;
+        offsetAction.damage = 0;
+        offsetAction.delayBeforeAction = time;
+        offsetAction.delayAfterAction = 0;
+        offsetAction.playAnim = false;
+        offsetAction.animWindupStart = 0;
+        offsetAction.animWinddownEnd = 0;
+
+        firstPattern.actionSequence.Insert(0, offsetAction);
     }
 
     void UpdateVisuals()
