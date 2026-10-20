@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 2 - Shamefool
   m_EditorClassIdentifier: 
   id: 2
-  maxHP: 20
+  maxHP: 15
   type: 3
   attackPatterns:
   - timelineChangePriority: 1

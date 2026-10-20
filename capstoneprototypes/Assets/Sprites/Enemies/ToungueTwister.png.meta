@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -95,7 +95,364 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: ToungueTwister_idle1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 672
+        width: 175
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8640775c46f8ffa4f95e1e89ba16d5ed
+      internalID: 575500908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToungueTwister_attack1
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 672
+        width: 175
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf0e14a2ee8fbd944943ed4b9f4316da
+      internalID: 522930607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToungueTwister_idle2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 588
+        width: 175
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73e8923bfdb583a4f88e27d0bb82fa28
+      internalID: 1020961460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToungueTwister_attack2
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 588
+        width: 175
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 773b50d78a02a8e4dae8869e99c4079c
+      internalID: -460875397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToungueTwister_idle3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 504
+        width: 175
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f258453733c0b164baa2d3c403613bd3
+      internalID: -57121201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToungueTwister_attack3_Hurt
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 504
+        width: 175
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39365c47b3a994c4f8f0fd84271e66e7
+      internalID: -1950601403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToungueTwister_idle4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 420
+        width: 175
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f62e57efc2ac2e743bce6629b048e86b
+      internalID: 1595695931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToungueTwister_attack4
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 420
+        width: 175
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d750476f3e605df448af72f6da40b185
+      internalID: -368327341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToungueTwister_idle5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 336
+        width: 175
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7daa92cb8a410c7469ccaf20172e40c1
+      internalID: 972603596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToungueTwister_attack5
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 336
+        width: 175
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70661c5532df1494b81eaa47c570d978
+      internalID: 684948011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToungueTwister_idle6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 252
+        width: 175
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cbcbb7ee7ef95f4dadb2a2946df4caa
+      internalID: -829801621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToungueTwister_attack6
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 252
+        width: 175
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6387f0a726c6ae94b96f9ad3bb471708
+      internalID: 902520176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToungueTwister_idle7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 168
+        width: 175
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 431143bd94056ee43a898e4b080e930a
+      internalID: 820556194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToungueTwister_attack7
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 168
+        width: 175
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e35eb26a2c29698409e5814b0158b028
+      internalID: -31829724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToungueTwister_idle8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 84
+        width: 175
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1d73c1b297f6bf4a9f880ca7a7ee006
+      internalID: -1211371380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToungueTwister_attack8
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 84
+        width: 175
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d95a049ceee5a643b4cb26db64f23c9
+      internalID: 953031704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToungueTwister_idle9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 175
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5095f47b3c5732439205940f0dc28fb
+      internalID: -221209663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -106,7 +463,24 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ToungueTwister_attack1: 522930607
+      ToungueTwister_attack2: -460875397
+      ToungueTwister_attack3_Hurt: -1950601403
+      ToungueTwister_attack4: -368327341
+      ToungueTwister_attack5: 684948011
+      ToungueTwister_attack6: 902520176
+      ToungueTwister_attack7: -31829724
+      ToungueTwister_attack8: 953031704
+      ToungueTwister_idle1: 575500908
+      ToungueTwister_idle2: 1020961460
+      ToungueTwister_idle3: -57121201
+      ToungueTwister_idle4: 1595695931
+      ToungueTwister_idle5: 972603596
+      ToungueTwister_idle6: -829801621
+      ToungueTwister_idle7: 820556194
+      ToungueTwister_idle8: -1211371380
+      ToungueTwister_idle9: -221209663
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
