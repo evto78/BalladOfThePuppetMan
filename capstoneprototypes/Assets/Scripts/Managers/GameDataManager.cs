@@ -18,6 +18,7 @@ public class GameDataManager : MonoBehaviour
     public EnemySpawnManager enemySpawnMan;
     public RoomSelection roomSelection;
     public RewardManager rewardManager;
+    public CameraGlide camGlide;
 
     private void Start()
     {
@@ -44,10 +45,12 @@ public class GameDataManager : MonoBehaviour
             case State.CombatEnd: 
                 ChangeState(State.RewardSelection);
                 break;
-            case State.RewardSelection: 
-                ChangeState(State.RoomSelection); // !!! - FOR NOW! REWARD SELECTION IS SKIPPED TO GO STRAIGHT TO ROOM SELECTION! WHEN IMPLEMENTING REWARDS CHANGE THIS! - !!!
+            case State.RewardSelection:
+                rewardManager.RandomizeRewards();
+                camGlide.isUp = false;
                 break;
-            case State.RoomSelection: 
+            case State.RoomSelection:
+                camGlide.isUp = true;
                 break;
             case State.GameOver:
                 player.gameOverAnim.PlayAnim();
