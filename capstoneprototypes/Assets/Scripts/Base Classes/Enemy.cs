@@ -138,6 +138,10 @@ public class Enemy : MonoBehaviour
 
     public void SetupMarkers()
     {
+        curTimePassed = timeline.timePassed;
+        curTimelineIndex = timeline.eventIndex;
+        curRound = timeline.roundNumber;
+
         AttackPattern curPattern = GetPatternFromRound(curRound);
 
         float accumulatedDelay = 0;
