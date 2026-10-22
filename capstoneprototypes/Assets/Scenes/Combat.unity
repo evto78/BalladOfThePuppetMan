@@ -168,27 +168,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillButtons:
-  - {fileID: 1100022924}
-  - {fileID: 1321051934}
-  - {fileID: 676226076}
-  - {fileID: 524927207}
-  energyCost:
-  - {fileID: 1427820065}
-  - {fileID: 1793210941}
-  - {fileID: 669734309}
-  - {fileID: 1609537767}
-  skillText:
-  - {fileID: 1447931896}
-  - {fileID: 2043795212}
-  - {fileID: 1844097272}
-  - {fileID: 2090064232}
-  energyIcon:
-  - {fileID: 785515877}
-  - {fileID: 400108681}
-  - {fileID: 73451787}
-  - {fileID: 1995074150}
+  - {fileID: 1100022927}
+  - {fileID: 1321051937}
+  - {fileID: 676226079}
+  - {fileID: 524927210}
   readout: {fileID: 1041489101}
   energyText: {fileID: 151975235}
+  skillSprites:
+  - {fileID: -1583564214, guid: f9e899e79b7973a4782b8d44c03af610, type: 3}
+  - {fileID: -1776478168, guid: f9e899e79b7973a4782b8d44c03af610, type: 3}
+  - {fileID: -1396452852, guid: f9e899e79b7973a4782b8d44c03af610, type: 3}
+  - {fileID: -77130963, guid: f9e899e79b7973a4782b8d44c03af610, type: 3}
+  - {fileID: 1388856082, guid: f9e899e79b7973a4782b8d44c03af610, type: 3}
+  skillSpritesHover:
+  - {fileID: 774146057, guid: 84545586126268140840e7c9f1647ccc, type: 3}
+  - {fileID: -80945465, guid: 84545586126268140840e7c9f1647ccc, type: 3}
+  - {fileID: 1574752595, guid: 84545586126268140840e7c9f1647ccc, type: 3}
+  - {fileID: 1171725004, guid: 84545586126268140840e7c9f1647ccc, type: 3}
+  - {fileID: -1716467055, guid: 84545586126268140840e7c9f1647ccc, type: 3}
+  skillElements:
+  - {fileID: 536091344, guid: 8bc6058566e0317429efec7615c9c852, type: 3}
+  - {fileID: -560500466, guid: 8bc6058566e0317429efec7615c9c852, type: 3}
+  - {fileID: 657116002, guid: 8bc6058566e0317429efec7615c9c852, type: 3}
+  - {fileID: 2132978690, guid: 8bc6058566e0317429efec7615c9c852, type: 3}
+  - {fileID: -303747564, guid: 8bc6058566e0317429efec7615c9c852, type: 3}
+  hoverXOffset: 2
   readoutObjects: []
 --- !u!1 &16148137
 GameObject:
@@ -3293,7 +3297,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d9219d1df3e2ad34c9e9dc066b95e386, type: 3}
+  m_Sprite: {fileID: -1396452852, guid: f9e899e79b7973a4782b8d44c03af610, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4530,7 +4534,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ff9892022147bab44ba8ce2de03bed59, type: 3}
+  m_Sprite: {fileID: -303747564, guid: 8bc6058566e0317429efec7615c9c852, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5851,6 +5855,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 524927208}
+  - component: {fileID: 524927210}
   - component: {fileID: 524927209}
   m_Layer: 5
   m_Name: Skill 4
@@ -5924,6 +5929,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 64, y: 10}
   m_EdgeRadius: 0
+--- !u!114 &524927210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524927207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e99a049a2efe0a342b367cd17194f98b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyCost: {fileID: 1609537767}
+  skillText: {fileID: 2090064232}
+  energyIcon: {fileID: 1995074150}
+  elementIcon: {fileID: 362327941}
+  button: {fileID: 1430147316}
+  img: {fileID: 1430147317}
 --- !u!1 &538084302
 GameObject:
   m_ObjectHideFlags: 0
@@ -7156,6 +7179,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 676226077}
+  - component: {fileID: 676226079}
   - component: {fileID: 676226078}
   m_Layer: 5
   m_Name: Skill 3
@@ -7229,6 +7253,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 64, y: 10}
   m_EdgeRadius: 0
+--- !u!114 &676226079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676226076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e99a049a2efe0a342b367cd17194f98b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyCost: {fileID: 669734309}
+  skillText: {fileID: 1844097272}
+  energyIcon: {fileID: 73451787}
+  elementIcon: {fileID: 1128923605}
+  button: {fileID: 256904390}
+  img: {fileID: 256904391}
 --- !u!1 &678886995
 GameObject:
   m_ObjectHideFlags: 0
@@ -7538,7 +7580,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ff9892022147bab44ba8ce2de03bed59, type: 3}
+  m_Sprite: {fileID: -560500466, guid: 8bc6058566e0317429efec7615c9c852, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11274,7 +11316,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d9219d1df3e2ad34c9e9dc066b95e386, type: 3}
+  m_Sprite: {fileID: -1776478168, guid: f9e899e79b7973a4782b8d44c03af610, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11301,6 +11343,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1100022925}
+  - component: {fileID: 1100022927}
   - component: {fileID: 1100022926}
   m_Layer: 5
   m_Name: Skill 1
@@ -11374,6 +11417,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 64, y: 10}
   m_EdgeRadius: 0
+--- !u!114 &1100022927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100022924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e99a049a2efe0a342b367cd17194f98b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyCost: {fileID: 1427820065}
+  skillText: {fileID: 1447931896}
+  energyIcon: {fileID: 785515877}
+  elementIcon: {fileID: 1963704366}
+  button: {fileID: 1989723250}
+  img: {fileID: 1989723251}
 --- !u!1 &1100336037
 GameObject:
   m_ObjectHideFlags: 0
@@ -11615,7 +11676,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ff9892022147bab44ba8ce2de03bed59, type: 3}
+  m_Sprite: {fileID: 657116002, guid: 8bc6058566e0317429efec7615c9c852, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13150,6 +13211,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1321051935}
+  - component: {fileID: 1321051937}
   - component: {fileID: 1321051936}
   m_Layer: 5
   m_Name: Skill 2
@@ -13223,6 +13285,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 64, y: 10}
   m_EdgeRadius: 0
+--- !u!114 &1321051937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321051934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e99a049a2efe0a342b367cd17194f98b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyCost: {fileID: 1793210941}
+  skillText: {fileID: 2043795212}
+  energyIcon: {fileID: 400108681}
+  elementIcon: {fileID: 709250068}
+  button: {fileID: 1099212232}
+  img: {fileID: 1099212233}
 --- !u!1 &1380437025
 GameObject:
   m_ObjectHideFlags: 0
@@ -13696,7 +13776,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d9219d1df3e2ad34c9e9dc066b95e386, type: 3}
+  m_Sprite: {fileID: 1388856082, guid: f9e899e79b7973a4782b8d44c03af610, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18465,7 +18545,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ff9892022147bab44ba8ce2de03bed59, type: 3}
+  m_Sprite: {fileID: 536091344, guid: 8bc6058566e0317429efec7615c9c852, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18602,7 +18682,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d9219d1df3e2ad34c9e9dc066b95e386, type: 3}
+  m_Sprite: {fileID: -1583564214, guid: f9e899e79b7973a4782b8d44c03af610, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

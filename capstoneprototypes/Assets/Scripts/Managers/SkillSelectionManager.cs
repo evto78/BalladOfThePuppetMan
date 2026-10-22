@@ -6,19 +6,34 @@ using TMPro;
 
 public class SkillSelectionManager : MonoBehaviour
 {
-    public List<GameObject> skillButtons;
-    public List<TextMeshProUGUI> energyCost;
-    public List<TextMeshProUGUI> skillText;
-    public List<GameObject> energyIcon;
+    [Header("References")]
+    public List<SkillButton> skillButtons;
     public TextMeshProUGUI readout;
     public TextMeshProUGUI energyText;
     PlayerActionManager player;
+    TargetingArrow tarArrow;
+    public List<Sprite> skillSprites;
+    public List<Sprite> skillSpritesHover;
+    public List<Sprite> skillElements;
 
+
+    [Header("Functional")]
+    public float hoverXOffset; // how much should the skill buttons shift when selected?
+    List<float> hoverProgress; // individual timers for each skill button to track how much it has been hovered over.
+    List<Vector3> initialPos; // all of the skill buttons initial pos
     public List<ReadoutOnHover> readoutObjects;
 
     private void Awake()
     {
         player = GameObject.Find("Player").GetComponent<PlayerActionManager>();
+
+        hoverProgress = new List<float>();
+        initialPos = new List<Vector3>();
+        foreach(SkillButton button in skillButtons)
+        {
+            hoverProgress.Add(0f);
+            initialPos.Add(button.transform.localPosition);
+        }
     }
 
     void Update()
@@ -27,12 +42,18 @@ public class SkillSelectionManager : MonoBehaviour
         player.timeline.StopPreviewSkillBlock();
         for (int i = 0; i < skillButtons.Count; i++)
         {
-            if (IsTouchingMouse(skillButtons[i])) 
+            if (IsTouchingMouse(skillButtons[i].gameObject)) 
             {
                 hovering = true;
+                hoverProgress[i] += Time.deltaTime * 12;
                 readout.text = player.equippedSkills[i].skillDescription;
                 player.PreviewSkill(i);
             }
+            else
+            {
+                hoverProgress[i] -= Time.deltaTime * 24;
+            }
+            hoverProgress[i] = Mathf.Clamp(hoverProgress[i],0f,1f);
         }
         if (!hovering)
         {
@@ -59,13 +80,21 @@ public class SkillSelectionManager : MonoBehaviour
     {
         for (int i = 0; i < skillButtons.Count; i++)
         {
-            skillText[i].text = player.equippedSkills[i].skillName;
-            energyCost[i].text = player.equippedSkills[i].cost.ToString();
+            SkillButton btn = skillButtons[i];
+
+            btn.skillText.text = player.equippedSkills[i].skillName;
+            btn.energyCost.text = player.equippedSkills[i].cost.ToString();
+
+            player.equippedSkills[i].elementalType.GetHashCode();
+
+            btn.elementIcon.sprite = skillElements;
 
             if (player.equippedSkills[i].cost > player.energy) 
-            { skillButtons[i].GetComponentInChildren<Button>().interactable = false; energyIcon[i].SetActive(false); } 
+            { btn.GetComponentInChildren<Button>().interactable = false; btn.energyIcon.SetActive(false); } 
             else 
-            { skillButtons[i].GetComponentInChildren<Button>().interactable = true; energyIcon[i].SetActive(true); }
+            { btn.GetComponentInChildren<Button>().interactable = true; btn.energyIcon.SetActive(true); }
+
+            btn.transform.localPosition = initialPos[i] + Vector3.right * (hoverXOffset * hoverProgress[i]);
         }
 
         energyText.text = player.energy.ToString();
