@@ -6,43 +6,45 @@ public class ElementalMods
 {
     static float neutral = 1f;
     static float advantage = 1.5f;
-    static float disadvantage = 0.5f;
+    //static float disadvantage = 0.5f;
 
     public static float Modifier(ElementalTypes skillElement, ElementalTypes enemyElement)
     {
         float elementMod = neutral;
 
-        if (skillElement == ElementalTypes.Red)
+        if (skillElement == ElementalTypes.Power)
         {
-            if (enemyElement == ElementalTypes.Green)
-            {
-                elementMod = advantage;
-            }
-            else if (enemyElement == ElementalTypes.Blue)
-            {
-                elementMod = disadvantage;
-            }
-        }
-        else if (skillElement == ElementalTypes.Green)
-        {
-            if (enemyElement == ElementalTypes.Red)
-            {
-                elementMod = disadvantage;
-            }
-            else if (enemyElement == ElementalTypes.Blue)
+            if (enemyElement == ElementalTypes.Money)
             {
                 elementMod = advantage;
             }
         }
-        else if (skillElement == ElementalTypes.Blue)
+        else if (skillElement == ElementalTypes.Money)
         {
-            if (enemyElement == ElementalTypes.Red)
+            if (enemyElement == ElementalTypes.Fame)
             {
                 elementMod = advantage;
             }
-            else if (enemyElement == ElementalTypes.Green)
+        }
+        else if (skillElement == ElementalTypes.Fame)
+        {
+            if (enemyElement == ElementalTypes.Power)
             {
-                elementMod = disadvantage;
+                elementMod = advantage;
+            }
+        }
+        else if (skillElement == ElementalTypes.Corruption)
+        {
+            if (enemyElement == ElementalTypes.Power || skillElement == ElementalTypes.Money || skillElement == ElementalTypes.Fame)
+            {
+                elementMod = advantage;
+            }
+        }
+        else if (skillElement == ElementalTypes.Purity)
+        {
+            if (enemyElement == ElementalTypes.Corruption)
+            {
+                elementMod = advantage;
             }
         }
 
@@ -52,8 +54,9 @@ public class ElementalMods
 
 public enum ElementalTypes
 {
-    None,
-    Red,
-    Green,
-    Blue
+    Power,
+    Money,
+    Fame,
+    Corruption,
+    Purity
 }

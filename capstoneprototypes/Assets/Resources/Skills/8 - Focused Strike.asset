@@ -18,7 +18,7 @@ MonoBehaviour:
   target: 1
   intensity: 1
   perfectMultiplier: 1.5
-  elementalType: 3
+  elementalType: 2
   skillName: Focused Strike
   skillDescription: Deals 1 blue damage with 1.5x perfect multiplier. Applies 1 stack
     of focus.

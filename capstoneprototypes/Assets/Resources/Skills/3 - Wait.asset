@@ -18,7 +18,7 @@ MonoBehaviour:
   target: 0
   intensity: 0
   perfectMultiplier: 1
-  elementalType: 0
+  elementalType: 4
   skillName: Wait
   skillDescription: Just waits 1 second.
   perfectable: 0
