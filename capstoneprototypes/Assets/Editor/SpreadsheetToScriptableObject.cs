@@ -8,6 +8,7 @@ using static PlayerSkill;
 public class SpreadsheetToScriptableObject
 {
     private static string enemyDataCSVPath = "/Scripts/Spreadsheet Importing/CSVs/Enemies.csv", attackPatternsDataCSVPath = "/Scripts/Spreadsheet Importing/CSVs/Attack Patterns.csv", skillsCSVPath = "/Scripts/Spreadsheet Importing/CSVs/Player Skills.csv", enemyEncountersDataCSVPath = "/Scripts/Spreadsheet Importing/CSVs/Enemy Encounters.csv"; //String paths for CSV files
+    private static string spreadsheetPath = "/Editor/Ballad of the Puppet Man Data.xlsx";
     private const string dataListPath = "Assets/Scripts/Spreadsheet Importing/DataList.asset"; //String path for the data list housing all created assets
 
     //Function that returns the data list from said path if found
@@ -37,7 +38,7 @@ public class SpreadsheetToScriptableObject
 
             //Checks for the skills type
             string typeDisplay;
-            if(int.Parse(splitData[4]) < 1)
+            if (int.Parse(splitData[4]) < 1)
             {
                 typeDisplay = "Heal";
             }
@@ -146,7 +147,7 @@ public class SpreadsheetToScriptableObject
 
                         previousPatten.actionSequence.Add(newAction);
                     }
-                    
+
                     previousPatternID = int.Parse(attackPatternSplitData[1]);
                 }
             }
@@ -186,7 +187,7 @@ public class SpreadsheetToScriptableObject
                     if (enemyName == dataList.allEnemies[k].name)
                     {
                         encounter.enemies.Add(dataList.allEnemies[k]);
-                        encounter.offset.Add(float.Parse(splitData[j+5]));
+                        encounter.offset.Add(float.Parse(splitData[j + 5]));
                     }
                 }
             }
@@ -205,5 +206,11 @@ public class SpreadsheetToScriptableObject
 
         EditorUtility.SetDirty(dataList);
         AssetDatabase.SaveAssets();
+    }
+
+    [MenuItem("Spreadsheet/Update CSVs")] //Ceates a new selection under the "Generation" tab in the unity editor to generate skills
+    public static void UpdateCSVs()
+    {
+
     }
 }
