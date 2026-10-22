@@ -449,8 +449,8 @@ public class TimelineManager : MonoBehaviour
             case EventType.PortalEnd: break;
         }
 
-        //Min speed is 1/4x and max speed is 4x 
-        combatSpeed = Mathf.Clamp(combatSpeed, 0.25f, 4);
+        //Min speed is 1/2x and max speed is 4x 
+        combatSpeed = Mathf.Clamp(combatSpeed, 0.5f, 4);
     }
     public void EnemyDied(Enemy enemy)
     {

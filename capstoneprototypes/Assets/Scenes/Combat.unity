@@ -153,6 +153,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1937129498}
+  - {fileID: 770523077}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4592857
@@ -175,20 +176,20 @@ MonoBehaviour:
   readout: {fileID: 1041489101}
   energyText: {fileID: 151975235}
   skillSprites:
-  - {fileID: -1583564214, guid: f9e899e79b7973a4782b8d44c03af610, type: 3}
   - {fileID: -1776478168, guid: f9e899e79b7973a4782b8d44c03af610, type: 3}
+  - {fileID: -1583564214, guid: f9e899e79b7973a4782b8d44c03af610, type: 3}
   - {fileID: -1396452852, guid: f9e899e79b7973a4782b8d44c03af610, type: 3}
   - {fileID: -77130963, guid: f9e899e79b7973a4782b8d44c03af610, type: 3}
   - {fileID: 1388856082, guid: f9e899e79b7973a4782b8d44c03af610, type: 3}
   skillSpritesHover:
-  - {fileID: 774146057, guid: 84545586126268140840e7c9f1647ccc, type: 3}
   - {fileID: -80945465, guid: 84545586126268140840e7c9f1647ccc, type: 3}
+  - {fileID: 774146057, guid: 84545586126268140840e7c9f1647ccc, type: 3}
   - {fileID: 1574752595, guid: 84545586126268140840e7c9f1647ccc, type: 3}
   - {fileID: 1171725004, guid: 84545586126268140840e7c9f1647ccc, type: 3}
   - {fileID: -1716467055, guid: 84545586126268140840e7c9f1647ccc, type: 3}
   skillElements:
-  - {fileID: 536091344, guid: 8bc6058566e0317429efec7615c9c852, type: 3}
   - {fileID: -560500466, guid: 8bc6058566e0317429efec7615c9c852, type: 3}
+  - {fileID: 536091344, guid: 8bc6058566e0317429efec7615c9c852, type: 3}
   - {fileID: 657116002, guid: 8bc6058566e0317429efec7615c9c852, type: 3}
   - {fileID: 2132978690, guid: 8bc6058566e0317429efec7615c9c852, type: 3}
   - {fileID: -303747564, guid: 8bc6058566e0317429efec7615c9c852, type: 3}
@@ -3265,9 +3266,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1191142449884842653}
-        m_TargetAssemblyTypeName: PlayerActionManager, Assembly-CSharp
-        m_MethodName: AttemptUseSkill
+      - m_Target: {fileID: 4592857}
+        m_TargetAssemblyTypeName: SkillSelectionManager, Assembly-CSharp
+        m_MethodName: StartTargetingSkill
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5944,7 +5945,7 @@ MonoBehaviour:
   energyCost: {fileID: 1609537767}
   skillText: {fileID: 2090064232}
   energyIcon: {fileID: 1995074150}
-  elementIcon: {fileID: 362327941}
+  elementIcon: {fileID: 362327943}
   button: {fileID: 1430147316}
   img: {fileID: 1430147317}
 --- !u!1 &538084302
@@ -7268,7 +7269,7 @@ MonoBehaviour:
   energyCost: {fileID: 669734309}
   skillText: {fileID: 1844097272}
   energyIcon: {fileID: 73451787}
-  elementIcon: {fileID: 1128923605}
+  elementIcon: {fileID: 1128923607}
   button: {fileID: 256904390}
   img: {fileID: 256904391}
 --- !u!1 &678886995
@@ -8391,7 +8392,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &770523077
 Transform:
   m_ObjectHideFlags: 0
@@ -8400,14 +8401,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770523076}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.3, y: -5.9, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.3, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1629493065}
   - {fileID: 2136862824}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 4592856}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &770523078
 MonoBehaviour:
@@ -8454,40 +8455,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  yCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0.002709641
-      outSlope: 0.002709641
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 1
-    - serializedVersion: 3
-      time: 0.5
-      value: 1
-      inSlope: -0.00000022741466
-      outSlope: -0.00000022741466
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.53719
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -0.0023988665
-      outSlope: -0.0023988665
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 1
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  yOffset: 0
 --- !u!1 &783333288
 GameObject:
   m_ObjectHideFlags: 0
@@ -11284,9 +11251,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1191142449884842653}
-        m_TargetAssemblyTypeName: PlayerActionManager, Assembly-CSharp
-        m_MethodName: AttemptUseSkill
+      - m_Target: {fileID: 4592857}
+        m_TargetAssemblyTypeName: SkillSelectionManager, Assembly-CSharp
+        m_MethodName: StartTargetingSkill
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11432,7 +11399,7 @@ MonoBehaviour:
   energyCost: {fileID: 1427820065}
   skillText: {fileID: 1447931896}
   energyIcon: {fileID: 785515877}
-  elementIcon: {fileID: 1963704366}
+  elementIcon: {fileID: 1963704368}
   button: {fileID: 1989723250}
   img: {fileID: 1989723251}
 --- !u!1 &1100336037
@@ -13300,7 +13267,7 @@ MonoBehaviour:
   energyCost: {fileID: 1793210941}
   skillText: {fileID: 2043795212}
   energyIcon: {fileID: 400108681}
-  elementIcon: {fileID: 709250068}
+  elementIcon: {fileID: 709250070}
   button: {fileID: 1099212232}
   img: {fileID: 1099212233}
 --- !u!1 &1380437025
@@ -13744,9 +13711,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1191142449884842653}
-        m_TargetAssemblyTypeName: PlayerActionManager, Assembly-CSharp
-        m_MethodName: AttemptUseSkill
+      - m_Target: {fileID: 4592857}
+        m_TargetAssemblyTypeName: SkillSelectionManager, Assembly-CSharp
+        m_MethodName: StartTargetingSkill
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18650,9 +18617,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1191142449884842653}
-        m_TargetAssemblyTypeName: PlayerActionManager, Assembly-CSharp
-        m_MethodName: AttemptUseSkill
+      - m_Target: {fileID: 4592857}
+        m_TargetAssemblyTypeName: SkillSelectionManager, Assembly-CSharp
+        m_MethodName: StartTargetingSkill
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21314,4 +21281,3 @@ SceneRoots:
   - {fileID: 1403245140}
   - {fileID: 569004992}
   - {fileID: 486127189}
-  - {fileID: 770523077}

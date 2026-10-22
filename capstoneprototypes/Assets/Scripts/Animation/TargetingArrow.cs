@@ -8,9 +8,6 @@ public class TargetingArrow : MonoBehaviour
     Vector3 startPos; Vector3 endPos;
 
     public AnimationCurve leanCurve;
-
-    public AnimationCurve yCurve;
-    public float yOffset;
     private void Start()
     {
         orbs.Add(transform.GetChild(0));
@@ -33,8 +30,6 @@ public class TargetingArrow : MonoBehaviour
         for (int i = 0; i < orbs.Count; i++)
         {
             progress = (float)i / (float)(orbs.Count - 1);
-            //modEndPos = new Vector3(endPos.x, endPos.y + (yOffset * yCurve.Evaluate(progress)), 0);
-            //orbs[i].transform.position = Vector3.Lerp(startPos, modEndPos, progress);
             orbs[i].transform.position = new Vector3 (
                     Mathf.LerpUnclamped(startPos.x, modEndPos.x, 1f - leanCurve.Evaluate(1f - progress)),
                     Mathf.LerpUnclamped(startPos.y, modEndPos.y, leanCurve.Evaluate(progress)),
