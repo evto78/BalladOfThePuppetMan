@@ -106,14 +106,18 @@ public class EnemySpriteAnimator : MonoBehaviour
         else { return; } //No proper animation found?
         overrideIdleTimer = animEnd - time;
 
-        //Debug.Log("Time: " + time);
-        //Debug.Log(animStart + " / " + animEnd);
-
         //Find the anim progress
-        animProgress = time / animEnd;
+        animProgress = (time - animStart) / (animEnd - animStart);
         activeAnimIndex = Mathf.FloorToInt(animProgress * (activeAnim.Count - 1));
 
-        if (time >= animStart) { }
+        Debug.Log("INFO:");
+        if (activeAnim == idleAnim) { Debug.Log("Idle Anim. Count: " + idleAnim.Count); }
+        if (activeAnim == preAttackAnim) { Debug.Log("PreAtk Anim. Count: " + preAttackAnim.Count); }
+        if (activeAnim == postAttackAnim) { Debug.Log("PostAtk Anim. Count: " + postAttackAnim.Count); }
+        if (activeAnim == hurtAnim) { Debug.Log("Hurt Anim. Count: " + hurtAnim.Count); }
+        Debug.Log("Time: " + time);
+        Debug.Log(animStart + " / " + animEnd);
+        Debug.Log("Index: " + activeAnimIndex);
     }
     public void HurtAnim()
     {
