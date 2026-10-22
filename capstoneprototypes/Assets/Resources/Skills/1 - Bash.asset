@@ -18,7 +18,7 @@ MonoBehaviour:
   target: 1
   intensity: 2
   perfectMultiplier: 1.5
-  elementalType: 0
+  elementalType: 4
   skillName: Bash
   skillDescription: Deals 2 neutral damage with 1.5x perfect multiplier.
   perfectable: 1

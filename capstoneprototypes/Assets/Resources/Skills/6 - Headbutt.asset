@@ -18,7 +18,7 @@ MonoBehaviour:
   target: 1
   intensity: 4
   perfectMultiplier: 2
-  elementalType: 2
+  elementalType: 1
   skillName: Headbutt
   skillDescription: Deals 4 green damage 2ith 2x perfect multiplier.
   perfectable: 1
