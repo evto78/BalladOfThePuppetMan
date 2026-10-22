@@ -294,11 +294,9 @@ public class PlayerActionManager : MonoBehaviour
     {
         if (timeline.combatActive && timeline.combatPause)
         {
-            PlayerSkill skill = equippedSkills[skillSlotIndex];
+            if (!isSkillUseable(skillSlotIndex)) { return; }
 
-            if (timeline.combatTime - timeSpent < skill.prepTime) { Debug.LogWarning("Not enough time to use skill."); return; }
-            if (energy < skill.cost) { Debug.LogWarning("Not enough energy to use skill."); return; }
-            if (timeline.activeEnemies.Count < 0) { Debug.LogWarning("No enemies!"); return; }
+            PlayerSkill skill = equippedSkills[skillSlotIndex];
 
             int timeIndex = timeline.IndexFromTime(timeSpent + skill.prepTime);
             int timePassedIndex = timeline.IndexFromTime(timeSpent);
@@ -316,6 +314,17 @@ public class PlayerActionManager : MonoBehaviour
             timeSpent += skill.prepTime;
             energy -= skill.cost;
         }
+    }
+
+    public bool isSkillUseable(int skillSlotIndex)
+    {
+        PlayerSkill skill = equippedSkills[skillSlotIndex];
+
+        if (timeline.combatTime - timeSpent < skill.prepTime) { Debug.LogWarning("Not enough time to use skill."); return false; }
+        if (energy < skill.cost) { Debug.LogWarning("Not enough energy to use skill."); return false; }
+        if (timeline.activeEnemies.Count < 0) { Debug.LogWarning("No enemies!"); return false; }
+
+        return true;
     }
 
     //Called by the skill selection buttons when hovered over

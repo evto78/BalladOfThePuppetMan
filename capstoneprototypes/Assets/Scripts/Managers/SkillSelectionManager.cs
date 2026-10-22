@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class SkillSelectionManager : MonoBehaviour
 {
@@ -135,6 +136,8 @@ public class SkillSelectionManager : MonoBehaviour
         targetingSkill = -1; player.targetedEnemy = null;
 
         if (skillSlot == -1) { return; }
+
+        if (!player.isSkillUseable(skillSlot)) { return; }
 
         switch (player.equippedSkills[skillSlot].target)
         {
