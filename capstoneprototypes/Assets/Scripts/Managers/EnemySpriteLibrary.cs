@@ -7,7 +7,13 @@ public class EnemySpriteLibrary : MonoBehaviour
     [System.Serializable]
     public class EnemySpriteList
     {
-        public List<Sprite> spriteList;
+        public List<AnimSheet> anims;
+    }
+
+    [System.Serializable]
+    public class AnimSheet
+    {
+        public List<Sprite> animFrames;
     }
 
     public List<EnemySpriteList> globalSpriteList;
