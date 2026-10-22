@@ -123,6 +123,7 @@ public class SpreadsheetToScriptableObject
                         newAction.playAnim = bool.Parse(attackPatternSplitData[9]);
                         newAction.animWindupStart = float.Parse(attackPatternSplitData[10]);
                         newAction.animWinddownEnd = float.Parse(attackPatternSplitData[11]);
+                        newAction.oneOff = bool.Parse(attackPatternSplitData[12]);
 
                         if (previousPatten != null)
                         {
@@ -141,6 +142,7 @@ public class SpreadsheetToScriptableObject
                         newAction.playAnim = bool.Parse(attackPatternSplitData[9]);
                         newAction.animWindupStart = float.Parse(attackPatternSplitData[10]);
                         newAction.animWinddownEnd = float.Parse(attackPatternSplitData[11]);
+                        newAction.oneOff = bool.Parse(attackPatternSplitData[12]);
 
                         previousPatten.actionSequence.Add(newAction);
                     }
@@ -191,6 +193,14 @@ public class SpreadsheetToScriptableObject
 
             AssetDatabase.CreateAsset(encounter, $"Assets/Resources/Encounters/Encounter {encounter.encounterID}.asset");
             dataList.allEncounters.Add(encounter);
+            if (splitData[11] == "Regular")
+            {
+                dataList.allRandomEncounters.Add(encounter);
+            }
+            else if (splitData[11] == "Scripted")
+            {
+                dataList.allScriptedEncounters.Add(encounter);
+            }
         }
 
         EditorUtility.SetDirty(dataList);
