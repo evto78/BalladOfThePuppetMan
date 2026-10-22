@@ -16,9 +16,9 @@ public class EnemySpriteAnimator : MonoBehaviour
 
     float hurtTimer;
     float overrideIdleTimer;
-    float idleCounter;
+    public float idleCounter;
     List<Sprite> activeAnim;
-    int activeAnimIndex;
+    public int activeAnimIndex;
 
     private void Start()
     {
@@ -37,12 +37,12 @@ public class EnemySpriteAnimator : MonoBehaviour
         { 
             overrideIdleTimer = 0f; 
             activeAnim = idleAnim;
-            activeAnimIndex = Mathf.RoundToInt(idleCounter);
+            activeAnimIndex = Mathf.FloorToInt(idleCounter);
 
             if (hurtTimer > 0)
             {
                 activeAnim = hurtAnim;
-                activeAnimIndex = Mathf.RoundToInt((hurtTimer * 2f) * (hurtAnim.Count - 1));
+                activeAnimIndex = Mathf.FloorToInt((hurtTimer * 2f) * (hurtAnim.Count - 1));
             }
         }
         else
@@ -52,18 +52,22 @@ public class EnemySpriteAnimator : MonoBehaviour
                 if (hurtTimer > 0)
                 {
                     activeAnim = hurtAnim;
-                    activeAnimIndex = Mathf.RoundToInt((hurtTimer * 2f) * (hurtAnim.Count - 1));
+                    activeAnimIndex = Mathf.FloorToInt((hurtTimer * 2f) * (hurtAnim.Count - 1));
                 }
             }
         }
 
         //Set sprite to proper anim frame
+        activeAnimIndex = Mathf.Clamp(activeAnimIndex, 0, activeAnim.Count-1);
         sr.sprite = activeAnim[activeAnimIndex];
     }
     private void LateUpdate()
     {
         idleCounter += Time.deltaTime * gdm.timeline.combatSpeed;
-        if (idleCounter > idleAnim.Count - 1) { idleCounter -= idleAnim.Count - 1; }
+        if (idleCounter > idleAnim.Count - 1) 
+        { 
+            idleCounter -= Mathf.Clamp(idleAnim.Count - 1, 1, idleAnim.Count); 
+        }
 
         if (overrideIdleTimer <= 0)
         {
@@ -85,24 +89,31 @@ public class EnemySpriteAnimator : MonoBehaviour
         //Find fitting animation:
         if (time < action.delayBeforeAction && time > action.delayBeforeAction - action.animWindupStart)
         {
-            activeAnim = preAttackAnim;
-
             animStart = action.delayBeforeAction - action.animWindupStart;
             animEnd = action.delayBeforeAction;
+
+            if (time >= animStart && time <= animEnd) { activeAnim = preAttackAnim; }
+            else { return; }
         }
         else if (time < action.delayBeforeAction + action.animWinddownEnd)
         {
-            activeAnim = postAttackAnim;
-
             animStart = action.delayBeforeAction;
             animEnd = action.delayBeforeAction + action.animWinddownEnd;
+
+            if (time >= animStart && time <= animEnd) { activeAnim = postAttackAnim; }
+            else { return; }
         }
         else { return; } //No proper animation found?
         overrideIdleTimer = animEnd - time;
 
+        //Debug.Log("Time: " + time);
+        //Debug.Log(animStart + " / " + animEnd);
+
         //Find the anim progress
         animProgress = time / animEnd;
-        activeAnimIndex = Mathf.RoundToInt(animProgress * (activeAnim.Count - 1));
+        activeAnimIndex = Mathf.FloorToInt(animProgress * (activeAnim.Count - 1));
+
+        if (time >= animStart) { }
     }
     public void HurtAnim()
     {

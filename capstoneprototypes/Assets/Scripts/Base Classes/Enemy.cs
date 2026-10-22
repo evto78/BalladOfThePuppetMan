@@ -49,7 +49,7 @@ public class Enemy : MonoBehaviour
     PlayerActionManager player;
     AudioManager audioMan;
     public EnemyData myData;
-    List<AttackPattern> attackPatterns;
+    public List<AttackPattern> attackPatterns;
     int curRound;
     int curLoop; //Number of times that the action sequence has looped this round.
     public List<int> patternByRound;
@@ -91,6 +91,8 @@ public class Enemy : MonoBehaviour
         AttackPattern newPattern = new AttackPattern();
         foreach (AttackPattern aPattern in myData.attackPatterns)
         {
+            newPattern = new AttackPattern();
+
             newPattern.timelineChangePriority = aPattern.timelineChangePriority;
             newPattern.timelineCombatSpeedPref = aPattern.timelineCombatSpeedPref;
             newPattern.timelineCombatTimePref = aPattern.timelineCombatTimePref;
@@ -109,6 +111,7 @@ public class Enemy : MonoBehaviour
         if (spriteLib == null) { spriteLib = GameObject.Find("EnemySpriteLibrary").GetComponent<EnemySpriteLibrary>(); }
 
         //Set up anim sheets
+        anim = GetComponent<EnemySpriteAnimator>();
         anim.idleAnim = spriteLib.globalSpriteList[myData.id].anims[0].animFrames;
         anim.preAttackAnim = spriteLib.globalSpriteList[myData.id].anims[1].animFrames;
         anim.postAttackAnim = spriteLib.globalSpriteList[myData.id].anims[2].animFrames;

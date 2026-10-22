@@ -395,6 +395,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1662438826770553006}
   - component: {fileID: 145024096572534442}
+  - component: {fileID: 6540695596742768368}
   m_Layer: 0
   m_Name: Shamefool
   m_TagString: Untagged
@@ -432,12 +433,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e9fa8221803bfd45adc5729f77eb9a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sr: {fileID: 8615386926869090728}
   mhp: 20
   hp: 20
   elementalType: 0
   myData: {fileID: 11400000, guid: 69b9d84f21e15fb449f5463d978df7b9, type: 2}
   patternByRound: 00000000
+--- !u!114 &6540695596742768368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5996677380891238105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6cb24a27f49cb1489791385c11454a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleAnim: []
+  preAttackAnim: []
+  postAttackAnim: []
+  hurtAnim: []
+  sr: {fileID: 8615386926869090728}
 --- !u!1 &7110514677949455749
 GameObject:
   m_ObjectHideFlags: 0
