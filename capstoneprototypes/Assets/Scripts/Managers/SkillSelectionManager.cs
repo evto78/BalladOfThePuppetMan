@@ -74,6 +74,7 @@ public class SkillSelectionManager : MonoBehaviour
             }
             hoverProgress[i] = Mathf.Clamp(hoverProgress[i], 0f, 1f);
         }
+        bool targetHovering = false;
         if (!hovering)
         {
             foreach (ReadoutOnHover readoutObj in readoutObjects)
@@ -86,6 +87,7 @@ public class SkillSelectionManager : MonoBehaviour
                     if (targetingSkill != -1 && readoutObj.transform.parent.TryGetComponent<Enemy>(out Enemy enemyScript) && player.timeline.activeEnemies.Contains(enemyScript))
                     {
                         player.targetedEnemy = enemyScript;
+                        targetHovering = true;
                         if (Input.GetMouseButtonDown(0))
                         {
                             player.AttemptUseSkill(targetingSkill);
@@ -94,6 +96,8 @@ public class SkillSelectionManager : MonoBehaviour
                     }
                 }
             }
+
+            if (!targetHovering && Input.GetMouseButtonDown(0)) { StartTargetingSkill(-1); }
         }
         if (!hovering) { readout.text = "..."; }
 
