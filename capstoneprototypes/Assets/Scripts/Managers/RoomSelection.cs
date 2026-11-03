@@ -34,20 +34,17 @@ public class RoomSelection : MonoBehaviour
             if (paths.Count > 6)
             {
                 //Past the boss encounter, just place question marks as a placeholder
-                newPath = new Vector3(-1.1f, 1.1f, -1.1f);
-                if (Random.Range(0, 2) == 0) { newPath = new Vector3(-newPath.x, newPath.y, newPath.z); }
-                if (Random.Range(0, 2) == 0) { newPath = new Vector3(newPath.x, -newPath.y, newPath.z); }
-                if (Random.Range(0, 2) == 0) { newPath = new Vector3(newPath.x, newPath.y, -newPath.z); }
+                newPath = new Vector3(-1.1f, -1.1f, -1.1f);
             }
             else if (paths.Count == 6) 
             {
                 //Force the boss encounter on the 6th room
-                newPath = new Vector3(-(roomIcons.Count - 1) + 0.1f, (roomIcons.Count - 1) + 0.1f, -(roomIcons.Count - 1) + 0.1f);
+                newPath = new Vector3(-0.1f, 0.1f, -0.1f);
             }
             else
             {
                 //For all other rooms, pick a random, NONBOSS room
-                newPath = new Vector3(Random.Range(0, roomIcons.Count-1) + 0.1f, Random.Range(0, roomIcons.Count-1) + 0.1f, Random.Range(0, roomIcons.Count-1) + 0.1f);
+                newPath = new Vector3(Random.Range(1, roomIcons.Count) + 0.1f, Random.Range(1, roomIcons.Count) + 0.1f, Random.Range(1, roomIcons.Count) + 0.1f);
                 if (Random.Range(0, 2) == 0) { newPath = new Vector3(-newPath.x, newPath.y, newPath.z); }
                 if (Random.Range(0, 2) == 0) { newPath = new Vector3(newPath.x, -newPath.y, newPath.z); }
                 if (Random.Range(0, 2) == 0) { newPath = new Vector3(newPath.x, newPath.y, -newPath.z); }
@@ -132,9 +129,9 @@ public class RoomSelection : MonoBehaviour
         }
         switch (Mathf.Abs(Mathf.RoundToInt(roomData)))
         {
-            case 0: //COMBAT
-                gdm.enemySpawnMan.SpawnRandomEncounter();
-                gdm.ChangeState(GameDataManager.State.StartCombat); 
+            case 0: //BOSS
+                gdm.enemySpawnMan.SpawnEncounter(6); //Run encounter 6, which is the tonguetwister boss encounter.
+                gdm.ChangeState(GameDataManager.State.StartCombat);
                 break; 
 
             case 1: //EVENT
@@ -144,9 +141,13 @@ public class RoomSelection : MonoBehaviour
                 gdm.player.HealRoom(); 
                 break;
 
-            case 3: //BOSS
-                gdm.enemySpawnMan.SpawnEncounter(6); //Run encounter 6, which is the tonguetwister boss encounter.
+            case 3: //COMBAT
+                gdm.enemySpawnMan.SpawnRandomEncounter();
                 gdm.ChangeState(GameDataManager.State.StartCombat);
+                break;
+
+            case 4: //SHOP
+                Debug.Log("Shop!");
                 break;
         }
 
