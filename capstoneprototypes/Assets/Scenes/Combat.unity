@@ -12527,6 +12527,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 62e48574dfc0997448a4cdb16f78c692, type: 3}
   - {fileID: 21300000, guid: 7a6ef060af1207a42a918b686695f728, type: 3}
   - {fileID: 21300000, guid: ed79274739a705e42a84569537af1f90, type: 3}
+  roomWeights: 0000000004000000020000000800000001000000
   thoughtBubbleSprite: {fileID: 21300000, guid: 41ba9479a86da9a438e4eed3c1b0d747, type: 3}
   selectedThoughtBubbleSprite: {fileID: 21300000, guid: 05d94f132d212d6438a3110d63f1544f, type: 3}
   optionSprites:

@@ -7,6 +7,7 @@ public class RoomSelection : MonoBehaviour
 {
     public List<Sprite> roomIcons;
     public List<Sprite> selectedRoomIcons;
+    public List<int> roomWeights;
     public Sprite thoughtBubbleSprite;
     public Sprite selectedThoughtBubbleSprite;
     public List<SpriteRenderer> optionSprites;
@@ -41,17 +42,42 @@ public class RoomSelection : MonoBehaviour
                 //Force the boss encounter on the 6th room
                 newPath = new Vector3(-0.1f, 0.1f, -0.1f);
             }
+            else if (paths.Count == 4)
+            {
+                //Always place a shop and 2 heals on the 4th room
+                newPath = new Vector3(2.1f, 4.1f, 2.1f);
+                if (Random.Range(0, 2) == 0) { newPath = new Vector3(-newPath.x, newPath.y, newPath.z); }
+                if (Random.Range(0, 2) == 0) { newPath = new Vector3(newPath.x, -newPath.y, newPath.z); }
+                if (Random.Range(0, 2) == 0) { newPath = new Vector3(newPath.x, newPath.y, -newPath.z); }
+            }
             else
             {
                 //For all other rooms, pick a random, NONBOSS room
-                newPath = new Vector3(Random.Range(1, roomIcons.Count) + 0.1f, Random.Range(1, roomIcons.Count) + 0.1f, Random.Range(1, roomIcons.Count) + 0.1f);
+                newPath = new Vector3(ReturnRandomWeightedRoom() + 0.1f, ReturnRandomWeightedRoom() + 0.1f, ReturnRandomWeightedRoom() + 0.1f);
                 if (Random.Range(0, 2) == 0) { newPath = new Vector3(-newPath.x, newPath.y, newPath.z); }
                 if (Random.Range(0, 2) == 0) { newPath = new Vector3(newPath.x, -newPath.y, newPath.z); }
                 if (Random.Range(0, 2) == 0) { newPath = new Vector3(newPath.x, newPath.y, -newPath.z); }
             }
 
-                paths.Add(newPath);
+            paths.Add(newPath);
         }
+    }
+    int ReturnRandomWeightedRoom()
+    {
+        int selectedRoom = 1;
+
+        int totalWeight = 0;
+        foreach (int w in roomWeights) { totalWeight += w; }
+
+        selectedRoom = Random.Range(1, totalWeight+1);
+        int accumulatedWeight = 0;
+        for (int i = 0; i < roomWeights.Count; i++)
+        {
+            accumulatedWeight += roomWeights[i];
+            if (selectedRoom <= accumulatedWeight) { selectedRoom = i; break; }
+        }
+
+        return selectedRoom;
     }
     void DisplayPaths()
     {
