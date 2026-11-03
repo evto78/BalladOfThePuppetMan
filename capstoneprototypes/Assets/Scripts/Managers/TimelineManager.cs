@@ -154,6 +154,11 @@ public class TimelineManager : MonoBehaviour
         gdm.ChangeState(GameDataManager.State.RealTimeCombat);
         metronomeTimer = 0; halfTick = false;
 
+        foreach (TimelineEvent e in eventList)
+        {
+            if (e.skillBlock != null) { Destroy(e.skillBlock); }
+        }
+
         camGlide.isUp = true;
     }
     void EndRound()

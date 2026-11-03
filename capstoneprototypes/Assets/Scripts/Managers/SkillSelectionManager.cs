@@ -69,6 +69,7 @@ public class SkillSelectionManager : MonoBehaviour
             }
             else
             {
+                if (targetingSkill == i) { player.PreviewSkill(i); }
                 hoverProgress[i] -= Time.deltaTime * 24;
             }
             hoverProgress[i] = Mathf.Clamp(hoverProgress[i], 0f, 1f);

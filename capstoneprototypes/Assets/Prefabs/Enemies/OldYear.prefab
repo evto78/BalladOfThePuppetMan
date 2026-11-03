@@ -175,6 +175,7 @@ MonoBehaviour:
   hp: 10
   elementalType: 0
   myData: {fileID: 11400000, guid: bfad49686696aa94a84b3cbabe850cba, type: 2}
+  attackPatterns: []
   patternByRound: 00000000
 --- !u!114 &7628850732769454492
 MonoBehaviour:
@@ -192,7 +193,10 @@ MonoBehaviour:
   preAttackAnim: []
   postAttackAnim: []
   hurtAnim: []
+  idleAnimSpeed: 1
   sr: {fileID: 5527803406950479304}
+  idleCounter: 0
+  activeAnimIndex: 0
 --- !u!1 &3265564915103193244
 GameObject:
   m_ObjectHideFlags: 0

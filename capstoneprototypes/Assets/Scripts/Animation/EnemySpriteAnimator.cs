@@ -9,6 +9,7 @@ public class EnemySpriteAnimator : MonoBehaviour
     public List<Sprite> preAttackAnim;
     public List<Sprite> postAttackAnim;
     public List<Sprite> hurtAnim;
+    public float idleAnimSpeed;
 
     [Header("References")]
     public SpriteRenderer sr;
@@ -63,7 +64,7 @@ public class EnemySpriteAnimator : MonoBehaviour
     }
     private void LateUpdate()
     {
-        idleCounter += Time.deltaTime * gdm.timeline.combatSpeed;
+        idleCounter += Time.deltaTime * gdm.timeline.combatSpeed * idleAnimSpeed;
         if (idleCounter > idleAnim.Count - 1) 
         { 
             idleCounter -= Mathf.Clamp(idleAnim.Count - 1, 1, idleAnim.Count); 
