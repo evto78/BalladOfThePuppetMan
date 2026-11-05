@@ -42,6 +42,8 @@ public class PlayerActionManager : MonoBehaviour
     public List<PlayerSkill> equippedSkills;
     public List<PlayerSkill> skillData;
 
+    public List<ItemObject> equippedItems;
+
     public Enemy targetedEnemy;
     public Transform targetUI;
     public GameObject largeTarget;
@@ -54,6 +56,8 @@ public class PlayerActionManager : MonoBehaviour
     float visualEnergyLeft;
     public SpriteRenderer healthBar;
     public List<Sprite> healthBarStates;
+    public Color positiveMemoriesColor;
+    public Color negativeMemoriesColor;
 
     [Header("References")]
     PlayerSpriteAnimator psAnim;
@@ -80,6 +84,8 @@ public class PlayerActionManager : MonoBehaviour
 
         skillData.AddRange(Resources.LoadAll<PlayerSkill>("Skills"));
         SortSkillData();
+
+        equippedItems = new List<ItemObject>();
     }
 
     void Start()
@@ -156,6 +162,9 @@ public class PlayerActionManager : MonoBehaviour
         //MONEY!
         if (curMemories > 9999) { memoryCount.text = "ALOT"; }
         else { memoryCount.text = curMemories.ToString(); }
+        if (curMemories >= 0) { memoryCount.color = positiveMemoriesColor; } else { memoryCount.color = negativeMemoriesColor; }
+        if (gdm.gameState == GameDataManager.State.Shop) { memoryCount.transform.parent.gameObject.SetActive(true); }
+        else if (!memoryAnimActive) { memoryCount.transform.parent.gameObject.SetActive(false); }
     }
 
     void GetInputs()
@@ -423,10 +432,11 @@ public class PlayerActionManager : MonoBehaviour
     {
         StartCoroutine(MemoryGainLoseAnim(amount));
     }
-
+    bool memoryAnimActive = false;
     IEnumerator MemoryGainLoseAnim(int amount)
     {
-        memoryCount.transform.gameObject.SetActive(true);
+        memoryAnimActive = true;
+        memoryCount.transform.parent.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(0.5f);
 
@@ -435,15 +445,20 @@ public class PlayerActionManager : MonoBehaviour
 
         while (amountLeft > 0) { curMemories++; amountLeft--;
             waitTime = 0.1f / ((float)Mathf.Abs(amountLeft));
-            yield return new WaitForSeconds(waitTime); }
+            if (waitTime > 0.1f) { waitTime = 0.1f; }
+            yield return new WaitForSeconds(waitTime);
+        }
         while (amountLeft < 0) { curMemories--; amountLeft++;
             waitTime = 0.1f / ((float)Mathf.Abs(amountLeft));
-            yield return new WaitForSeconds(waitTime); }
+            if (waitTime > 0.1f) { waitTime = 0.1f; }
+            yield return new WaitForSeconds(waitTime); 
+        }
 
         yield return new WaitForSeconds(1f);
 
-        memoryCount.transform.gameObject.SetActive(false);
+        memoryCount.transform.parent.gameObject.SetActive(false);
 
+        memoryAnimActive = false;
         yield return null;
     }
 }
