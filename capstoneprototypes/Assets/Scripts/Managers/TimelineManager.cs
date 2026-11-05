@@ -264,6 +264,9 @@ public class TimelineManager : MonoBehaviour
         prevEventIndex = -1;
         combatSpeed = 0;
 
+        //REWARD memory for winning a fight!
+        player.GainLoseMemory(5 + gdm.roomSelection.distance);
+
         camGlide.isUp = true;
 
         gdm.ChangeState(GameDataManager.State.CombatEnd);

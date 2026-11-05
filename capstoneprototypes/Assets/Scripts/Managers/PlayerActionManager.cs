@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using Unity.VisualScripting;
 
 public class PlayerActionManager : MonoBehaviour
 {
@@ -18,6 +20,8 @@ public class PlayerActionManager : MonoBehaviour
 
     public int maxEnergy;
     public int energy;
+
+    public int curMemories = 0;
 
     float timeSpent;
 
@@ -60,6 +64,7 @@ public class PlayerActionManager : MonoBehaviour
     public Image fillBar;
     public GameOverAnim gameOverAnim;
     GameDataManager gdm;
+    public TextMeshProUGUI memoryCount;
 
     private void Awake()
     {
@@ -81,6 +86,8 @@ public class PlayerActionManager : MonoBehaviour
     {
         hp = mhp;
         energy = maxEnergy;
+
+        memoryCount.transform.parent.gameObject.SetActive(false);
 
         curParryCooldown = 0f;
         parryActive = false;
@@ -136,8 +143,8 @@ public class PlayerActionManager : MonoBehaviour
         } 
         else { targetUI.gameObject.SetActive(false); }
 
-            //Manage Timers
-            curParryCooldown -= Time.deltaTime; if (curParryCooldown < 0) { curParryCooldown = 0; }
+        //Manage Timers
+        curParryCooldown -= Time.deltaTime; if (curParryCooldown < 0) { curParryCooldown = 0; }
         curPerfectCooldown -= Time.deltaTime; if (curPerfectCooldown < 0) { curPerfectCooldown = 0; }
 
         //Check if parry / perfect window is over
@@ -145,6 +152,10 @@ public class PlayerActionManager : MonoBehaviour
         perfectActive = perfectCooldown - curPerfectCooldown < perfectWindow; if (!perfectActive) { perfectLanded = false; }
 
         GetInputs();
+
+        //MONEY!
+        if (curMemories > 9999) { memoryCount.text = "ALOT"; }
+        else { memoryCount.text = curMemories.ToString(); }
     }
 
     void GetInputs()
@@ -406,5 +417,33 @@ public class PlayerActionManager : MonoBehaviour
     public void HealRoom()
     {
         hp = mhp;
+    }
+
+    public void GainLoseMemory(int amount)
+    {
+        StartCoroutine(MemoryGainLoseAnim(amount));
+    }
+
+    IEnumerator MemoryGainLoseAnim(int amount)
+    {
+        memoryCount.transform.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        int amountLeft = amount;
+        float waitTime;
+
+        while (amountLeft > 0) { curMemories++; amountLeft--;
+            waitTime = 0.1f / ((float)Mathf.Abs(amountLeft));
+            yield return new WaitForSeconds(waitTime); }
+        while (amountLeft < 0) { curMemories--; amountLeft++;
+            waitTime = 0.1f / ((float)Mathf.Abs(amountLeft));
+            yield return new WaitForSeconds(waitTime); }
+
+        yield return new WaitForSeconds(1f);
+
+        memoryCount.transform.gameObject.SetActive(false);
+
+        yield return null;
     }
 }
