@@ -172,7 +172,7 @@ public class RoomSelection : MonoBehaviour
                 break;
 
             case 4: //SHOP
-                Debug.Log("Shop!");
+                gdm.ChangeState(GameDataManager.State.Shop);
                 break;
         }
 

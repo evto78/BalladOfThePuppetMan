@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 public class GameDataManager : MonoBehaviour
 {
     [Header("Functional")]
+    public List<ItemObject> itemData;
     public List<PlayerSkill> startingSkills;
-    public enum State { StartGame, StartCombat, TurnBasedCombat, RealTimeCombat, CombatEnd, RewardSelection, RoomSelection, GameOver}
+    public enum State { StartGame, StartCombat, TurnBasedCombat, RealTimeCombat, CombatEnd, RewardSelection, RoomSelection, GameOver, Shop}
     public State gameState = State.StartGame;
     public int areaID; // The ID number of the current area, since we only have suburbia rn, this should only ever be 0.
 
@@ -18,7 +19,14 @@ public class GameDataManager : MonoBehaviour
     public EnemySpawnManager enemySpawnMan;
     public RoomSelection roomSelection;
     public RewardManager rewardManager;
+    public ShopManager shopManager;
     public CameraGlide camGlide;
+
+    private void Awake()
+    {
+        itemData = new List<ItemObject>();
+        itemData.AddRange(Resources.LoadAll<ItemObject>("Items"));
+    }
 
     private void Start()
     {
@@ -55,6 +63,8 @@ public class GameDataManager : MonoBehaviour
             case State.GameOver:
                 player.gameOverAnim.PlayAnim();
                 break;
+            case State.Shop:
+                break;
         }
     }
 
@@ -67,6 +77,7 @@ public class GameDataManager : MonoBehaviour
     {
         roomSelection.gameObject.SetActive(gameState == State.RoomSelection);
         rewardManager.gameObject.SetActive(gameState == State.RewardSelection);
+        shopManager.gameObject.SetActive(gameState == State.Shop);
     }
 
     public void QuitToDesktop()

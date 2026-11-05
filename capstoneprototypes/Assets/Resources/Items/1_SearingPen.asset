@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a40bf8741d973df4e91e695a9802734d, type: 3}
+  m_Name: 1_SearingPen
+  m_EditorClassIdentifier: 
+  id: 1
+  cost: 75
+  isRare: 1
+  sprite: {fileID: 21300000, guid: 929a58c307211ea42875ad5ef10bdb00, type: 3}
+  itemName: Searing Pen
+  itemDescription: After dealing damage to any enemy, apply 1 stack of decay to that
+    enemy. Makeing them take 1 damage for every stack every second for the rest of
+    the combat.
