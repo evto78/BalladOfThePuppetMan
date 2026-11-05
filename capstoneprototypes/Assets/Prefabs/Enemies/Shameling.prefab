@@ -193,7 +193,7 @@ MonoBehaviour:
   preAttackAnim: []
   postAttackAnim: []
   hurtAnim: []
-  idleAnimSpeed: 1
+  idleAnimSpeed: 10
   sr: {fileID: 5527803406950479304}
   idleCounter: 0
   activeAnimIndex: 0
