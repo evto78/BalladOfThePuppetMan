@@ -61,6 +61,7 @@ public class TimelineManager : MonoBehaviour
     AudioManager audioMan;
     public RoomSelection roomSelection;
     GameDataManager gdm;
+    public GeneralAnimator liveTimelineGAnim;
 
     private void Awake()
     {
@@ -77,6 +78,8 @@ public class TimelineManager : MonoBehaviour
         markerPrefab.SetActive(false);
         camGlide.isUp = true;
 
+        liveTimelineGAnim.StartCoroutine(liveTimelineGAnim.ContinuousBobbing(Vector3.up/8f, 0.5f, -Vector3.one));
+
         //StartCombat();
     }
     private void Update()
@@ -84,6 +87,7 @@ public class TimelineManager : MonoBehaviour
         if (combatActive && !combatPause) { UpdateCombat(); UpdateMetronome(); }
         else if (combatPause) { foreach (Enemy enemy in activeEnemies) { enemy.TimelineUpdate(); } UpdateVisuals(); }
         else { UpdateVisuals(); }
+        UpdateLiveTimeline();
     }
     void UpdateVisuals()
     {
@@ -123,6 +127,10 @@ public class TimelineManager : MonoBehaviour
                 }
             }
         }
+    }
+    void UpdateLiveTimeline()
+    {
+
     }
     public void StartCombat()
     {
