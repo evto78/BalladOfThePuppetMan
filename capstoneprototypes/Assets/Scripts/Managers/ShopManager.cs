@@ -21,7 +21,7 @@ public class ShopManager : MonoBehaviour
     public TextMeshProUGUI totalCostText;
     public Color costColor;
     public Color overcostColor;
-    void Start()
+    public void StartShop()
     {
         totalCost = 0;
 

@@ -64,6 +64,8 @@ public class GameDataManager : MonoBehaviour
                 player.gameOverAnim.PlayAnim();
                 break;
             case State.Shop:
+                shopManager.gameObject.SetActive(true);
+                shopManager.StartShop();
                 break;
         }
     }
