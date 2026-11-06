@@ -289,24 +289,32 @@ public class PlayerActionManager : MonoBehaviour
             case 8: StandardAttack(attackEvent, skill, perfectMult); AddStatusEffect(0, Mathf.CeilToInt(skill.intensity * perfectMult)); break; //Focused Strike
             case 9: StandardAttack(attackEvent, skill, perfectMult); break; //Strong Swing
             case 10: StandardAttack(attackEvent, skill, perfectMult); break; //Poke
+            case 11: StandardAttack(attackEvent, skill, perfectMult); break; //KILL
         }
     }
 
     void StandardAttack(TimelineManager.TimelineEvent attackEvent, PlayerSkill skill, float perfectMult)
     {
-        //If enemy previously targeted is gone, aim for another enemy.
-        if (attackEvent.enemyTargeted == null && timeline.activeEnemies.Count > 0) 
-        { 
-            if (targetedEnemy == null) { attackEvent.enemyTargeted = timeline.activeEnemies[0]; }
-            else
+        if (skill.target == PlayerSkill.TargetType.SingleEnemy)
+        {
+            //If enemy previously targeted is gone, aim for another enemy.
+            if (attackEvent.enemyTargeted == null && timeline.activeEnemies.Count > 0)
             {
-                attackEvent.enemyTargeted = targetedEnemy;
+                if (targetedEnemy == null) { attackEvent.enemyTargeted = timeline.activeEnemies[0]; }
+                else
+                {
+                    attackEvent.enemyTargeted = targetedEnemy;
+                }
             }
+            //If no enemies are left alive, cancel the attack.
+            else if (timeline.activeEnemies.Count == 0) { return; }
+            //Do the attack.
+            attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType)));
         }
-        //If no enemies are left alive, cancel the attack.
-        else if (timeline.activeEnemies.Count == 0) { return; }
-        //Do the attack.
-        attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType)));
+        else if (skill.target == PlayerSkill.TargetType.AllEnemies)
+        {
+            foreach (Enemy e in timeline.activeEnemies) { e.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); }
+        }
     }
 
     //Called by the skill selection buttons when clicked

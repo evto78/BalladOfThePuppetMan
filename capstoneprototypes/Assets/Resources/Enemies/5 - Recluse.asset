@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75e7ab80feff4d34d9b540e9abd1ae67, type: 3}
+  m_Name: 5 - Recluse
+  m_EditorClassIdentifier: 
+  id: 5
+  maxHP: 10
+  type: 2
+  attackPatterns:
+  - timelineChangePriority: 1
+    timelineCombatTimePref: 6
+    timelineCombatSpeedPref: 1
+    actionSequence:
+    - actionType: 4
+      oneOff: 1
+      damage: 0
+      delayBeforeAction: 1
+      delayAfterAction: 0
+      playAnim: 0
+      animWindupStart: 0
+      animWinddownEnd: 0
+    - actionType: 0
+      oneOff: 0
+      damage: 5
+      delayBeforeAction: 1
+      delayAfterAction: 1
+      playAnim: 1
+      animWindupStart: 0.5
+      animWinddownEnd: 0.5
+  patternByRound: 00000000
+  enemyName: Recluse
+  enemyDescription: Recluse. Low HP, it can only take damage after it attacks.
+  enemySprite: {fileID: 259604409, guid: 6d85b3cd8dcb745409627534ec9fefad, type: 3}

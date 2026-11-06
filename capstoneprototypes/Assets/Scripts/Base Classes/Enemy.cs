@@ -263,9 +263,8 @@ public class Enemy : MonoBehaviour
 
         if (hp <= 0) { Die(); }
     }
-
     public void Die()
     {
-        Destroy(gameObject);
+        Destroy(gameObject, 0.1f);
     }
 }

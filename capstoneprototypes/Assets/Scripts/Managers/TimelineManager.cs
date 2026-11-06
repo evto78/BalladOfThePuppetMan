@@ -82,6 +82,7 @@ public class TimelineManager : MonoBehaviour
     private void Update()
     {
         if (combatActive && !combatPause) { UpdateCombat(); UpdateMetronome(); }
+        else if (combatPause) { foreach (Enemy enemy in activeEnemies) { enemy.TimelineUpdate(); } UpdateVisuals(); }
         else { UpdateVisuals(); }
     }
     void UpdateVisuals()
@@ -168,6 +169,7 @@ public class TimelineManager : MonoBehaviour
         gdm.ChangeState(GameDataManager.State.TurnBasedCombat);
 
         timePassed = 0;
+        prevTimePassed = 0;
         prevEventIndex = -1;
         roundNumber++;
 
@@ -189,8 +191,7 @@ public class TimelineManager : MonoBehaviour
         if (combatOver) { EndCombat(); return; }
 
         PrepareNextRound();
-        foreach (Enemy enemy in activeEnemies) { enemy.SetupMarkers(); }
-
+        foreach (Enemy enemy in activeEnemies) { enemy.SetupMarkers();  }
         player.SkillSelectStart();
 
         camGlide.isUp = false;
@@ -291,6 +292,9 @@ public class TimelineManager : MonoBehaviour
         prevTimePassed = timePassed;
         timePassed += Time.deltaTime * combatSpeed;
         prevEventIndex = eventIndex;
+
+        //If no enemies are left, rapidly speed up the combat speed.
+        if (activeEnemies.Count == 0) { combatSpeed = Mathf.Clamp(combatSpeed, 1f, 100f); combatSpeed += Time.deltaTime * 5; }
 
         if (eventIndex > resolution) { EndRound(); }
     }

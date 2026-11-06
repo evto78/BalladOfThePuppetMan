@@ -24675,6 +24675,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2622858863055161794, guid: f4d36188c86c789458234650fe6b71ca, type: 3}
+      propertyPath: enemies.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622858863055161794, guid: f4d36188c86c789458234650fe6b71ca, type: 3}
+      propertyPath: enemies.Array.data[5]
+      value: 
+      objectReference: {fileID: 8794168709281493107, guid: 3106ef6aa1774eb4c916ea795c773a69, type: 3}
     - target: {fileID: 3733397916990088843, guid: f4d36188c86c789458234650fe6b71ca, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -24929,6 +24937,10 @@ PrefabInstance:
       propertyPath: roomSelection
       value: 
       objectReference: {fileID: 1261328443}
+    - target: {fileID: 1347452795832196805, guid: 1f4c0f0d2401d0941aa011fc17fe0a9d, type: 3}
+      propertyPath: startingSkills.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 747ef5a16c96a4743a410afb104203e0, type: 2}
     - target: {fileID: 8586653378842630664, guid: 1f4c0f0d2401d0941aa011fc17fe0a9d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.9124813

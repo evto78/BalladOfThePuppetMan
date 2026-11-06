@@ -34,6 +34,9 @@ public class EnemySpriteAnimator : MonoBehaviour
     public void AnimUpdate()
     {
         //overrideIdleTimer -= Time.deltaTime * gdm.timeline.combatSpeed;
+
+        if (gdm != null && gdm.timeline.combatPause) { overrideIdleTimer -= Time.deltaTime; } //if its paused, stop overwriting idle anim
+
         if (overrideIdleTimer <= 0) 
         { 
             overrideIdleTimer = 0f; 
@@ -64,7 +67,10 @@ public class EnemySpriteAnimator : MonoBehaviour
     }
     private void LateUpdate()
     {
-        idleCounter += Time.deltaTime * gdm.timeline.combatSpeed * idleAnimSpeed;
+        float actingCombatSpeed = gdm.timeline.combatSpeed;
+        if (actingCombatSpeed == 0) { actingCombatSpeed = 1; }
+
+        idleCounter += Time.deltaTime * actingCombatSpeed * idleAnimSpeed;
         if (idleCounter > idleAnim.Count - 1) 
         { 
             idleCounter -= Mathf.Clamp(idleAnim.Count - 1, 1, idleAnim.Count); 
@@ -72,11 +78,11 @@ public class EnemySpriteAnimator : MonoBehaviour
 
         if (overrideIdleTimer <= 0)
         {
-            hurtTimer -= Time.deltaTime * gdm.timeline.combatSpeed;
+            hurtTimer -= Time.deltaTime * actingCombatSpeed;
         }
         else if (activeAnim == postAttackAnim)
         {
-            hurtTimer -= Time.deltaTime * gdm.timeline.combatSpeed * 2f; //If hurt anim is overriding the post attack anim, it finishes twice as fast.
+            hurtTimer -= Time.deltaTime * actingCombatSpeed * 2f; //If hurt anim is overriding the post attack anim, it finishes twice as fast.
         }
         if (hurtTimer <= 0) { hurtTimer = 0; }
     }
@@ -110,15 +116,6 @@ public class EnemySpriteAnimator : MonoBehaviour
         //Find the anim progress
         animProgress = (time - animStart) / (animEnd - animStart);
         activeAnimIndex = Mathf.FloorToInt(animProgress * (activeAnim.Count - 1));
-
-        //Debug.Log("INFO:");
-        //if (activeAnim == idleAnim) { Debug.Log("Idle Anim. Count: " + idleAnim.Count); }
-        //if (activeAnim == preAttackAnim) { Debug.Log("PreAtk Anim. Count: " + preAttackAnim.Count); }
-        //if (activeAnim == postAttackAnim) { Debug.Log("PostAtk Anim. Count: " + postAttackAnim.Count); }
-        //if (activeAnim == hurtAnim) { Debug.Log("Hurt Anim. Count: " + hurtAnim.Count); }
-        //Debug.Log("Time: " + time);
-        //Debug.Log(animStart + " / " + animEnd);
-        //Debug.Log("Index: " + activeAnimIndex);
     }
     public void HurtAnim()
     {
