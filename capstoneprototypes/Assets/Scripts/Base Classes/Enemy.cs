@@ -47,6 +47,7 @@ public class Enemy : MonoBehaviour
     float curTimePassed; //The amount of time passed according to the timeline. Accurate to all timeline distortions.
     float curTimelineIndex; //The amount of time passed according to the current index of the timeline relative to its resolution. Accurate to all timeline distortions.
     PlayerActionManager player;
+    GeneralAnimator gAnim;
     AudioManager audioMan;
     public EnemyData myData;
     public List<AttackPattern> attackPatterns;
@@ -63,6 +64,7 @@ public class Enemy : MonoBehaviour
         hp = mhp;
 
         anim = GetComponent<EnemySpriteAnimator>();
+        gAnim = GetComponent<GeneralAnimator>();
         timeline = GameObject.Find("Timeline").GetComponent<TimelineManager>();
         player = GameObject.Find("Player").GetComponent<PlayerActionManager>();
         audioMan = GameObject.Find("AudioManager").GetComponent<AudioManager>();
@@ -73,6 +75,19 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         curTimePassed = 0;
+
+        SetUpAnims();
+    }
+
+    void SetUpAnims()
+    {
+        gAnim.UpdateStartPos();
+        gAnim.ResetAll();
+        switch (myData.id)
+        {
+            // If this is the recluse, begin the bobbing...
+            case 5: gAnim.StartCoroutine(gAnim.ContinuousBobbing(Vector3.up * 0.2f, 1f, -Vector3.one)); break;
+        }
     }
 
     //Data is optional, but if it is given, it is prefered.
@@ -258,6 +273,15 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         anim.HurtAnim();
+
+        switch (damage)
+        {
+            case < 3: gAnim.StartCoroutine(gAnim.Shake(Vector3.right * 0.2f, 8f, 3f, -Vector3.one)); break;
+            case < 5: gAnim.StartCoroutine(gAnim.Shake(Vector3.right * 0.4f, 8f, 3f, -Vector3.one)); break;
+            case < 7: gAnim.StartCoroutine(gAnim.Shake(Vector3.right * 0.6f, 8f, 3f, -Vector3.one)); break;
+            case < 10: gAnim.StartCoroutine(gAnim.Shake(Vector3.right * 1f, 8f, 3f, -Vector3.one)); break;
+            case >= 10: gAnim.StartCoroutine(gAnim.Shake(Vector3.right * 1.2f, 8f, 3f, -Vector3.one)); break;
+        }
 
         hp -= damage;
 

@@ -471,6 +471,7 @@ GameObject:
   - component: {fileID: 5913989271826315046}
   - component: {fileID: 1966678866097778864}
   - component: {fileID: 7890353833714126518}
+  - component: {fileID: -8684947380736113163}
   m_Layer: 0
   m_Name: Recluse
   m_TagString: Untagged
@@ -534,3 +535,16 @@ MonoBehaviour:
   sr: {fileID: 413085976267709118}
   idleCounter: 0
   activeAnimIndex: 0
+--- !u!114 &-8684947380736113163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8794168709281493107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75825fb7ba7d3134b84132d1d8805c65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLocal: 0

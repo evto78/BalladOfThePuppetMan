@@ -17,6 +17,22 @@ public class GeneralAnimator : MonoBehaviour
         startScale = GetScale();
     }
 
+    public void UpdateStartPos()
+    {
+        if (isLocal)
+        {
+            startPos = transform.localPosition;
+            startRot = transform.localRotation;
+            startScale = transform.localScale;
+        }
+        else
+        {
+            startPos = transform.position;
+            startRot = transform.rotation;
+            startScale = transform.localScale;
+        }
+    }
+
     Vector3 GetPos()
     { if (isLocal) { return transform.localPosition; } else { return transform.position; } }
     Quaternion GetRot()
@@ -101,19 +117,60 @@ public class GeneralAnimator : MonoBehaviour
     {
         if (isLocal) { transform.localPosition += dir * Time.deltaTime; } 
         else { transform.position += dir * Time.deltaTime; }
-        yield return ContinuousGlide(dir);
+        yield return StartCoroutine(ContinuousGlide(dir));
     }
     //Recursively turn in this direction every frame.
     public IEnumerator ContinuousTurn(Vector3 dir)
     {
         if (isLocal) { transform.localEulerAngles += dir * Time.deltaTime; }
         else { transform.eulerAngles += dir * Time.deltaTime; }
-        yield return ContinuousTurn(dir);
+        yield return StartCoroutine(ContinuousTurn(dir));
     }
     //Recursively move in this direction every frame.
     public IEnumerator ContinuousScale(Vector3 scale)
     {
         transform.localScale += scale * Time.deltaTime;
-        yield return ContinuousScale(scale);
+        yield return StartCoroutine(ContinuousScale(scale));
+    }
+    //Recursively bob according to dir every frame.
+    public IEnumerator ContinuousBobbing(Vector3 dir, float speed, Vector3 prevStartPos)
+    {
+        // -Vector3.one is a standin for no value given.
+        if (prevStartPos == -Vector3.one) { prevStartPos = GetPos(); }
+        float progress = 0f;
+        float modProgress = 0f;
+
+        while (progress < 2f) 
+        {
+            progress += Time.deltaTime * speed;
+            modProgress = progress * (Mathf.PI * 2);
+            if (isLocal) { transform.localPosition = prevStartPos + (dir * (Mathf.Sin(modProgress))); }
+            else { transform.position = prevStartPos + (dir * (Mathf.Sin(modProgress))); }
+            yield return new WaitForEndOfFrame();
+        }
+
+        yield return StartCoroutine(ContinuousBobbing(dir, speed, prevStartPos));
+    }
+    //Recursively shake according to dir every frame, decays over time until done.
+    public IEnumerator Shake(Vector3 dir, float speed, float decayRate, Vector3 prevStartPos)
+    {
+        // -Vector3.one is a standin for no value given.
+        if (prevStartPos == -Vector3.one) { prevStartPos = GetPos(); }
+        float progress = 0f;
+        float modProgress = 0f;
+
+        while (progress < 2f)
+        {
+            progress += Time.deltaTime * speed;
+            modProgress = progress * (Mathf.PI * 2);
+            if (isLocal) { transform.localPosition = prevStartPos + (dir * (Mathf.Sin(modProgress))); }
+            else { transform.position = prevStartPos + (dir * (Mathf.Sin(modProgress))); }
+            yield return new WaitForEndOfFrame();
+        }
+
+        dir /= decayRate;
+        
+        if (dir.magnitude > 0.001f) { yield return StartCoroutine(Shake(dir, speed, decayRate, prevStartPos)); }
+        else { yield return null; }
     }
 }

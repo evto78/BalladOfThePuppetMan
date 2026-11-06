@@ -407,6 +407,15 @@ public class PlayerActionManager : MonoBehaviour
     void TakeDamage(int dmg)
     {
         hp -= dmg;
+
+        switch (dmg)
+        {
+            case < 3: gAnim.StartCoroutine(gAnim.Shake(Vector3.right * 0.1f, 8f, 3f, -Vector3.one)); break;
+            case < 5: gAnim.StartCoroutine(gAnim.Shake(Vector3.right * 0.2f, 8f, 3f, -Vector3.one)); break;
+            case < 10: gAnim.StartCoroutine(gAnim.Shake(Vector3.right * 0.3f, 8f, 3f, -Vector3.one)); break;
+            case >= 10: gAnim.StartCoroutine(gAnim.Shake(Vector3.right * 0.6f, 8f, 3f, -Vector3.one)); break;
+        }
+
         psAnim.hitOverrideTimer = 0.25f;
         if (hp <= 0) { Die(); }
     }
@@ -444,9 +453,22 @@ public class PlayerActionManager : MonoBehaviour
     IEnumerator MemoryGainLoseAnim(int amount)
     {
         memoryAnimActive = true;
-        memoryCount.transform.parent.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(0.5f);
+        //Fade In
+        memoryCount.transform.parent.gameObject.SetActive(true);
+        float fadeProgress = 0;
+        while (fadeProgress < 1)
+        {
+            fadeProgress += Time.deltaTime * 6f; if (fadeProgress > 1) { fadeProgress = 1; }
+            for (int i = 0; i < memoryCount.transform.parent.childCount; i++)
+            {
+                if (memoryCount.transform.parent.GetChild(i).TryGetComponent<Image>(out Image img)) { img.color = new Color(img.color.r, img.color.g, img.color.b, fadeProgress); }
+                if (memoryCount.transform.parent.GetChild(i).TryGetComponent<TextMeshProUGUI>(out TextMeshProUGUI txt)) { txt.color = new Color(txt.color.r, txt.color.g, txt.color.b, fadeProgress); }
+            }
+            yield return new WaitForEndOfFrame();
+        }
+
+        yield return new WaitForSeconds(0.25f);
 
         int amountLeft = amount;
         float waitTime;
@@ -462,8 +484,19 @@ public class PlayerActionManager : MonoBehaviour
             yield return new WaitForSeconds(waitTime); 
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
+        //Fade Out
+        while (fadeProgress > 0)
+        {
+            fadeProgress -= Time.deltaTime * 6f; if (fadeProgress < 0) { fadeProgress = 0; }
+            for (int i = 0; i < memoryCount.transform.parent.childCount; i++)
+            {
+                if (memoryCount.transform.parent.GetChild(i).TryGetComponent<Image>(out Image img)) { img.color = new Color(img.color.r, img.color.g, img.color.b, fadeProgress); }
+                if (memoryCount.transform.parent.GetChild(i).TryGetComponent<TextMeshProUGUI>(out TextMeshProUGUI txt)) { txt.color = new Color(txt.color.r, txt.color.g, txt.color.b, fadeProgress); }
+            }
+            yield return new WaitForEndOfFrame();
+        }
         memoryCount.transform.parent.gameObject.SetActive(false);
 
         memoryAnimActive = false;

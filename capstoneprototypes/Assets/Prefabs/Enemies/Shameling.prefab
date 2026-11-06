@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 2742526880035886883}
   - component: {fileID: 8799480677778714446}
   - component: {fileID: 5540902702781315351}
+  - component: {fileID: 8768112486794584039}
   m_Layer: 0
   m_Name: Shameling
   m_TagString: Untagged
@@ -197,6 +198,19 @@ MonoBehaviour:
   sr: {fileID: 5527803406950479304}
   idleCounter: 0
   activeAnimIndex: 0
+--- !u!114 &8768112486794584039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2573266613902475739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75825fb7ba7d3134b84132d1d8805c65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLocal: 0
 --- !u!1 &3265564915103193244
 GameObject:
   m_ObjectHideFlags: 0

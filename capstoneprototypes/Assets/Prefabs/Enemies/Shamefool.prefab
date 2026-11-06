@@ -396,6 +396,7 @@ GameObject:
   - component: {fileID: 1662438826770553006}
   - component: {fileID: 145024096572534442}
   - component: {fileID: 6540695596742768368}
+  - component: {fileID: -962757775525611561}
   m_Layer: 0
   m_Name: Shamefool
   m_TagString: Untagged
@@ -459,6 +460,19 @@ MonoBehaviour:
   sr: {fileID: 8615386926869090728}
   idleCounter: 0
   activeAnimIndex: 0
+--- !u!114 &-962757775525611561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5996677380891238105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75825fb7ba7d3134b84132d1d8805c65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLocal: 0
 --- !u!1 &7110514677949455749
 GameObject:
   m_ObjectHideFlags: 0
