@@ -12,6 +12,19 @@ public class ReadoutOnHover : MonoBehaviour
     {
         selectionManager = GameObject.Find("UI - Turnbased").GetComponent<SkillSelectionManager>();
 
+        if (selectionManager.readoutObjects.Contains(this)) { return; }
+
+        selectionManager.readoutObjects.Add(this);
+    }
+
+    private void OnEnable()
+    {
+        if (!Application.isPlaying) { return; }
+
+        selectionManager = GameObject.Find("UI - Turnbased").GetComponent<SkillSelectionManager>();
+
+        if (selectionManager.readoutObjects.Contains(this)) { return; }
+
         selectionManager.readoutObjects.Add(this);
     }
 

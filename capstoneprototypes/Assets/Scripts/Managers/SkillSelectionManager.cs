@@ -91,6 +91,7 @@ public class SkillSelectionManager : MonoBehaviour
                         {
                             player.AttemptUseSkill(targetingSkill);
                             StartTargetingSkill(-1);
+                            break;
                         }
                     }
                 }

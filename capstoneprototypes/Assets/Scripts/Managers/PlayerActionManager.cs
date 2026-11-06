@@ -499,6 +499,12 @@ public class PlayerActionManager : MonoBehaviour
         }
         memoryCount.transform.parent.gameObject.SetActive(false);
 
+        for (int i = 0; i < memoryCount.transform.parent.childCount; i++)
+        {
+            if (memoryCount.transform.parent.GetChild(i).TryGetComponent<Image>(out Image img)) { img.color = new Color(img.color.r, img.color.g, img.color.b, 1); }
+            if (memoryCount.transform.parent.GetChild(i).TryGetComponent<TextMeshProUGUI>(out TextMeshProUGUI txt)) { txt.color = new Color(txt.color.r, txt.color.g, txt.color.b, 1); }
+        }
+
         memoryAnimActive = false;
         yield return null;
     }

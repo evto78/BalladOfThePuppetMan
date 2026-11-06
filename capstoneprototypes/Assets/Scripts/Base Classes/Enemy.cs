@@ -36,6 +36,8 @@ public class Enemy : MonoBehaviour
     [Header("Visuals")]
     EnemySpriteLibrary spriteLib; // the database of all sprites
     EnemySpriteAnimator anim;
+    public GameObject particles;
+    public List<ParticleSystem> deathParticles;
 
     [Header("Stats")]
     public int mhp;
@@ -289,6 +291,10 @@ public class Enemy : MonoBehaviour
     }
     public void Die()
     {
-        Destroy(gameObject, 0.1f);
+        foreach(ParticleSystem ps in deathParticles) { ps.Play(); }
+        particles.transform.parent = null;
+        Destroy(particles, 8f);
+
+        Destroy(gameObject, 0.01f);
     }
 }
