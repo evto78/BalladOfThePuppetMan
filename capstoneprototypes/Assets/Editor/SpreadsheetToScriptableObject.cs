@@ -291,16 +291,6 @@ public class SpreadsheetToScriptableObject
         {
             string[] splitData = allLines[i].Split(',');
 
-            string typeDisplay;
-            if (int.Parse(splitData[4]) < 1)
-            {
-                typeDisplay = "Heal";
-            }
-            else
-            {
-                typeDisplay = "Damage";
-            }
-
             StatusEffect status = ScriptableObject.CreateInstance<StatusEffect>();
             status.id = int.Parse(splitData[0]);
             status.statusName = splitData[1];
