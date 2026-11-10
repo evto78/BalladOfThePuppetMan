@@ -539,7 +539,7 @@ public class SpreadsheetToScriptableObject
         UpdateCSVs();
         GenerateStatusEffects();
         GeneratePlayerSkills();
-        //Logic to generate items
+        GenerateItems();
         GenerateEnemies();
         GenerateEncounters();
     }
