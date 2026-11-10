@@ -27,6 +27,8 @@ public class SpreadsheetToScriptableObject
     [MenuItem("Generation/Generate Skills")] //Ceates a new selection under the "Generation" tab in the unity editor to generate skills
     public static void GeneratePlayerSkills()
     {
+        UpdateCSVs();
+
         DataList dataList = GetDataList(); //Calls for data list refrence
 
         //Gets each line from the skills CSV file and seperates them into an array
@@ -94,6 +96,8 @@ public class SpreadsheetToScriptableObject
     [MenuItem("Generation/Generate Enemies")] //Ceates a new selection under the "Generation" tab in the unity editor to generate skills
     public static void GenerateEnemies()
     {
+        UpdateCSVs();
+
         DataList dataList = GetDataList();
 
         string[] allEnemyLines = File.ReadAllLines(Application.dataPath + enemyDataCSVPath);
@@ -200,6 +204,8 @@ public class SpreadsheetToScriptableObject
     [MenuItem("Generation/Generate Encounters")]
     public static void GenerateEncounters()
     {
+        UpdateCSVs();
+
         DataList dataList = GetDataList();
 
         string[] allLines = File.ReadAllLines(Application.dataPath + enemyEncountersDataCSVPath);
@@ -260,6 +266,8 @@ public class SpreadsheetToScriptableObject
     [MenuItem("Generation/Generate Status Effects")]
     public static void GenerateStatusEffects()
     {
+        UpdateCSVs();
+
         DataList dataList = GetDataList();
 
         string[] allLines = File.ReadAllLines(Application.dataPath + skillsCSVPath);
@@ -472,6 +480,11 @@ public class SpreadsheetToScriptableObject
     [MenuItem("Design Tools/Generate Data")]
     public static void GenerateData()
     {
-
+        UpdateCSVs();
+        GenerateStatusEffects();
+        GeneratePlayerSkills();
+        //Logic to generate items
+        GenerateEnemies();
+        GenerateEncounters();
     }
 }
