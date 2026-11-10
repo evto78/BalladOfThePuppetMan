@@ -186,14 +186,17 @@ public class TimelineManager : MonoBehaviour
         {
             liveMarkers[i].gameObject.SetActive(sortedTimeUntil[i] > minMaxTimeUntil.x && sortedTimeUntil[i] < minMaxTimeUntil.y);
             liveMarkers[i].SetType(sortedEventList[i].eventType);
-            if (sortedEventList[i].markerTrans.gameObject.GetComponent<MarkerObject>().sr.sprite == beatMarker) { liveMarkers[i].sr.sprite = beatMarker; }
-            if (sortedEventList[i].markerTrans.gameObject.GetComponent<MarkerObject>().sr.sprite == halfBeatMarker) { liveMarkers[i].sr.sprite = halfBeatMarker; }
             liveMarkers[i].transform.localPosition = new Vector3(zeroPos + (35f * sortedTimeUntil[i]), liveMarkers[i].transform.localPosition.y, 0);
 
             float relIndex = sortedEventList[i].timelineIndex - eventIndex;
             float bobProgress = (float)relIndex / 12f;
 
             liveMarkers[i].UpdateBobbing(bobProgress);
+
+            if (sortedTimeUntil[i] < 0) { liveMarkers[i].sr.color = Color.Lerp(Color.white, new Color(1, 1, 1, 0), sortedTimeUntil[i] * -2f); }
+            else if (sortedTimeUntil[i] > 1) { liveMarkers[i].sr.color = Color.Lerp(Color.white, new Color(1, 1, 1, 0), sortedTimeUntil[i] - 1); }
+            else { liveMarkers[i].sr.color = Color.white; }
+            liveMarkers[i].bgSr.color = liveMarkers[i].sr.color;
         }
     }
     public void StartCombat()
