@@ -48,6 +48,8 @@ public class TimelineManager : MonoBehaviour
 
     [Header("Functional")]
     public List<TimelineEvent> eventList;
+    public List<TimelineEvent> sortedEventList;
+    public List<float> sortedTimeUntil;
     public List<Enemy> activeEnemies;
 
     [Header("References")]
@@ -62,6 +64,8 @@ public class TimelineManager : MonoBehaviour
     public RoomSelection roomSelection;
     GameDataManager gdm;
     public GeneralAnimator liveTimelineGAnim;
+    Transform liveTimeline;
+    public GameObject liveTimelineMarker;
 
     private void Awake()
     {
@@ -79,6 +83,7 @@ public class TimelineManager : MonoBehaviour
         camGlide.isUp = true;
 
         liveTimelineGAnim.StartCoroutine(liveTimelineGAnim.ContinuousBobbing(Vector3.up/8f, 0.5f, -Vector3.one));
+        liveTimeline = liveTimelineGAnim.gameObject.transform;
 
         //StartCombat();
     }
@@ -128,9 +133,44 @@ public class TimelineManager : MonoBehaviour
             }
         }
     }
+    //Probably the most frame expensive method in this whole game... sorting a list every frame? are you crazy?    <- me talking to myself btw
+    //If we ever need to optimize, START HERE!
+    void UpdateSortedEventList()
+    {
+        sortedEventList = new List<TimelineEvent>();
+        sortedTimeUntil = new List<float>();
+
+        List<TimelineEvent> tempEventList = new List<TimelineEvent>();
+        List<float> tempTimeUntilList = new List<float>();
+
+        foreach (TimelineEvent e in eventList)
+        {
+            if (!e.removed)
+            {
+                tempEventList.Add(e);
+                tempTimeUntilList.Add(TimeFromIndex(e.timelineIndex) - timePassed);
+            }
+        }
+
+        float currentSmallest; int currentSmallestIndex;
+        while (tempEventList.Count > 0)
+        {
+            currentSmallestIndex = -1;
+            currentSmallest = float.MaxValue;
+            for (int i = 0; i < tempEventList.Count; i++)
+            {
+                if (tempTimeUntilList[i] < currentSmallest) { currentSmallest = tempTimeUntilList[i]; currentSmallestIndex = i; }
+            }
+            if (currentSmallestIndex == -1) { Debug.LogError("SORT EVENT LIST FAILED!"); break; }
+            sortedEventList.Add(tempEventList[currentSmallestIndex]);
+            sortedTimeUntil.Add(tempTimeUntilList[currentSmallestIndex]);
+            tempEventList.RemoveAt(currentSmallestIndex);
+            tempTimeUntilList.RemoveAt(currentSmallestIndex);
+        }
+    }
     void UpdateLiveTimeline()
     {
-
+        UpdateSortedEventList();
     }
     public void StartCombat()
     {
