@@ -12,7 +12,7 @@ public class MarkerObject : MonoBehaviour
 
     public ReadoutOnHover myReadout;
 
-    float standardYPos;
+    public float standardYPos;
     public AnimationCurve bobbingCurve;
 
     public void SetType(TimelineManager.EventType newType)
@@ -42,7 +42,7 @@ public class MarkerObject : MonoBehaviour
     {
         if (bobProgress < 0) { bobProgress = (16f * ((bobProgress * -1f))); }
         float modifiedProgress = bobbingCurve.Evaluate(bobProgress);
-        float newYPos = Mathf.Lerp(standardYPos + 1, standardYPos, modifiedProgress);
+        float newYPos = Mathf.Lerp(0 + 1, 0, modifiedProgress);
         transform.localPosition = new Vector3(transform.localPosition.x, newYPos, transform.localPosition.z);
     }
 }

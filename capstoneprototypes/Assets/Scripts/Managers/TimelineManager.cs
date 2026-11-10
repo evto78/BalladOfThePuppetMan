@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.Timeline;
 using UnityEngine.UI;
 using static TimelineManager;
 
@@ -66,6 +68,7 @@ public class TimelineManager : MonoBehaviour
     public GeneralAnimator liveTimelineGAnim;
     Transform liveTimeline;
     public GameObject liveTimelineMarker;
+    List<MarkerObject> liveMarkers;
 
     private void Awake()
     {
@@ -82,8 +85,10 @@ public class TimelineManager : MonoBehaviour
         markerPrefab.SetActive(false);
         camGlide.isUp = true;
 
-        liveTimelineGAnim.StartCoroutine(liveTimelineGAnim.ContinuousBobbing(Vector3.up/8f, 0.5f, -Vector3.one));
+        liveTimelineGAnim.StartCoroutine(liveTimelineGAnim.ContinuousBobbing(Vector3.up/16f, 0.5f, -Vector3.one));
         liveTimeline = liveTimelineGAnim.gameObject.transform;
+
+        liveMarkers = new List<MarkerObject>();
 
         //StartCombat();
     }
@@ -171,6 +176,25 @@ public class TimelineManager : MonoBehaviour
     void UpdateLiveTimeline()
     {
         UpdateSortedEventList();
+
+        while (liveMarkers.Count > sortedEventList.Count) { if (liveMarkers[0].gameObject != null) { Destroy(liveMarkers[0].gameObject); } liveMarkers.RemoveAt(0); }
+        while (liveMarkers.Count < sortedEventList.Count) { MarkerObject newMarker = Instantiate(liveTimelineMarker, liveTimelineMarker.transform.parent).GetComponent<MarkerObject>(); newMarker.gameObject.SetActive(false); liveMarkers.Add(newMarker); }
+
+        Vector2 minMaxTimeUntil = new Vector2(-0.5f,2f);
+        float zeroPos = -37;
+        for (int i = 0; i < sortedEventList.Count; i++)
+        {
+            liveMarkers[i].gameObject.SetActive(sortedTimeUntil[i] > minMaxTimeUntil.x && sortedTimeUntil[i] < minMaxTimeUntil.y);
+            liveMarkers[i].SetType(sortedEventList[i].eventType);
+            if (sortedEventList[i].markerTrans.gameObject.GetComponent<MarkerObject>().sr.sprite == beatMarker) { liveMarkers[i].sr.sprite = beatMarker; }
+            if (sortedEventList[i].markerTrans.gameObject.GetComponent<MarkerObject>().sr.sprite == halfBeatMarker) { liveMarkers[i].sr.sprite = halfBeatMarker; }
+            liveMarkers[i].transform.localPosition = new Vector3(zeroPos + (35f * sortedTimeUntil[i]), liveMarkers[i].transform.localPosition.y, 0);
+
+            float relIndex = sortedEventList[i].timelineIndex - eventIndex;
+            float bobProgress = (float)relIndex / 12f;
+
+            liveMarkers[i].UpdateBobbing(bobProgress);
+        }
     }
     public void StartCombat()
     {
