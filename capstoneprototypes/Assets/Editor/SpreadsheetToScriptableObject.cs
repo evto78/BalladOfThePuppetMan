@@ -64,7 +64,6 @@ public class SpreadsheetToScriptableObject
         return fields.ToArray();
     }
 
-    [MenuItem("Generation/Generate Skills")] //Ceates a new selection under the "Generation" tab in the unity editor to generate skills
     public static void GeneratePlayerSkills()
     {
         DataList dataList = GetDataList(); //Calls for data list refrence
@@ -120,7 +119,6 @@ public class SpreadsheetToScriptableObject
         AssetDatabase.SaveAssets();
     }
 
-    [MenuItem("Generation/Generate Enemies")] //Ceates a new selection under the "Generation" tab in the unity editor to generate skills
     public static void GenerateEnemies()
     {
         DataList dataList = GetDataList();
@@ -226,7 +224,6 @@ public class SpreadsheetToScriptableObject
         AssetDatabase.SaveAssets();
     }
 
-    [MenuItem("Generation/Generate Encounters")]
     public static void GenerateEncounters()
     {
         DataList dataList = GetDataList();
@@ -288,7 +285,6 @@ public class SpreadsheetToScriptableObject
         AssetDatabase.SaveAssets();
     }
 
-    [MenuItem("Generation/Generate Status Effects")]
     public static void GenerateStatusEffects()
     {
         DataList dataList = GetDataList();
@@ -327,7 +323,6 @@ public class SpreadsheetToScriptableObject
         AssetDatabase.SaveAssets();
     }
 
-    [MenuItem("Spreadsheet/Update CSVs")]
     public static void UpdateCSVs()
     {
         string fullSpreadsheetPath = Application.dataPath + spreadsheetPath;
