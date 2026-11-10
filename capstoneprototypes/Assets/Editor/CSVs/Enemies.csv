@@ -1,0 +1,6 @@
+ID,Enemy Name,Element Type,Max HP,PatternByRound
+0,Shameling,Power,10,0
+1,NewYear,Money,20,0-1
+2,Shamefool,Fame,20,0
+3,OldYear,Purity,20,0-1
+4,TongueTwister,Corruption,200,0-1-0-2

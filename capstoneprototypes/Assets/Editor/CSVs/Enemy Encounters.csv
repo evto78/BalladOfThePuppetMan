@@ -1,0 +1,8 @@
+ID,Enemy 1,Enemy 2,Enemy 3,Enemy 4,Enemy 5,Enemy 1 offset,Enemy 2 offset,Enemy 3 offset,Enemy 4 offset,Enemy 5 offset,Type
+0,Shameling,Shameling,None,None,None,0,0.5,0,0,0,Regular
+1,Shameling,NewYear,None,None,None,0,0,0,0,0,Regular
+2,Shameling,Shamefool,None,None,None,0,0,0,0,0,Regular
+3,Shameling,Shameling,Shamefool,None,None,0,0.5,0,0,0,Regular
+4,NewYear,OldYear,Shameling,None,None,0,0,0,0,0,Regular
+5,OldYear,Shamefool,None,None,None,0,0,0,0,0,Regular
+6,TongueTwister,None,None,None,None,0,0,0,0,0,Scripted

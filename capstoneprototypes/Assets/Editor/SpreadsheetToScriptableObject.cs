@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO.Compression;
+using System.Xml.Linq;
+using System.Linq;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -7,8 +10,8 @@ using static PlayerSkill;
 
 public class SpreadsheetToScriptableObject
 {
-    private static string enemyDataCSVPath = "/Scripts/Spreadsheet Importing/CSVs/Enemies.csv", attackPatternsDataCSVPath = "/Scripts/Spreadsheet Importing/CSVs/Attack Patterns.csv", skillsCSVPath = "/Scripts/Spreadsheet Importing/CSVs/Player Skills.csv", enemyEncountersDataCSVPath = "/Scripts/Spreadsheet Importing/CSVs/Enemy Encounters.csv"; //String paths for CSV files
-    private static string spreadsheetPath = "/Editor/Ballad of the Puppet Man Data.xlsx";
+    private static string enemyDataCSVPath = "/Editor/CSVs/Enemies.csv", attackPatternsDataCSVPath = "/Editor/Attack Patterns.csv", skillsCSVPath = "/Editor/CSVs/Player Skills.csv", enemyEncountersDataCSVPath = "/Editor/CSVs/Enemy Encounters.csv"; //String paths for CSV files
+    private static string spreadsheetPath = "/Editor/Ballad of the Puppet Man Data.xlsx", csvFolderPath = "/Editor/CSVs/";
     private const string dataListPath = "Assets/Scripts/Spreadsheet Importing/DataList.asset"; //String path for the data list housing all created assets
 
     //Function that returns the data list from said path if found
@@ -29,6 +32,8 @@ public class SpreadsheetToScriptableObject
         string[] allLines = File.ReadAllLines(Application.dataPath + skillsCSVPath);
 
         dataList.allPlayerSkills.Clear(); //Clears previous list of skills
+
+        //Add logic to delete all previous scriptable objects
 
         //Loop that skips the first line of the CSV file (since they are headers) and creates a new scriptable object per line in the CSV
         for (int i = 1; i < allLines.Length; i++)
@@ -82,6 +87,8 @@ public class SpreadsheetToScriptableObject
         string[] allAttackPatternLines = File.ReadAllLines(Application.dataPath + attackPatternsDataCSVPath);
 
         dataList.allEnemies.Clear();
+
+        //Add logic to delete all previous scriptable objects
 
         for (int i = 1; i < allEnemyLines.Length; i++)
         {
@@ -173,6 +180,8 @@ public class SpreadsheetToScriptableObject
 
         dataList.allEncounters.Clear();
 
+        //Add logic to delete all previous scriptable objects
+
         for (int i = 1; i < allLines.Length; i++)
         {
             string[] splitData = allLines[i].Split(',');
@@ -210,6 +219,169 @@ public class SpreadsheetToScriptableObject
 
     [MenuItem("Spreadsheet/Update CSVs")] //Ceates a new selection under the "Generation" tab in the unity editor to generate skills
     public static void UpdateCSVs()
+    {
+        string fullSpreadsheetPath = Application.dataPath + spreadsheetPath;
+        string csvFolder = Application.dataPath + csvFolderPath;
+
+        using (FileStream stream = File.OpenRead(fullSpreadsheetPath))
+        {
+            using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Read))
+            {
+                List<string> sharedStrings = new List<string>();
+                ZipArchiveEntry sharedStringsEntry = archive.GetEntry("xl/sharedStrings.xml");
+
+                if (sharedStringsEntry != null)
+                {
+                    using (Stream sharedStringsStream = sharedStringsEntry.Open())
+                    {
+                        XDocument sharedStringsDoc = XDocument.Load(sharedStringsStream);
+
+                        XNamespace ns = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
+
+                        foreach (XElement stringItem in sharedStringsDoc.Root.Elements(ns + "si"))
+                        {
+                            string text = string.Concat(
+                                stringItem.Descendants(ns + "t").Select(t => t.Value)
+                            );
+
+                            sharedStrings.Add(text);
+                        }
+                    }
+                }
+
+                ZipArchiveEntry workbookEntry = archive.GetEntry("xl/workbook.xml");
+                ZipArchiveEntry relationshipsEntry = archive.GetEntry("xl/_rels/workbook.xml.rels");
+                XDocument relationshipsDoc;
+
+                using (Stream relationshipsStream = relationshipsEntry.Open())
+                {
+                    relationshipsDoc = XDocument.Load(relationshipsStream);
+                }
+
+                XNamespace relNs = "http://schemas.openxmlformats.org/package/2006/relationships";
+                XNamespace rNs = "http://schemas.openxmlformats.org/officeDocument/2006/relationships";
+
+                using (Stream workbookStream = workbookEntry.Open())
+                {
+                    XDocument workbookDoc = XDocument.Load(workbookStream);
+                    XNamespace ns = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
+                    XElement sheets = workbookDoc.Root.Element(ns + "sheets");
+
+                    foreach (XElement sheet in sheets.Elements(ns + "sheet"))
+                    {
+                        string sheetName = sheet.Attribute("name").Value;
+                        if (sheetName.Equals("Design", StringComparison.OrdinalIgnoreCase) || sheetName.Equals("Tools", StringComparison.OrdinalIgnoreCase))
+                        {
+                            continue;
+                        }
+
+                        string relationshipId = sheet.Attribute(rNs + "id").Value;
+
+                        XElement relationship = relationshipsDoc.Root.Elements(relNs + "Relationship").FirstOrDefault(r => r.Attribute("Id").Value == relationshipId);
+
+                        string target = relationship.Attribute("Target").Value;
+                        string worksheetPath = target.StartsWith("/") ? target.TrimStart('/') : "xl/" + target;
+
+                        ZipArchiveEntry worksheetEntry = archive.GetEntry(worksheetPath);
+
+                        using (Stream worksheetStream = worksheetEntry.Open())
+                        {
+                            XDocument worksheetDoc = XDocument.Load(worksheetStream);
+                            XElement sheetData = worksheetDoc.Root.Element(ns + "sheetData");
+
+                            List<string> csvLines = new List<string>();
+
+                            foreach (XElement row in sheetData.Elements(ns + "row"))
+                            {
+                                string rowNumber = row.Attribute("r")?.Value ?? "?";
+
+                                List<string> rowValues = new List<string>();
+
+                                foreach (XElement cell in row.Elements(ns + "c"))
+                                {
+
+                                    string cellAddress = cell.Attribute("r")?.Value ?? "?";
+
+                                    string cellType = cell.Attribute("t")?.Value ?? "n";
+
+                                    string cellValue = cell.Element(ns + "v")?.Value ?? cell.Element(ns + "is")?.Value ?? "";
+
+                                    if (cellType == "s")
+                                    {
+                                        if (int.TryParse(cellValue, out int stringIndex) && stringIndex >= 0 && stringIndex < sharedStrings.Count)
+                                        {
+                                            cellValue = sharedStrings[stringIndex];
+                                        }
+                                    }
+                                    else if (cellType == "b")
+                                    {
+                                        if (cellValue == "1")
+                                        {
+                                            cellValue = "True";
+                                        }
+                                        else if (cellValue == "0")
+                                        {
+                                            cellValue = "False";
+                                        }
+                                    }
+
+                                    int columnIndex = 0;
+
+                                    foreach (char character in cellAddress)
+                                    {
+                                        if (!char.IsLetter(character))
+                                        {
+                                            break;
+                                        }
+
+                                        columnIndex = columnIndex * 26
+                                            + (char.ToUpperInvariant(character) - 'A' + 1);
+                                    }
+
+                                    columnIndex--;
+
+                                    while (rowValues.Count <= columnIndex)
+                                    {
+                                        rowValues.Add("");
+                                    }
+
+                                    rowValues[columnIndex] = cellValue;
+
+                                    
+                                }
+
+                                string csvLine = string.Join(",", rowValues.Select(value =>
+                                {
+                                    if (value.Contains(",") || value.Contains("\"") || value.Contains("\n") || value.Contains("\r"))
+                                    {
+                                        return "\"" + value.Replace("\"", "\"\"") + "\"";
+                                    }
+
+                                    return value;
+                                }));
+
+                                csvLines.Add(csvLine);
+                            }
+                            string csvFileName = sheetName + ".csv";
+                            string csvFilePath = csvFolder + csvFileName;
+
+                            bool needsUpdate = !File.Exists(csvFilePath) || !File.ReadAllLines(csvFilePath).SequenceEqual(csvLines);
+
+                            if (needsUpdate)
+                            {
+                                File.WriteAllLines(csvFilePath, csvLines);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        AssetDatabase.Refresh();
+    }
+
+    [MenuItem("Design Tools/Generate Data")] //Ceates a new selection under the "Generation" tab in the unity editor to generate skills
+    public static void GenerateData()
     {
 
     }
