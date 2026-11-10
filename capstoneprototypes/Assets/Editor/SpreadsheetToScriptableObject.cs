@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Text;
 using System.Xml.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -24,11 +25,48 @@ public class SpreadsheetToScriptableObject
         return dl;
     }
 
+    private static string[] ParseCSVLine(string line)
+    {
+        List<string> fields = new List<string>();
+        StringBuilder currentField = new StringBuilder();
+
+        bool insideQuotes = false;
+
+        for (int i = 0; i < line.Length; i++)
+        {
+            char character = line[i];
+
+            if (character == '"')
+            {
+                if (insideQuotes && i + 1 < line.Length && line[i + 1] == '"')
+                {
+                    currentField.Append('"');
+                    i++;
+                }
+                else
+                {
+                    insideQuotes = !insideQuotes;
+                }
+            }
+            else if (character == ',' && !insideQuotes)
+            {
+                fields.Add(currentField.ToString());
+                currentField.Clear();
+            }
+            else
+            {
+                currentField.Append(character);
+            }
+        }
+
+        fields.Add(currentField.ToString());
+
+        return fields.ToArray();
+    }
+
     [MenuItem("Generation/Generate Skills")] //Ceates a new selection under the "Generation" tab in the unity editor to generate skills
     public static void GeneratePlayerSkills()
     {
-        UpdateCSVs();
-
         DataList dataList = GetDataList(); //Calls for data list refrence
 
         //Gets each line from the skills CSV file and seperates them into an array
@@ -54,18 +92,7 @@ public class SpreadsheetToScriptableObject
         for (int i = 1; i < allLines.Length; i++)
         {
             //Splits the data in the line by the "," divider
-            string[] splitData = allLines[i].Split(',');
-
-            //Checks for the skills type
-            string typeDisplay;
-            if (int.Parse(splitData[4]) < 1)
-            {
-                typeDisplay = "Heal";
-            }
-            else
-            {
-                typeDisplay = "Damage";
-            }
+            string[] splitData = ParseCSVLine(allLines[i]);
 
             //Creates instance of the skills scriptable object and sets the data from the CSV into the it using the split data
             PlayerSkill skill = ScriptableObject.CreateInstance<PlayerSkill>();
@@ -96,8 +123,6 @@ public class SpreadsheetToScriptableObject
     [MenuItem("Generation/Generate Enemies")] //Ceates a new selection under the "Generation" tab in the unity editor to generate skills
     public static void GenerateEnemies()
     {
-        UpdateCSVs();
-
         DataList dataList = GetDataList();
 
         string[] allEnemyLines = File.ReadAllLines(Application.dataPath + enemyDataCSVPath);
@@ -120,7 +145,7 @@ public class SpreadsheetToScriptableObject
 
         for (int i = 1; i < allEnemyLines.Length; i++)
         {
-            string[] enemySplitData = allEnemyLines[i].Split(',');
+            string[] enemySplitData = ParseCSVLine(allEnemyLines[i]);
 
             EnemyData enemy = ScriptableObject.CreateInstance<EnemyData>();
             enemy.id = int.Parse(enemySplitData[0]);
@@ -140,7 +165,7 @@ public class SpreadsheetToScriptableObject
 
             for (int j = 1; j < allAttackPatternLines.Length; j++)
             {
-                string[] attackPatternSplitData = allAttackPatternLines[j].Split(',');
+                string[] attackPatternSplitData = ParseCSVLine(allAttackPatternLines[j]);
 
                 if (int.Parse(attackPatternSplitData[0]) == enemy.id)
                 {
@@ -204,13 +229,13 @@ public class SpreadsheetToScriptableObject
     [MenuItem("Generation/Generate Encounters")]
     public static void GenerateEncounters()
     {
-        UpdateCSVs();
-
         DataList dataList = GetDataList();
 
         string[] allLines = File.ReadAllLines(Application.dataPath + enemyEncountersDataCSVPath);
 
         dataList.allEncounters.Clear();
+        dataList.allRandomEncounters.Clear();
+        dataList.allScriptedEncounters.Clear();
 
         string folderPath = "Assets/Resources/Encounters";
         string[] existingAssets = Directory.GetFiles(folderPath, "*.asset", SearchOption.TopDirectoryOnly);
@@ -227,7 +252,7 @@ public class SpreadsheetToScriptableObject
 
         for (int i = 1; i < allLines.Length; i++)
         {
-            string[] splitData = allLines[i].Split(',');
+            string[] splitData = ParseCSVLine(allLines[i]);
 
             EncountersData encounter = ScriptableObject.CreateInstance<EncountersData>();
             encounter.encounterID = int.Parse(splitData[0]);
@@ -237,7 +262,7 @@ public class SpreadsheetToScriptableObject
                 string enemyName = splitData[j];
                 for (int k = 0; k < dataList.allEnemies.Count; k++)
                 {
-                    if (enemyName == dataList.allEnemies[k].name)
+                    if (enemyName == dataList.allEnemies[k].enemyName)
                     {
                         encounter.enemies.Add(dataList.allEnemies[k]);
                         encounter.offset.Add(float.Parse(splitData[j + 5]));
@@ -266,13 +291,11 @@ public class SpreadsheetToScriptableObject
     [MenuItem("Generation/Generate Status Effects")]
     public static void GenerateStatusEffects()
     {
-        UpdateCSVs();
-
         DataList dataList = GetDataList();
 
         string[] allLines = File.ReadAllLines(Application.dataPath + statusEffectsDataCSVPath);
 
-        dataList.allPlayerSkills.Clear();
+        dataList.allStatusEffects.Clear();
 
         string folderPath = "Assets/Resources/StatusEffects";
         string[] existingAssets = Directory.GetFiles(folderPath, "*.asset", SearchOption.TopDirectoryOnly);
@@ -289,7 +312,7 @@ public class SpreadsheetToScriptableObject
 
         for (int i = 1; i < allLines.Length; i++)
         {
-            string[] splitData = allLines[i].Split(',');
+            string[] splitData = ParseCSVLine(allLines[i]);
 
             StatusEffect status = ScriptableObject.CreateInstance<StatusEffect>();
             status.id = int.Parse(splitData[0]);
