@@ -11,7 +11,7 @@ using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCou
 
 public class SpreadsheetToScriptableObject
 {
-    private static string enemyDataCSVPath = "/Editor/CSVs/Enemies.csv", attackPatternsDataCSVPath = "/Editor/Attack Patterns.csv", skillsCSVPath = "/Editor/CSVs/Player Skills.csv", enemyEncountersDataCSVPath = "/Editor/CSVs/Enemy Encounters.csv", itemDataCSVPath, statusEffectDataCSVPath = "/Editor/CSVs/Status Effects.csv"; //String paths for CSV files
+    private static string enemyDataCSVPath = "/Editor/CSVs/Enemies.csv", attackPatternsDataCSVPath = "/Editor/CSVs/Attack Patterns.csv", skillsCSVPath = "/Editor/CSVs/Player Skills.csv", enemyEncountersDataCSVPath = "/Editor/CSVs/Enemy Encounters.csv", itemDataCSVPath, statusEffectDataCSVPath = "/Editor/CSVs/Status Effects.csv"; //String paths for CSV files
     private static string spreadsheetPath = "/Editor/Ballad of the Puppet Man Data.xlsx", csvFolderPath = "/Editor/CSVs/";
     private const string dataListPath = "Assets/Scripts/Spreadsheet Importing/DataList.asset"; //String path for the data list housing all created assets
 
