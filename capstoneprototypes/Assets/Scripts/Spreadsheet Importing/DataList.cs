@@ -9,4 +9,6 @@ public class DataList : ScriptableObject
     public List<EncountersData> allEncounters = new List<EncountersData>();
     public List<EncountersData> allRandomEncounters = new List<EncountersData>();
     public List<EncountersData> allScriptedEncounters = new List<EncountersData>();
+    public List<ItemObject> allItems = new List<ItemObject>();
+    public List<StatusEffect> allStatusEffects = new List<StatusEffect>();
 }

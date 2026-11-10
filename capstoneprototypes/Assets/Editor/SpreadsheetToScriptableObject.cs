@@ -99,6 +99,7 @@ public class SpreadsheetToScriptableObject
             enemy.enemyName = enemySplitData[1];
             enemy.type = Enum.Parse<ElementalTypes>(enemySplitData[2]);
             enemy.maxHP = int.Parse(enemySplitData[3]);
+            enemy.enemyDescription = enemySplitData[5];
 
             string[] patternByRoundSplitData = enemySplitData[4].Split('-');
             for (int j = 0; j < patternByRoundSplitData.Length; j++)
@@ -188,6 +189,7 @@ public class SpreadsheetToScriptableObject
 
             EncountersData encounter = ScriptableObject.CreateInstance<EncountersData>();
             encounter.encounterID = int.Parse(splitData[0]);
+            encounter.encounterType = Enum.Parse<Encounters.EncounterType>(splitData[11]);
             for (int j = 1; j <= 5; j++)
             {
                 string enemyName = splitData[j];
@@ -200,16 +202,17 @@ public class SpreadsheetToScriptableObject
                     }
                 }
             }
-
-            AssetDatabase.CreateAsset(encounter, $"Assets/Resources/Encounters/Encounter {encounter.encounterID}.asset");
+            
             dataList.allEncounters.Add(encounter);
-            if (splitData[11] == "Regular")
+            if (encounter.encounterType == Enum.Parse<Encounters.EncounterType>("Regular"))
             {
                 dataList.allRandomEncounters.Add(encounter);
+                AssetDatabase.CreateAsset(encounter, $"Assets/Resources/Encounters/Encounter {encounter.encounterID}.asset");
             }
-            else if (splitData[11] == "Scripted")
+            else if (encounter.encounterType == Enum.Parse<Encounters.EncounterType>("Scripted"))
             {
                 dataList.allScriptedEncounters.Add(encounter);
+                AssetDatabase.CreateAsset(encounter, $"Assets/Resources/Encounters/Encounter {encounter.encounterID} - Scripted.asset");
             }
         }
 
