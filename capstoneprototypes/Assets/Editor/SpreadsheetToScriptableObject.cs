@@ -1,16 +1,17 @@
 using System;
 using System.Collections.Generic;
-using System.IO.Compression;
-using System.Xml.Linq;
-using System.Linq;
 using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Xml.Linq;
 using UnityEditor;
 using UnityEngine;
 using static PlayerSkill;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class SpreadsheetToScriptableObject
 {
-    private static string enemyDataCSVPath = "/Editor/CSVs/Enemies.csv", attackPatternsDataCSVPath = "/Editor/Attack Patterns.csv", skillsCSVPath = "/Editor/CSVs/Player Skills.csv", enemyEncountersDataCSVPath = "/Editor/CSVs/Enemy Encounters.csv"; //String paths for CSV files
+    private static string enemyDataCSVPath = "/Editor/CSVs/Enemies.csv", attackPatternsDataCSVPath = "/Editor/Attack Patterns.csv", skillsCSVPath = "/Editor/CSVs/Player Skills.csv", enemyEncountersDataCSVPath = "/Editor/CSVs/Enemy Encounters.csv", itemDataCSVPath, statusEffectDataCSVPath = "/Editor/CSVs/Status Effects.csv"; //String paths for CSV files
     private static string spreadsheetPath = "/Editor/Ballad of the Puppet Man Data.xlsx", csvFolderPath = "/Editor/CSVs/";
     private const string dataListPath = "Assets/Scripts/Spreadsheet Importing/DataList.asset"; //String path for the data list housing all created assets
 
@@ -33,7 +34,19 @@ public class SpreadsheetToScriptableObject
 
         dataList.allPlayerSkills.Clear(); //Clears previous list of skills
 
-        //Add logic to delete all previous scriptable objects
+        //Adds logic to delete all previous scriptable objects
+        string folderPath = "Assets/Resources/Skills";
+        string[] existingAssets = Directory.GetFiles(folderPath, "*.asset", SearchOption.TopDirectoryOnly);
+        foreach (string assetPath in existingAssets)
+        {
+            string unityAssetPath = assetPath.Replace('\\', '/');
+
+            if (!AssetDatabase.DeleteAsset(unityAssetPath))
+            {
+                Debug.LogError("Failed to delete asset: " + unityAssetPath);
+                return;
+            }
+        }
 
         //Loop that skips the first line of the CSV file (since they are headers) and creates a new scriptable object per line in the CSV
         for (int i = 1; i < allLines.Length; i++)
@@ -88,7 +101,18 @@ public class SpreadsheetToScriptableObject
 
         dataList.allEnemies.Clear();
 
-        //Add logic to delete all previous scriptable objects
+        string folderPath = "Assets/Resources/Enemies";
+        string[] existingAssets = Directory.GetFiles(folderPath, "*.asset", SearchOption.TopDirectoryOnly);
+        foreach (string assetPath in existingAssets)
+        {
+            string unityAssetPath = assetPath.Replace('\\', '/');
+
+            if (!AssetDatabase.DeleteAsset(unityAssetPath))
+            {
+                Debug.LogError("Failed to delete asset: " + unityAssetPath);
+                return;
+            }
+        }
 
         for (int i = 1; i < allEnemyLines.Length; i++)
         {
@@ -164,7 +188,8 @@ public class SpreadsheetToScriptableObject
                 enemy.attackPatterns.Add(previousPatten);
             }
 
-            AssetDatabase.CreateAsset(enemy, $"Assets/Resources/Enemies/{enemy.enemyName}.asset");
+            string fileName = $"{enemy.id} - {enemy.enemyName}";
+            AssetDatabase.CreateAsset(enemy, $"Assets/Resources/Enemies/{fileName}.asset");
             dataList.allEnemies.Add(enemy);
         }
 
@@ -172,7 +197,7 @@ public class SpreadsheetToScriptableObject
         AssetDatabase.SaveAssets();
     }
 
-    [MenuItem("Generation/Generate Encounters")] //Ceates a new selection under the "Generation" tab in the unity editor to generate skills
+    [MenuItem("Generation/Generate Encounters")]
     public static void GenerateEncounters()
     {
         DataList dataList = GetDataList();
@@ -181,7 +206,18 @@ public class SpreadsheetToScriptableObject
 
         dataList.allEncounters.Clear();
 
-        //Add logic to delete all previous scriptable objects
+        string folderPath = "Assets/Resources/Encounters";
+        string[] existingAssets = Directory.GetFiles(folderPath, "*.asset", SearchOption.TopDirectoryOnly);
+        foreach (string assetPath in existingAssets)
+        {
+            string unityAssetPath = assetPath.Replace('\\', '/');
+
+            if (!AssetDatabase.DeleteAsset(unityAssetPath))
+            {
+                Debug.LogError("Failed to delete asset: " + unityAssetPath);
+                return;
+            }
+        }
 
         for (int i = 1; i < allLines.Length; i++)
         {
@@ -202,17 +238,18 @@ public class SpreadsheetToScriptableObject
                     }
                 }
             }
-            
+
+            string fileName = $"Encounter {encounter.encounterID}";
             dataList.allEncounters.Add(encounter);
             if (encounter.encounterType == Enum.Parse<Encounters.EncounterType>("Regular"))
             {
                 dataList.allRandomEncounters.Add(encounter);
-                AssetDatabase.CreateAsset(encounter, $"Assets/Resources/Encounters/Encounter {encounter.encounterID}.asset");
+                AssetDatabase.CreateAsset(encounter, $"Assets/Resources/Encounters/{fileName}.asset");
             }
             else if (encounter.encounterType == Enum.Parse<Encounters.EncounterType>("Scripted"))
             {
                 dataList.allScriptedEncounters.Add(encounter);
-                AssetDatabase.CreateAsset(encounter, $"Assets/Resources/Encounters/Encounter {encounter.encounterID} - Scripted.asset");
+                AssetDatabase.CreateAsset(encounter, $"Assets/Resources/Encounters/{fileName} - Scripted.asset");
             }
         }
 
@@ -220,7 +257,56 @@ public class SpreadsheetToScriptableObject
         AssetDatabase.SaveAssets();
     }
 
-    [MenuItem("Spreadsheet/Update CSVs")] //Ceates a new selection under the "Generation" tab in the unity editor to generate skills
+    [MenuItem("Generation/Generate Status Effects")]
+    public static void GenerateStatusEffects()
+    {
+        DataList dataList = GetDataList();
+
+        string[] allLines = File.ReadAllLines(Application.dataPath + skillsCSVPath);
+
+        dataList.allPlayerSkills.Clear();
+
+        string folderPath = "Assets/Resources/StatusEffects";
+        string[] existingAssets = Directory.GetFiles(folderPath, "*.asset", SearchOption.TopDirectoryOnly);
+        foreach (string assetPath in existingAssets)
+        {
+            string unityAssetPath = assetPath.Replace('\\', '/');
+
+            if (!AssetDatabase.DeleteAsset(unityAssetPath))
+            {
+                Debug.LogError("Failed to delete asset: " + unityAssetPath);
+                return;
+            }
+        }
+
+        for (int i = 1; i < allLines.Length; i++)
+        {
+            string[] splitData = allLines[i].Split(',');
+
+            string typeDisplay;
+            if (int.Parse(splitData[4]) < 1)
+            {
+                typeDisplay = "Heal";
+            }
+            else
+            {
+                typeDisplay = "Damage";
+            }
+
+            StatusEffect status = ScriptableObject.CreateInstance<StatusEffect>();
+            status.id = int.Parse(splitData[0]);
+            status.statusName = splitData[1];
+            status.statusDescription = splitData[2];
+
+            string fileName = $"{status.id} - {status.statusName}";
+            AssetDatabase.CreateAsset(status, $"Assets/Resources/StatusEffects/{fileName}.asset");
+            dataList.allStatusEffects.Add(status);
+        }
+        EditorUtility.SetDirty(dataList);
+        AssetDatabase.SaveAssets();
+    }
+
+    [MenuItem("Spreadsheet/Update CSVs")]
     public static void UpdateCSVs()
     {
         string fullSpreadsheetPath = Application.dataPath + spreadsheetPath;
@@ -383,7 +469,7 @@ public class SpreadsheetToScriptableObject
         AssetDatabase.Refresh();
     }
 
-    [MenuItem("Design Tools/Generate Data")] //Ceates a new selection under the "Generation" tab in the unity editor to generate skills
+    [MenuItem("Design Tools/Generate Data")]
     public static void GenerateData()
     {
 
