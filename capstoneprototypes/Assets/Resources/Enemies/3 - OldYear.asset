@@ -50,5 +50,5 @@ MonoBehaviour:
       animWinddownEnd: 0.5
   patternByRound: 0000000001000000
   enemyName: OldYear
-  enemyDescription: 
+  enemyDescription: N/A
   enemySprite: {fileID: 0}

@@ -1,6 +1,7 @@
-ID,Enemy Name,Element Type,Max HP,PatternByRound
-0,Shameling,Power,10,0
-1,NewYear,Money,20,0-1
-2,Shamefool,Fame,20,0
-3,OldYear,Purity,20,0-1
-4,TongueTwister,Corruption,200,0-1-0-2
+ID,Enemy Name,Element Type,Max HP,PatternByRound,Enemy Description
+0,Shameling,Power,10,0,N/A
+1,NewYear,Money,20,0-1,N/A
+2,Shamefool,Fame,20,0,N/A
+3,OldYear,Purity,20,0-1,N/A
+4,TongueTwister,Corruption,200,0-1-0-2,N/A
+5,Recluse,Fame,10,0,"Recluse. Low HP, it can only take damage after it attacks."

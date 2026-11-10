@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a40bf8741d973df4e91e695a9802734d, type: 3}
-  m_Name: 6_RedPaint
+  m_Script: {fileID: 11500000, guid: badd602edb3a3614ca150cf3a7536ca0, type: 3}
+  m_Name: Encounter 6 - Scripted
   m_EditorClassIdentifier: 
-  id: 6
-  cost: 25
-  isRare: 0
-  sprite: {fileID: -317549868, guid: 03df6c52b4ee144428f058dce5a9a98b, type: 3}
-  itemName: Red Paint
-  itemDescription: Power skills deal 1.5x more damage.
+  encounterID: 6
+  enemies:
+  - {fileID: 11400000, guid: 17d00982ae3968041a365cc796334b61, type: 2}
+  offset:
+  - 0
+  encounterType: 1

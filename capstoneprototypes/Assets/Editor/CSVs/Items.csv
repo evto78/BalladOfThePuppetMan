@@ -1,3 +1,10 @@
 ID,Item Name,Cost,Rarity,Item Description
-0,Unfair Coin,20,Common,Money skills you use have a 25% chance to activate an additonal time whenever they activate.
-1,Searing Pen,75,Rare,"After dealing damage to any enemy, apply 1 stack of decay to that enemy. Makeing them take 1 damage for every stack every second for the rest of the combat."
+0,None,0,Common,None
+1,Paint Brush,50,Rare,Elemental advantage and disadvantage is 1.5x more effective.
+2,Trophy,25,Common,End of combat rewards give one more option to pick from.
+3,None,0,Common,None
+4,None,0,Common,None
+5,None,0,Common,None
+6,Red Paint,25,Common,Power skills deal 1.5x more damage.
+7,Green Paint,25,Common,Money skills deal 1.5x more damage.
+8,Blue Paint,25,Common,Fame skills deal 1.5x more damage.

@@ -10,4 +10,3 @@ ID,Skill Name,Element Type,Cost (energy),PrepTime (seconds),Target,Intensity (Da
 8,Focused Strike,Fame,1,2,SingleEnemy,1,1.5,True,Deals 1 blue damage with 1.5x perfect multiplier. Applies 1 stack of focus.
 9,Strong Swing,Power,4,5,SingleEnemy,5,2,True,Deals 5 red damage with 2x perfect multiplier.
 10,Poke,Money,1,1,SingleEnemy,1,1.5,True,Deals 1 green damage with 1.5x perfect multiplier.
-11,Devistating Blow,Corruption

@@ -19,3 +19,4 @@ MonoBehaviour:
   offset:
   - 0
   - 0.5
+  encounterType: 0

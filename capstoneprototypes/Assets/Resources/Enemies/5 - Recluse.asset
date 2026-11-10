@@ -39,4 +39,4 @@ MonoBehaviour:
   patternByRound: 00000000
   enemyName: Recluse
   enemyDescription: Recluse. Low HP, it can only take damage after it attacks.
-  enemySprite: {fileID: 259604409, guid: 6d85b3cd8dcb745409627534ec9fefad, type: 3}
+  enemySprite: {fileID: 0}

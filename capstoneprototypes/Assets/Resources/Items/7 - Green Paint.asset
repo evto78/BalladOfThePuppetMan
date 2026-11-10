@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a40bf8741d973df4e91e695a9802734d, type: 3}
-  m_Name: 1_PaintBrush
+  m_Name: 7 - Green Paint
   m_EditorClassIdentifier: 
-  id: 1
-  cost: 50
-  isRare: 1
-  sprite: {fileID: 1755104600, guid: 03df6c52b4ee144428f058dce5a9a98b, type: 3}
-  itemName: Paint Brush
-  itemDescription: Elemental advantage and disadvantage is 1.5x more effective.
+  id: 7
+  cost: 25
+  isRare: 0
+  sprite: {fileID: 0}
+  itemName: Green Paint
+  itemDescription: Money skills deal 1.5x more damage.

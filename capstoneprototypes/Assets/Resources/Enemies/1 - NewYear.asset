@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   maxHP: 20
-  type: 4
+  type: 1
   attackPatterns:
   - timelineChangePriority: 2
     timelineCombatTimePref: 6
@@ -50,5 +50,5 @@ MonoBehaviour:
       animWinddownEnd: 0.5
   patternByRound: 0000000001000000
   enemyName: NewYear
-  enemyDescription: 
+  enemyDescription: N/A
   enemySprite: {fileID: 0}

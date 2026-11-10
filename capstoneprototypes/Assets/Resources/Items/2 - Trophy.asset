@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a40bf8741d973df4e91e695a9802734d, type: 3}
-  m_Name: 7_GreenPaint
+  m_Name: 2 - Trophy
   m_EditorClassIdentifier: 
-  id: 7
+  id: 2
   cost: 25
   isRare: 0
-  sprite: {fileID: -1855812641, guid: 03df6c52b4ee144428f058dce5a9a98b, type: 3}
-  itemName: Green Paint
-  itemDescription: Money skills deal 1.5x more damage.
+  sprite: {fileID: 0}
+  itemName: Trophy
+  itemDescription: End of combat rewards give one more option to pick from.
