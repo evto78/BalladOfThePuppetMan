@@ -25,6 +25,7 @@ public class SpreadsheetToScriptableObject
         return dl;
     }
 
+    //Function that parses the lines of a CSV file
     private static string[] ParseCSVLine(string line)
     {
         List<string> fields = new List<string>();
@@ -64,7 +65,7 @@ public class SpreadsheetToScriptableObject
         return fields.ToArray();
     }
 
-    [MenuItem("Generation/Generate Skills")] //Ceates a new selection under the "Generation" tab in the unity editor to generate skills
+    //Function that generates player skills from the player CSV
     public static void GeneratePlayerSkills()
     {
         DataList dataList = GetDataList(); //Calls for data list refrence
@@ -120,7 +121,6 @@ public class SpreadsheetToScriptableObject
         AssetDatabase.SaveAssets();
     }
 
-    [MenuItem("Generation/Generate Enemies")] //Ceates a new selection under the "Generation" tab in the unity editor to generate skills
     public static void GenerateEnemies()
     {
         DataList dataList = GetDataList();
@@ -226,7 +226,6 @@ public class SpreadsheetToScriptableObject
         AssetDatabase.SaveAssets();
     }
 
-    [MenuItem("Generation/Generate Encounters")]
     public static void GenerateEncounters()
     {
         DataList dataList = GetDataList();
@@ -288,7 +287,6 @@ public class SpreadsheetToScriptableObject
         AssetDatabase.SaveAssets();
     }
 
-    [MenuItem("Generation/Generate Status Effects")]
     public static void GenerateStatusEffects()
     {
         DataList dataList = GetDataList();
@@ -327,7 +325,54 @@ public class SpreadsheetToScriptableObject
         AssetDatabase.SaveAssets();
     }
 
-    [MenuItem("Spreadsheet/Update CSVs")]
+    public static void GenerateItems()
+    {
+        DataList dataList = GetDataList();
+
+        string[] allLines = File.ReadAllLines(Application.dataPath + itemDataCSVPath);
+
+        dataList.allItems.Clear();
+
+        string folderPath = "Assets/Resources/Items";
+        string[] existingAssets = Directory.GetFiles(folderPath, "*.asset", SearchOption.TopDirectoryOnly);
+        foreach (string assetPath in existingAssets)
+        {
+            string unityAssetPath = assetPath.Replace('\\', '/');
+
+            if (!AssetDatabase.DeleteAsset(unityAssetPath))
+            {
+                Debug.LogError("Failed to delete asset: " + unityAssetPath);
+                return;
+            }
+        }
+
+        for (int i = 1; i < allLines.Length; i++)
+        {
+            string[] splitData = ParseCSVLine(allLines[i]);
+
+            ItemObject item = ScriptableObject.CreateInstance<ItemObject>();
+            item.id = int.Parse(splitData[0]);
+            item.itemName = splitData[1];
+            item.cost = int.Parse(splitData[2]);
+            if (splitData[3] == "Rare")
+            {
+                item.isRare = true;
+            }
+            else
+            {
+                item.isRare = false;
+            }
+            item.itemDescription = splitData[4];
+
+            string fileName = $"{item.id} - {item.itemName}";
+            AssetDatabase.CreateAsset(item, $"Assets/Resources/Items/{fileName}.asset");
+            dataList.allItems.Add(item);
+        }
+        EditorUtility.SetDirty(dataList);
+        AssetDatabase.SaveAssets();
+    }
+
+    //Function that reads an excel sheet as a zip file and deconstructs the different sheet values into seperate CSV files that are saved to the editor folder in engine
     public static void UpdateCSVs()
     {
         string fullSpreadsheetPath = Application.dataPath + spreadsheetPath;
@@ -350,9 +395,7 @@ public class SpreadsheetToScriptableObject
 
                         foreach (XElement stringItem in sharedStringsDoc.Root.Elements(ns + "si"))
                         {
-                            string text = string.Concat(
-                                stringItem.Descendants(ns + "t").Select(t => t.Value)
-                            );
+                            string text = string.Concat(stringItem.Descendants(ns + "t").Select(t => t.Value));
 
                             sharedStrings.Add(text);
                         }
@@ -444,8 +487,7 @@ public class SpreadsheetToScriptableObject
                                             break;
                                         }
 
-                                        columnIndex = columnIndex * 26
-                                            + (char.ToUpperInvariant(character) - 'A' + 1);
+                                        columnIndex = columnIndex * 26 + (char.ToUpperInvariant(character) - 'A' + 1);
                                     }
 
                                     columnIndex--;
@@ -490,6 +532,7 @@ public class SpreadsheetToScriptableObject
         AssetDatabase.Refresh();
     }
 
+    //Function that generates/updates all the data from our spreadsheet
     [MenuItem("Design Tools/Generate Data")]
     public static void GenerateData()
     {
