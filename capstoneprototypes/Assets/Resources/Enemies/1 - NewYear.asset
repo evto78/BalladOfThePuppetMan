@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   maxHP: 20
-  type: 1
+  type: 4
   attackPatterns:
   - timelineChangePriority: 2
     timelineCombatTimePref: 6
@@ -50,5 +50,6 @@ MonoBehaviour:
       animWinddownEnd: 0.5
   patternByRound: 0000000001000000
   enemyName: NewYear
-  enemyDescription: N/A
+  enemyDescription: New Year. Med HP, Always comes sooner than expected, Instead
+    of attacking it speeds up the timeline.
   enemySprite: {fileID: 0}

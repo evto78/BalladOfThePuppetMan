@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 5 - Recluse
   m_EditorClassIdentifier: 
   id: 5
-  maxHP: 10
+  maxHP: 15
   type: 2
   attackPatterns:
   - timelineChangePriority: 1

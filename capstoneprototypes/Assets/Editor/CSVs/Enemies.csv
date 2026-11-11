@@ -1,7 +1,7 @@
 ID,Enemy Name,Element Type,Max HP,PatternByRound,Enemy Description
-0,Shameling,Power,10,0,N/A
-1,NewYear,Money,20,0-1,N/A
-2,Shamefool,Fame,20,0,N/A
-3,OldYear,Purity,20,0-1,N/A
-4,TongueTwister,Corruption,200,0-1-0-2,N/A
-5,Recluse,Fame,10,0,"Recluse. Low HP, it can only take damage after it attacks."
+0,Shameling,Fame,10,0,"Shameling. Low HP, Low DMG, Nothing special. It should be ashamed."
+1,NewYear,Purity,20,0-1,"New Year. Med HP, Always comes sooner than expected, Instead of attacking it speeds up the timeline."
+2,Shamefool,Fame,15,0,"Shameling. Low HP, Low DMG, Nothing special. It should be ashamed."
+3,OldYear,Purity,20,0-1,Old Year. Med hp. Oh how the years drag on...
+4,TongueTwister,Power,200,0-1-0-2,Tongue Twister. Oh no...
+5,Recluse,Fame,15,0,"Recluse. Low HP, it can only take damage after it attacks."

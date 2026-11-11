@@ -1,10 +1,17 @@
 ID,Item Name,Cost,Rarity,Item Description
-0,None,0,Common,None
+0,Sealed Love Letter,25,Common,"If you end a turn without taking any damage, Heal 2 hp."
 1,Paint Brush,50,Rare,Elemental advantage and disadvantage is 1.5x more effective.
 2,Trophy,25,Common,End of combat rewards give one more option to pick from.
-3,None,0,Common,None
-4,None,0,Common,None
-5,None,0,Common,None
+3,Script,50,Rare,Perfect attacks & parries heal you 1 hp.
+4,Instant Coffee,25,Common,Start each combat with 2 more energy.
+5,Coffee Machine,25,Common,Recover 1 more energy every round.
 6,Red Paint,25,Common,Power skills deal 1.5x more damage.
 7,Green Paint,25,Common,Money skills deal 1.5x more damage.
 8,Blue Paint,25,Common,Fame skills deal 1.5x more damage.
+9,Golden Tooth,25,Common,Perfect attacks & perries give you 1 memory.
+10,Shady Loan,50,Rare,Money skills that you own are counted as corruption skills.
+11,Shady Deal,50,Rare,Power skills that you own are counted as corruption skills.
+12,Shady Endorcement,50,Rare,Fame skills that you own are counted as corruption skills.
+13,Sold Soul,50,Rare,Corruption skills deal 1.5x more damage. Take 1 damage when using a corruption skill.
+14,Award Pedistool,25,Common,Your first equipped skill costs 1 less energy to use. Your third equipped skill costs 1 more energy to use.
+15,Focus Pills,50,Rare,Holding middle click slows down time by 1.5x.

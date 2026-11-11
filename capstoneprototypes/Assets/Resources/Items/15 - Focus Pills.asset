@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a40bf8741d973df4e91e695a9802734d, type: 3}
-  m_Name: 5 - None
+  m_Name: 15 - Focus Pills
   m_EditorClassIdentifier: 
-  id: 5
-  cost: 0
-  isRare: 0
-  sprite: {fileID: 0}
-  itemName: None
-  itemDescription: None
+  id: 15
+  cost: 50
+  isRare: 1
+  sprite: {fileID: -2086596500, guid: 444d67eac5ff5d44c8d8850f34c3864d, type: 3}
+  itemName: Focus Pills
+  itemDescription: Holding middle click slows down time by 1.5x.

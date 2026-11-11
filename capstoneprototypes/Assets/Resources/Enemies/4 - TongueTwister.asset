@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 4
   maxHP: 200
-  type: 3
+  type: 0
   attackPatterns:
   - timelineChangePriority: 5
     timelineCombatTimePref: 6
@@ -78,5 +78,5 @@ MonoBehaviour:
       animWinddownEnd: 0
   patternByRound: 00000000010000000000000002000000
   enemyName: TongueTwister
-  enemyDescription: N/A
+  enemyDescription: Tongue Twister. Oh no...
   enemySprite: {fileID: 0}

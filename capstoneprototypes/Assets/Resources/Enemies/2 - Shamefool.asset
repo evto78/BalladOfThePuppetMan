@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 2 - Shamefool
   m_EditorClassIdentifier: 
   id: 2
-  maxHP: 20
+  maxHP: 15
   type: 2
   attackPatterns:
   - timelineChangePriority: 1
@@ -46,5 +46,5 @@ MonoBehaviour:
       animWinddownEnd: 0.125
   patternByRound: 00000000
   enemyName: Shamefool
-  enemyDescription: N/A
+  enemyDescription: Shameling. Low HP, Low DMG, Nothing special. It should be ashamed.
   enemySprite: {fileID: 0}

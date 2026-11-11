@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   maxHP: 10
-  type: 0
+  type: 2
   attackPatterns:
   - timelineChangePriority: 1
     timelineCombatTimePref: 6
@@ -38,5 +38,5 @@ MonoBehaviour:
       animWinddownEnd: 0.25
   patternByRound: 00000000
   enemyName: Shameling
-  enemyDescription: N/A
+  enemyDescription: Shameling. Low HP, Low DMG, Nothing special. It should be ashamed.
   enemySprite: {fileID: 0}
