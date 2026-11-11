@@ -69,6 +69,7 @@ public class PlayerActionManager : MonoBehaviour
     public GameOverAnim gameOverAnim;
     GameDataManager gdm;
     public TextMeshProUGUI memoryCount;
+    public GameObject damageIndicatorPrefab;
 
     private void Awake()
     {
@@ -407,6 +408,9 @@ public class PlayerActionManager : MonoBehaviour
     void TakeDamage(int dmg)
     {
         hp -= dmg;
+        GameObject damageIndicatorObj = Instantiate(damageIndicatorPrefab, new Vector3(transform.position.x + 0.75f, transform.position.y, transform.position.z), Quaternion.identity);
+        DamageIndicator damageIndicator = damageIndicatorObj.GetComponent<DamageIndicator>();
+        damageIndicator.SetDamage(dmg);
 
         switch (dmg)
         {

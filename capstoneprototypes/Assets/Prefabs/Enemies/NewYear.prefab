@@ -521,6 +521,7 @@ MonoBehaviour:
   myData: {fileID: 11400000, guid: 8a6bfae9491c86f49a7c58fd3839d14d, type: 2}
   attackPatterns: []
   patternByRound: 0000000001000000
+  damageIndicatorPrefab: {fileID: 9204953870382014862, guid: ab899e5d3d06d66478a7e62d5c8f046f, type: 3}
 --- !u!114 &7890353833714126518
 MonoBehaviour:
   m_ObjectHideFlags: 0

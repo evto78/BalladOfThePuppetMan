@@ -6,7 +6,7 @@ using UnityEngine;
 public class DamageIndicator : MonoBehaviour
 {
     Rigidbody2D rb;
-    TextMeshProUGUI damage;
+    TextMeshProUGUI damageText;
 
     public float initialYVelocity = 7.5f;
     public float lifeTime = 0.5f;
@@ -14,7 +14,7 @@ public class DamageIndicator : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        damage = GetComponentInChildren<TextMeshProUGUI>();
+        damageText = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     private void Start()
@@ -25,6 +25,6 @@ public class DamageIndicator : MonoBehaviour
 
     public void SetDamage(int damage)
     {
-
+        damageText.text = damage.ToString();
     }
 }
