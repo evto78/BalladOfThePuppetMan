@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 13
   cost: 50
   isRare: 1
-  sprite: {fileID: 1410559377, guid: 444d67eac5ff5d44c8d8850f34c3864d, type: 3}
+  sprite: {fileID: 0}
   itemName: Sold Soul
   itemDescription: Corruption skills deal 1.5x more damage. Take 1 damage when using
     a corruption skill.

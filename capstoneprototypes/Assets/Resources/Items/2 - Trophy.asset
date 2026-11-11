@@ -15,6 +15,6 @@ MonoBehaviour:
   id: 2
   cost: 25
   isRare: 0
-  sprite: {fileID: 1134014914, guid: 444d67eac5ff5d44c8d8850f34c3864d, type: 3}
+  sprite: {fileID: 0}
   itemName: Trophy
   itemDescription: End of combat rewards give one more option to pick from.

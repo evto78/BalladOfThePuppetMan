@@ -31,7 +31,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9ad5b487061685e4c95105ebad1b3041, type: 2}
   - {fileID: 11400000, guid: 73f833ac7c18ee54ba385f90ab4a985a, type: 2}
   - {fileID: 11400000, guid: dfc80f562c2c0204bb2043ba9f202c05, type: 2}
-  - {fileID: 11400000, guid: 747ef5a16c96a4743a410afb104203e0, type: 2}
+  - {fileID: 11400000, guid: 3d517c690404c4d418307e5523c1843e, type: 2}
   allEncounters:
   - {fileID: 11400000, guid: 81cad993b47828847bb0439c014a9e22, type: 2}
   - {fileID: 11400000, guid: bae1960e09ff37746b85c20a0dce4916, type: 2}

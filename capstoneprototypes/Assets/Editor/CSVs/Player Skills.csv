@@ -5,8 +5,9 @@ ID,Skill Name,Element Type,Cost (energy),PrepTime (seconds),Target,Intensity (Da
 3,Wait,Purity,0,1,Self,0,1,False,Just waits 1 second.
 4,Focus,Purity,1,2,Self,1,2,False,Your next attack will do 50% more damage for each stack of Focus. Lose all Focus when taking damage.
 5,Barrage,Power,1,1,SingleEnemy,1,1.5,True,Deals 1 power damage with 1.5x perfect multiplier.
-6,Headbutt,Money,3,3,SingleEnemy,4,2,True,Deals 4 money damage with 2x perfect multiplier.
+6,Headbutt,Money,3,3,SingleEnemy,4,2,True,Deals 4 money damage 2ith 2x perfect multiplier.
 7,Calm Punch,Fame,2,2,SingleEnemy,2,1.5,True,Deals 2 fame damage with 1.5x perfect multiplier.
 8,Focused Strike,Fame,1,2,SingleEnemy,1,1.5,True,Deals 1 fame damage with 1.5x perfect multiplier. Applies 1 stack of focus.
 9,Strong Swing,Power,4,5,SingleEnemy,5,2,True,Deals 5 power damage with 2x perfect multiplier.
 10,Poke,Money,1,1,SingleEnemy,1,1.5,True,Deals 1 money damage with 1.5x perfect multiplier.
+11,Devistating Blow,Corruption,5,3,SingleEnemy,5,2.5,True,Deals 5 corruption damage with a 2.5x perfect multiplier.

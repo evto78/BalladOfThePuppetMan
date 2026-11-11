@@ -292,7 +292,8 @@ public class PlayerActionManager : MonoBehaviour
             case 8: StandardAttack(attackEvent, skill, perfectMult); AddStatusEffect(0, Mathf.CeilToInt(skill.intensity * perfectMult)); break; //Focused Strike
             case 9: StandardAttack(attackEvent, skill, perfectMult); break; //Strong Swing
             case 10: StandardAttack(attackEvent, skill, perfectMult); break; //Poke
-            case 11: StandardAttack(attackEvent, skill, perfectMult); break; //KILL
+            case 11: StandardAttack(attackEvent, skill, perfectMult); break; //Devistating Blow
+            case 12: StandardAttack(attackEvent, skill, perfectMult); break; //KILL
         }
     }
 

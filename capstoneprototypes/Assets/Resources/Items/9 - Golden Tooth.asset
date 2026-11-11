@@ -15,6 +15,6 @@ MonoBehaviour:
   id: 9
   cost: 25
   isRare: 0
-  sprite: {fileID: -1790768876, guid: 444d67eac5ff5d44c8d8850f34c3864d, type: 3}
+  sprite: {fileID: 0}
   itemName: Golden Tooth
-  itemDescription: Perfect attacks & perries give you 1 memory.
+  itemDescription: Perfect attacks & parries give you 1 memory.
