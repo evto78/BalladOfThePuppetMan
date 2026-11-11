@@ -258,6 +258,7 @@ public class PlayerActionManager : MonoBehaviour
     {
         if (parryActive)
         {
+            attackEvent.removed = true;
             ParryLanded();
         }
         else
@@ -275,6 +276,7 @@ public class PlayerActionManager : MonoBehaviour
         if (skill.perfectable && perfectActive)
         {
             PerfectLanded();
+            attackEvent.removed = true;
             perfectMult = skill.perfectMultiplier;
         }
 
@@ -435,12 +437,14 @@ public class PlayerActionManager : MonoBehaviour
     {
         parryLanded = true;
         foreach (ParticleSystem ps in parryParticles) { ps.Stop(); ps.Play(); }
+        timeline.HitParticles();
     }
 
     void PerfectLanded()
     {
         perfectLanded = true;
         foreach (ParticleSystem ps in perfectParticles) { ps.Stop(); ps.Play(); }
+        timeline.HitParticles();
     }
 
     //Ran when a healing room is selected

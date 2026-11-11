@@ -47,6 +47,7 @@ public class TimelineManager : MonoBehaviour
     public Sprite beatMarker;
     public Sprite halfBeatMarker;
     List<MarkerObject> beatMarkers = new List<MarkerObject>();
+    public List<ParticleSystem> hitParticles;
 
     [Header("Functional")]
     public List<TimelineEvent> eventList;
@@ -101,6 +102,12 @@ public class TimelineManager : MonoBehaviour
     }
     void UpdateVisuals()
     {
+        if (combatActive)
+        {
+            transform.GetChild(0).gameObject.SetActive(combatPause);
+            liveTimelineGAnim.transform.GetChild(0).gameObject.SetActive(!combatPause);
+        }
+
         if (combatActive) { spotlight.SetActive(combatPause); } else { spotlight.SetActive(false); }
 
         if (fillPixelByPixel)
@@ -136,6 +143,13 @@ public class TimelineManager : MonoBehaviour
                     marker.UpdateBobbing(0f);
                 }
             }
+        }
+    }
+    public void HitParticles()
+    {
+        foreach(ParticleSystem ps in hitParticles)
+        {
+            ps.Play();
         }
     }
     //Probably the most frame expensive method in this whole game... sorting a list every frame? are you crazy?    <- me talking to myself btw
