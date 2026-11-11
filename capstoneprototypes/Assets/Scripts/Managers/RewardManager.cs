@@ -6,24 +6,39 @@ using UnityEngine.UI;
 
 public class RewardManager : MonoBehaviour
 {
-    public GameObject[] combatSkillUI;
     public PlayerSkill[] skills;
     public DataList dl;
     public TextMeshProUGUI[] rewardText;
     public Button[] skillReplacement, rewards;
     public GameObject skipButton;
     public PlayerActionManager player;
+    public TimelineManager timeline;
 
     PlayerSkill selectedSkill;
     GameDataManager gdm;
+    bool buttonsEnabled = true;
+    
 
 
-    public TextMeshProUGUI[] currentSkillText;
-    public TextMeshProUGUI[] currentSkillEnergy;
+    //public TextMeshProUGUI[] currentSkillText;
+    //public TextMeshProUGUI[] currentSkillEnergy;
 
     private void Awake()
     {
         gdm = GameObject.Find("GameDataManager").GetComponent<GameDataManager>();
+    }
+
+    private void Update()
+    {
+        if (gdm.gameState == GameDataManager.State.RewardSelection && buttonsEnabled)
+        {
+            for (int i = 0; i < skillReplacement.Length; i++)
+            {
+                skillReplacement[i].interactable = false;
+            }
+            buttonsEnabled = false;
+            Debug.Log("Buttons disabled");
+        }
     }
 
     public void RandomizeRewards()
@@ -33,12 +48,7 @@ public class RewardManager : MonoBehaviour
             rewards[y].interactable = true;
         }
         skipButton.SetActive(true);
-
-        for (int z = 0; z < combatSkillUI.Length; z++)
-        {
-            combatSkillUI[z].SetActive(false);
-        }
-        UpdatePlayerSkillsUI();
+        //UpdatePlayerSkillsUI();
 
         //When we have more skills, this will include logic to make sure duplicates cannot appear
         for (int i = 0; i < skills.Length; i++)
@@ -109,33 +119,36 @@ public class RewardManager : MonoBehaviour
 
     public void ReplaceSkill(int slotIndex)
     {
-        player.equippedSkills[slotIndex] = selectedSkill;
+        if (!timeline.combatActive) {
+            player.equippedSkills[slotIndex] = selectedSkill;
 
-        UpdatePlayerSkillsUI();
+            //UpdatePlayerSkillsUI();
 
-       for (int i = 0; i < skillReplacement.Length; i++)
-        {
-            skillReplacement[i].interactable = false;
-        }
+            for (int i = 0; i < skillReplacement.Length; i++)
+            {
+                skillReplacement[i].interactable = false;
+            }
 
-        SkipSelection();
-    }
-
-    public void UpdatePlayerSkillsUI()
-    {
-        for (int i = 0; i < player.equippedSkills.Count; i++)
-        {
-            currentSkillText[i].text = player.equippedSkills[i].skillName;
-            currentSkillEnergy[i].text = $"{player.equippedSkills[i].cost}";
+            SkipSelection();
         }
     }
+
+    //public void UpdatePlayerSkillsUI()
+    //{
+    //    for (int i = 0; i < player.equippedSkills.Count; i++)
+    //    {
+    //        currentSkillText[i].text = player.equippedSkills[i].skillName;
+    //        currentSkillEnergy[i].text = $"{player.equippedSkills[i].cost}";
+    //    }
+    //}
 
     public void SkipSelection()
     {
-        gdm.ChangeState(GameDataManager.State.RoomSelection);
-        for (int z = 0; z < combatSkillUI.Length; z++)
+        for (int i = 0; i < skillReplacement.Length; i++)
         {
-            combatSkillUI[z].SetActive(true);
+            skillReplacement[i].interactable = true;
         }
+        buttonsEnabled = true;
+        gdm.ChangeState(GameDataManager.State.RoomSelection);
     }
 }

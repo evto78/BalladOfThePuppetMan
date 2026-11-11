@@ -119,10 +119,13 @@ public class SkillSelectionManager : MonoBehaviour
             btn.elementIcon.sprite = skillElements[element];
             btn.img.sprite = skillSprites[element];
 
-            if (player.equippedSkills[i].cost > player.energy) 
-            { btn.GetComponentInChildren<Button>().interactable = false; btn.energyIcon.SetActive(false); } 
-            else 
-            { btn.GetComponentInChildren<Button>().interactable = true; btn.energyIcon.SetActive(true); }
+            if (gdm.gameState != GameDataManager.State.RewardSelection)
+            {
+                if (player.equippedSkills[i].cost > player.energy)
+                { btn.GetComponentInChildren<Button>().interactable = false; btn.energyIcon.SetActive(false); }
+                else
+                { btn.GetComponentInChildren<Button>().interactable = true; btn.energyIcon.SetActive(true); }
+            }
 
             if (targetingSkill == i) 
             { 
