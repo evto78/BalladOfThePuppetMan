@@ -74,3 +74,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7605cae6e67cdcc489568af9152c4884, type: 2}
   allStatusEffects:
   - {fileID: 11400000, guid: 09c1e903da82d2d4a8dbb0e8d7ea0e72, type: 2}
+  itemSprites:
+  - {fileID: 0}
+  - {fileID: 994816554, guid: 444d67eac5ff5d44c8d8850f34c3864d, type: 3}
+  - {fileID: 1134014914, guid: 444d67eac5ff5d44c8d8850f34c3864d, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 1130619758, guid: 444d67eac5ff5d44c8d8850f34c3864d, type: 3}
+  - {fileID: -76699755, guid: 444d67eac5ff5d44c8d8850f34c3864d, type: 3}
+  - {fileID: -580280943, guid: 444d67eac5ff5d44c8d8850f34c3864d, type: 3}
+  - {fileID: 371065800, guid: 444d67eac5ff5d44c8d8850f34c3864d, type: 3}
+  - {fileID: -1790768876, guid: 444d67eac5ff5d44c8d8850f34c3864d, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 1410559377, guid: 444d67eac5ff5d44c8d8850f34c3864d, type: 3}
+  - {fileID: 0}
+  - {fileID: -2086596500, guid: 444d67eac5ff5d44c8d8850f34c3864d, type: 3}
