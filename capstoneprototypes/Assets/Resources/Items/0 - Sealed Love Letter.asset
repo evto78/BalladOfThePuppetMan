@@ -15,6 +15,6 @@ MonoBehaviour:
   id: 0
   cost: 25
   isRare: 0
-  sprite: {fileID: 21300000, guid: 4ae5074efc4d61540993f44ccfb2a561, type: 3}
+  sprite: {fileID: 0}
   itemName: Sealed Love Letter
   itemDescription: If you end a turn without taking any damage, Heal 2 hp.
