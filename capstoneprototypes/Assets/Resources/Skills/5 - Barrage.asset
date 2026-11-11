@@ -20,5 +20,5 @@ MonoBehaviour:
   perfectMultiplier: 1.5
   elementalType: 0
   skillName: Barrage
-  skillDescription: Deals 1 red damage with 1.5x perfect multiplier.
+  skillDescription: Deals 1 power damage with 1.5x perfect multiplier.
   perfectable: 1
