@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e4c19e84dd55b34c8f809c0a669f1bd, type: 3}
-  m_Name: 11 - KILL
+  m_Name: 12 - KILL
   m_EditorClassIdentifier: 
-  id: 11
+  id: 12
   cost: 1
   prepTime: 0.5
   target: 2
