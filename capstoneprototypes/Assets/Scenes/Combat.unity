@@ -25055,6 +25055,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 422709667}
     - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
+      propertyPath: damageIndicatorPrefab
+      value: 
+      objectReference: {fileID: 9204953870382014862, guid: ab899e5d3d06d66478a7e62d5c8f046f, type: 3}
+    - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
       propertyPath: negativeMemoriesColor.a
       value: 1
       objectReference: {fileID: 0}

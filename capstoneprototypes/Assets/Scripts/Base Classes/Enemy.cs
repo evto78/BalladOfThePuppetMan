@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //Base class for all enemies
@@ -56,6 +57,9 @@ public class Enemy : MonoBehaviour
     int curRound;
     int curLoop; //Number of times that the action sequence has looped this round.
     public List<int> patternByRound;
+
+    [Header("References")]
+    public GameObject damageIndicatorPrefab;
 
     private void Awake()
     {
@@ -286,6 +290,9 @@ public class Enemy : MonoBehaviour
         }
 
         hp -= damage;
+        GameObject damageIndicatorObj = Instantiate(damageIndicatorPrefab, new Vector3(transform.position.x - 0.75f, transform.position.y, transform.position.z), Quaternion.identity);
+        DamageIndicator damageIndicator = damageIndicatorObj.GetComponent<DamageIndicator>();
+        damageIndicator.SetDamage(damage);
 
         if (hp <= 0) { Die(); }
     }
