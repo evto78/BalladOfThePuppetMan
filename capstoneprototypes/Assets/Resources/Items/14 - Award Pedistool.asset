@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 14
   cost: 25
   isRare: 0
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 4ae5074efc4d61540993f44ccfb2a561, type: 3}
   itemName: Award Pedistool
   itemDescription: Your first equipped skill costs 1 less energy to use. Your third
     equipped skill costs 1 more energy to use.
