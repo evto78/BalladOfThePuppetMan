@@ -20,5 +20,5 @@ MonoBehaviour:
   perfectMultiplier: 2
   elementalType: 0
   skillName: Strong Swing
-  skillDescription: Deals 5 red damage with 2x perfect multiplier.
+  skillDescription: Deals 5 power damage with 2x perfect multiplier.
   perfectable: 1

@@ -20,5 +20,5 @@ MonoBehaviour:
   perfectMultiplier: 1.5
   elementalType: 1
   skillName: Poke
-  skillDescription: Deals 1 green damage with 1.5x perfect multiplier.
+  skillDescription: Deals 1 money damage with 1.5x perfect multiplier.
   perfectable: 1

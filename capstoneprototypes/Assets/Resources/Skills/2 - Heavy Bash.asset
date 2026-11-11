@@ -20,5 +20,5 @@ MonoBehaviour:
   perfectMultiplier: 2
   elementalType: 4
   skillName: Heavy Bash
-  skillDescription: Deals 6 neutral damage with 2x perfect multiplier.
+  skillDescription: Deals 6 purity damage with 2x perfect multiplier.
   perfectable: 1

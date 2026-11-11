@@ -20,5 +20,5 @@ MonoBehaviour:
   perfectMultiplier: 1.5
   elementalType: 2
   skillName: Calm Punch
-  skillDescription: Deals 2 blue damage with 1.5x perfect multiplier.
+  skillDescription: Deals 2 fame damage with 1.5x perfect multiplier.
   perfectable: 1

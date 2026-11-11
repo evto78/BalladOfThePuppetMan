@@ -20,5 +20,5 @@ MonoBehaviour:
   perfectMultiplier: 1
   elementalType: 4
   skillName: Strike
-  skillDescription: Deals 1 neutral damage with no perfect multiplier.
+  skillDescription: Deals 1 purity damage with no perfect multiplier.
   perfectable: 0
