@@ -15,6 +15,6 @@ MonoBehaviour:
   id: 15
   cost: 50
   isRare: 1
-  sprite: {fileID: 0}
+  sprite: {fileID: -2086596500, guid: 444d67eac5ff5d44c8d8850f34c3864d, type: 3}
   itemName: Focus Pills
   itemDescription: Holding middle click slows down time by 1.5x.
