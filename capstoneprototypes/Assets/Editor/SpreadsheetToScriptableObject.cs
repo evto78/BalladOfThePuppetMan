@@ -363,7 +363,12 @@ public class SpreadsheetToScriptableObject
                 item.isRare = false;
             }
             item.itemDescription = splitData[4];
-            if (dataList.itemSprites[i] != null) { item.sprite = dataList.itemSprites[i]; }
+
+            int spriteIndex = i - 1;
+            if (spriteIndex < dataList.itemSprites.Count && dataList.itemSprites[spriteIndex] != null)
+            {
+                item.sprite = dataList.itemSprites[spriteIndex];
+            }
 
             string fileName = $"{item.id} - {item.itemName}";
             AssetDatabase.CreateAsset(item, $"Assets/Resources/Items/{fileName}.asset");
