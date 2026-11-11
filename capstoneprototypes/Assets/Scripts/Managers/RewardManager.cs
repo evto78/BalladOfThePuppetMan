@@ -9,19 +9,20 @@ public class RewardManager : MonoBehaviour
     public PlayerSkill[] skills;
     public DataList dl;
     public TextMeshProUGUI[] rewardText;
+    public TextMeshProUGUI[] rewardEnergy;
+    public Image[] rewardElement;
     public Button[] skillReplacement, rewards;
     public GameObject skipButton;
     public PlayerActionManager player;
     public TimelineManager timeline;
+    public GameObject timelineObject;
 
     PlayerSkill selectedSkill;
     GameDataManager gdm;
     bool buttonsEnabled = true;
+
+    public Sprite[] buttonSprites, elementSprites;
     
-
-
-    //public TextMeshProUGUI[] currentSkillText;
-    //public TextMeshProUGUI[] currentSkillEnergy;
 
     private void Awake()
     {
@@ -35,9 +36,9 @@ public class RewardManager : MonoBehaviour
             for (int i = 0; i < skillReplacement.Length; i++)
             {
                 skillReplacement[i].interactable = false;
+                timelineObject.SetActive(false);
             }
             buttonsEnabled = false;
-            Debug.Log("Buttons disabled");
         }
     }
 
@@ -48,9 +49,7 @@ public class RewardManager : MonoBehaviour
             rewards[y].interactable = true;
         }
         skipButton.SetActive(true);
-        //UpdatePlayerSkillsUI();
 
-        //When we have more skills, this will include logic to make sure duplicates cannot appear
         for (int i = 0; i < skills.Length; i++)
         {
             bool duplicate = true;
@@ -94,6 +93,30 @@ public class RewardManager : MonoBehaviour
             }
             
             rewardText[i].text = skills[i].skillName;
+            rewardEnergy[i].text = skills[i].cost.ToString();
+            switch (skills[i].elementalType)
+            {
+                case ElementalTypes.Power:
+                    rewardElement[i].sprite = elementSprites[0];
+                    rewards[i].image.sprite = buttonSprites[0];
+                    break;
+                case ElementalTypes.Money:
+                    rewardElement[i].sprite = elementSprites[1];
+                    rewards[i].image.sprite = buttonSprites[1];
+                    break;
+                case ElementalTypes.Fame:
+                    rewardElement[i].sprite = elementSprites[2];
+                    rewards[i].image.sprite = buttonSprites[2];
+                    break;
+                case ElementalTypes.Corruption:
+                    rewardElement[i].sprite = elementSprites[3];
+                    rewards[i].image.sprite = buttonSprites[3];
+                    break;
+                case ElementalTypes.Purity:
+                    rewardElement[i].sprite = elementSprites[4];
+                    rewards[i].image.sprite = buttonSprites[4];
+                    break;
+            }
         }
     }
 
@@ -133,15 +156,6 @@ public class RewardManager : MonoBehaviour
         }
     }
 
-    //public void UpdatePlayerSkillsUI()
-    //{
-    //    for (int i = 0; i < player.equippedSkills.Count; i++)
-    //    {
-    //        currentSkillText[i].text = player.equippedSkills[i].skillName;
-    //        currentSkillEnergy[i].text = $"{player.equippedSkills[i].cost}";
-    //    }
-    //}
-
     public void SkipSelection()
     {
         for (int i = 0; i < skillReplacement.Length; i++)
@@ -149,6 +163,7 @@ public class RewardManager : MonoBehaviour
             skillReplacement[i].interactable = true;
         }
         buttonsEnabled = true;
+        timelineObject.SetActive(true);
         gdm.ChangeState(GameDataManager.State.RoomSelection);
     }
 }
