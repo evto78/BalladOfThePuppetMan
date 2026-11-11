@@ -9,6 +9,7 @@ public class EnemySpriteAnimator : MonoBehaviour
     public List<Sprite> preAttackAnim;
     public List<Sprite> postAttackAnim;
     public List<Sprite> hurtAnim;
+    public List<List<Sprite>> additonalAnims;
     public float idleAnimSpeed;
 
     [Header("References")]

@@ -137,6 +137,14 @@ public class Enemy : MonoBehaviour
         anim.preAttackAnim = spriteLib.globalSpriteList[myData.id].anims[1].animFrames;
         anim.postAttackAnim = spriteLib.globalSpriteList[myData.id].anims[2].animFrames;
         anim.hurtAnim = spriteLib.globalSpriteList[myData.id].anims[3].animFrames;
+        anim.additonalAnims = new List<List<Sprite>>();
+        if (spriteLib.globalSpriteList[myData.id].anims.Count > 4)
+        {
+            for (int i = 4; i < spriteLib.globalSpriteList[myData.id].anims.Count; i++)
+            {
+                anim.additonalAnims.Add(spriteLib.globalSpriteList[myData.id].anims[i].animFrames);
+            }
+        }
     }
 
     private void OnDisable()
