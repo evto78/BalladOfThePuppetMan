@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour
         public float delayAfterAction; //How long should this enemy wait after doing this action?
 
         public bool playAnim; //Should this action change the enemies sprite at all.
+        public int animOverrideBefore = -1; //What Animation should play before the action. Ignored when the value is -1
+        public int animOverrideAfter = -1; //What Animation should play after the action. Ignored when the value is -1
         //Make sure that the wind up and wind down fits within the delay before after the action. 
         //Set both to 0 if you don't want an animaiton change \/
         public float animWindupStart; //The amount of time before the end of the "delayBeforeAction" where the enemy changes their sprite to prepare for an attack.

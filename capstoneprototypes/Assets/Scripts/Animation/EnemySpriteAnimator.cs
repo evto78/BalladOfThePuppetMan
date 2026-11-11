@@ -100,7 +100,11 @@ public class EnemySpriteAnimator : MonoBehaviour
             animStart = action.delayBeforeAction - action.animWindupStart;
             animEnd = action.delayBeforeAction;
 
-            if (time >= animStart && time <= animEnd) { activeAnim = preAttackAnim; }
+            if (time >= animStart && time <= animEnd) 
+            {
+                if (action.animOverrideBefore != -1) { activeAnim = additonalAnims[action.animOverrideBefore]; }
+                else { activeAnim = preAttackAnim; }
+            }
             else { return; }
         }
         else if (time < action.delayBeforeAction + action.animWinddownEnd)
@@ -108,7 +112,11 @@ public class EnemySpriteAnimator : MonoBehaviour
             animStart = action.delayBeforeAction;
             animEnd = action.delayBeforeAction + action.animWinddownEnd;
 
-            if (time >= animStart && time <= animEnd) { activeAnim = postAttackAnim; }
+            if (time >= animStart && time <= animEnd) 
+            {
+                if (action.animOverrideAfter != -1) { activeAnim = additonalAnims[action.animOverrideAfter]; }
+                else { activeAnim = postAttackAnim; }
+            }
             else { return; }
         }
         else { return; } //No proper animation found?
