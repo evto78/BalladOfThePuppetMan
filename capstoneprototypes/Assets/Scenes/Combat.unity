@@ -16483,6 +16483,7 @@ MonoBehaviour:
   player: {fileID: 1191142449884842653}
   timeline: {fileID: 238459326}
   timelineObject: {fileID: 238459323}
+  liveTimelineObject: {fileID: 124426489}
   buttonSprites:
   - {fileID: -1776478168, guid: f9e899e79b7973a4782b8d44c03af610, type: 3}
   - {fileID: -1583564214, guid: f9e899e79b7973a4782b8d44c03af610, type: 3}
