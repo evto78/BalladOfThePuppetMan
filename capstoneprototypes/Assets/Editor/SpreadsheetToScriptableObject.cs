@@ -152,7 +152,9 @@ public class SpreadsheetToScriptableObject
             enemy.enemyName = enemySplitData[1];
             enemy.type = Enum.Parse<ElementalTypes>(enemySplitData[2]);
             enemy.maxHP = int.Parse(enemySplitData[3]);
-            enemy.enemyDescription = enemySplitData[5];
+            enemy.animOverrideBefore = int.Parse(enemySplitData[5]);
+            enemy.animOverrideAfter = int.Parse(enemySplitData[6]);
+            enemy.enemyDescription = enemySplitData[7];
 
             string[] patternByRoundSplitData = enemySplitData[4].Split('-');
             for (int j = 0; j < patternByRoundSplitData.Length; j++)

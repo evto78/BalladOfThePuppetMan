@@ -11,6 +11,8 @@ public class EnemyData : ScriptableObject
     public ElementalTypes type;
     public List<Enemy.AttackPattern> attackPatterns = new List<Enemy.AttackPattern>();
     public List<int> patternByRound = new List<int>();
+    public int animOverrideBefore;
+    public int animOverrideAfter;
 
     [Header("Flavor")]
     public string enemyName;
