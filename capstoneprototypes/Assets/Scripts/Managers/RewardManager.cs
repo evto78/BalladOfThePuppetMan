@@ -15,7 +15,7 @@ public class RewardManager : MonoBehaviour
     public GameObject skipButton;
     public PlayerActionManager player;
     public TimelineManager timeline;
-    public GameObject timelineObject;
+    public GameObject timelineObject, liveTimelineObject;
 
     PlayerSkill selectedSkill;
     GameDataManager gdm;
@@ -37,6 +37,7 @@ public class RewardManager : MonoBehaviour
             {
                 skillReplacement[i].interactable = false;
                 timelineObject.SetActive(false);
+                liveTimelineObject.SetActive(false);
             }
             buttonsEnabled = false;
         }
