@@ -12,7 +12,7 @@ public class GameSettings : MonoBehaviour
 
     private void Start()
     {
-        isFullscreen.isOn = PlayerPrefs.GetInt("Fullscreen") == 1;
+        isFullscreen.isOn = PlayerPrefs.GetInt("Fullscreen", 1) == 1;
         Screen.fullScreen = isFullscreen.isOn;
     }
 

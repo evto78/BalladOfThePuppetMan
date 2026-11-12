@@ -88,10 +88,10 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        masterVolSlider = PlayerPrefs.GetInt("MasterVolume");
-        musicVolSlider = PlayerPrefs.GetInt("MusicVolume");
-        effectVolSlider = PlayerPrefs.GetInt("EffectVolume");
-        uiVolSlider = PlayerPrefs.GetInt("UIVolume");
+        masterVolSlider = PlayerPrefs.GetInt("MasterVolume", 20);
+        musicVolSlider = PlayerPrefs.GetInt("MusicVolume", 20);
+        effectVolSlider = PlayerPrefs.GetInt("EffectVolume", 20);
+        uiVolSlider = PlayerPrefs.GetInt("UIVolume", 20);
 
         masterVol = masterVolSlider / 20f;
         musicVol = musicVolSlider / 20f;
