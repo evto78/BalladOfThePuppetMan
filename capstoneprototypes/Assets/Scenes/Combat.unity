@@ -47311,11 +47311,11 @@ PrefabInstance:
     - target: {fileID: 1347452795832196805, guid: 1f4c0f0d2401d0941aa011fc17fe0a9d, type: 3}
       propertyPath: startingSkills.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: a869c62217e5ae94cb906ee8944e808b, type: 2}
+      objectReference: {fileID: 11400000, guid: cffceb8e2c519c04597e536c484c1eef, type: 2}
     - target: {fileID: 1347452795832196805, guid: 1f4c0f0d2401d0941aa011fc17fe0a9d, type: 3}
       propertyPath: startingSkills.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: f0f93e43decb1b94ca1c75b227cbaca3, type: 2}
+      objectReference: {fileID: 11400000, guid: cffceb8e2c519c04597e536c484c1eef, type: 2}
     - target: {fileID: 8586653378842630664, guid: 1f4c0f0d2401d0941aa011fc17fe0a9d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.9124813
