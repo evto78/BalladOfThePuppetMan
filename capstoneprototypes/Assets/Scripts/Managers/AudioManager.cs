@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -15,6 +17,16 @@ public class AudioManager : MonoBehaviour
     public float musicVol;
     public float effectVol;
     public float uiVol;
+
+    int masterVolSlider = 2;
+    int musicVolSlider = 10;
+    int effectVolSlider = 10;
+    int uiVolSlider = 15;
+
+    public Image[] masterVolImage;
+    public Image[] musicVolImage;
+    public Image[] effectVolImage;
+    public Image[] uiVolImage;
 
     public GameObject audioSourcePrefab;
     public Transform unactiveGroup;
@@ -73,6 +85,22 @@ public class AudioManager : MonoBehaviour
         return sortedItemData;
     }
     List<SFXSource> deleteList;
+
+    private void Start()
+    {
+        masterVolSlider = PlayerPrefs.GetInt("MasterVolume");
+        musicVolSlider = PlayerPrefs.GetInt("MusicVolume");
+        effectVolSlider = PlayerPrefs.GetInt("EffectVolume");
+        uiVolSlider = PlayerPrefs.GetInt("UIVolume");
+
+        masterVol = masterVolSlider / 20f;
+        musicVol = musicVolSlider / 20f;
+        effectVol = effectVolSlider / 20f;
+        uiVol = uiVolSlider / 20f;
+
+        UpdateVolumeImages();
+    }
+
     private void Update()
     {
         //Delete all sound effects that are not currently playing.
@@ -155,5 +183,108 @@ public class AudioManager : MonoBehaviour
     public void StopMusic()
     {
         musicSource.source.Stop();
+    }
+
+    public void ChangeMasterVolume(int valueChange)
+    {
+        masterVolSlider += valueChange;
+        masterVolSlider = Mathf.Clamp(masterVolSlider, 0, 20);
+        masterVol = masterVolSlider / 20f;
+
+        PlayerPrefs.SetInt("MasterVolume", masterVolSlider);
+        PlayerPrefs.Save();
+
+        UpdateVolumeImages();
+
+    }
+
+    public void ChangeMusicVolume(int valueChange)
+    {
+        musicVolSlider += valueChange;
+        musicVolSlider = Mathf.Clamp(musicVolSlider, 0, 20);
+        musicVol = musicVolSlider / 20f;
+
+        PlayerPrefs.SetInt("MusicVolume", musicVolSlider);
+        PlayerPrefs.Save();
+
+        UpdateVolumeImages();
+
+    }
+
+    public void ChangeEffectVolume(int valueChange)
+    {
+        effectVolSlider += valueChange;
+        effectVolSlider = Mathf.Clamp(effectVolSlider, 0, 20);
+        effectVol = effectVolSlider / 20f;
+
+        PlayerPrefs.SetInt("EffectVolume", effectVolSlider);
+        PlayerPrefs.Save();
+
+        UpdateVolumeImages();
+
+    }
+
+    public void ChangeUIVolume(int valueChange)
+    {
+        uiVolSlider += valueChange;
+        uiVolSlider = Mathf.Clamp(uiVolSlider, 0, 20);
+        uiVol = uiVolSlider / 20f;
+
+        PlayerPrefs.SetInt("UIVolume", uiVolSlider);
+        PlayerPrefs.Save();
+
+        UpdateVolumeImages();
+
+    }
+
+    void UpdateVolumeImages()
+    {
+        for (int i = 0; i < masterVolImage.Length; i++)
+        {
+            if (masterVolSlider >= i + 1)
+            {
+                masterVolImage[i].color = Color.white;
+            }
+            else
+            {
+                masterVolImage[i].color = Color.grey;
+            }
+        }
+
+        for (int i = 0; i < musicVolImage.Length; i++)
+        {
+            if (musicVolSlider >= i + 1)
+            {
+                musicVolImage[i].color = Color.white;
+            }
+            else
+            {
+                musicVolImage[i].color = Color.grey;
+            }
+        }
+
+        for (int i = 0; i < effectVolImage.Length; i++)
+        {
+            if (effectVolSlider >= i + 1)
+            {
+                effectVolImage[i].color = Color.white;
+            }
+            else
+            {
+                effectVolImage[i].color = Color.grey;
+            }
+        }
+
+        for (int i = 0; i < uiVolImage.Length; i++)
+        {
+            if (uiVolSlider >= i + 1)
+            {
+                uiVolImage[i].color = Color.white;
+            }
+            else
+            {
+                uiVolImage[i].color = Color.grey;
+            }
+        }
     }
 }
