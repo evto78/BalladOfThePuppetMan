@@ -189,6 +189,12 @@ public class TimelineManager : MonoBehaviour
     }
     void UpdateLiveTimeline()
     {
+        if (!combatActive)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+            liveTimelineGAnim.transform.GetChild(0).gameObject.SetActive(false);
+        }
+
         UpdateSortedEventList();
 
         while (liveMarkers.Count > sortedEventList.Count) { if (liveMarkers[0].gameObject != null) { Destroy(liveMarkers[0].gameObject); } liveMarkers.RemoveAt(0); }

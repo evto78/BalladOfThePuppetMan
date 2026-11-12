@@ -16482,8 +16482,8 @@ MonoBehaviour:
   skipButton: {fileID: 2061291280}
   player: {fileID: 1191142449884842653}
   timeline: {fileID: 238459326}
-  timelineObject: {fileID: 238459323}
-  liveTimelineObject: {fileID: 124426489}
+  timelineObject: {fileID: 1613218061}
+  liveTimelineObject: {fileID: 86838765}
   buttonSprites:
   - {fileID: -1776478168, guid: f9e899e79b7973a4782b8d44c03af610, type: 3}
   - {fileID: -1583564214, guid: f9e899e79b7973a4782b8d44c03af610, type: 3}
@@ -47312,11 +47312,11 @@ PrefabInstance:
     - target: {fileID: 1347452795832196805, guid: 1f4c0f0d2401d0941aa011fc17fe0a9d, type: 3}
       propertyPath: startingSkills.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: cffceb8e2c519c04597e536c484c1eef, type: 2}
+      objectReference: {fileID: 11400000, guid: a869c62217e5ae94cb906ee8944e808b, type: 2}
     - target: {fileID: 1347452795832196805, guid: 1f4c0f0d2401d0941aa011fc17fe0a9d, type: 3}
       propertyPath: startingSkills.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: cffceb8e2c519c04597e536c484c1eef, type: 2}
+      objectReference: {fileID: 11400000, guid: f0f93e43decb1b94ca1c75b227cbaca3, type: 2}
     - target: {fileID: 8586653378842630664, guid: 1f4c0f0d2401d0941aa011fc17fe0a9d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.9124813

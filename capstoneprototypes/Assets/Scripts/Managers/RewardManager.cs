@@ -165,6 +165,7 @@ public class RewardManager : MonoBehaviour
         }
         buttonsEnabled = true;
         timelineObject.SetActive(true);
+        liveTimelineObject.SetActive(true);
         gdm.ChangeState(GameDataManager.State.RoomSelection);
     }
 }
