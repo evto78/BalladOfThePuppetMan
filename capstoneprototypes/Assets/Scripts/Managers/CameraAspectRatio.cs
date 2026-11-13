@@ -33,18 +33,5 @@ public class CameraAspectRatio : MonoBehaviour
 
             cam.rect = newRect;
         }
-        else
-        {
-            float scaleWidth = 1f / scaleHeight;
-
-            Rect newRect = cam.rect;
-
-            newRect.width = scaleHeight;
-            newRect.height = 1f;
-            newRect.x = (1f - scaleWidth) / 2f;
-            newRect.y = 0;
-
-            cam.rect = newRect;
-        }
     }
 }
