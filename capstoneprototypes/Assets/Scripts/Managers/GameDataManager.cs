@@ -8,6 +8,7 @@ public class GameDataManager : MonoBehaviour
     [Header("Functional")]
     public List<ItemObject> itemData;
     public List<PlayerSkill> startingSkills;
+    public DataList dl;
     public enum State { StartGame, StartCombat, TurnBasedCombat, RealTimeCombat, CombatEnd, RewardSelection, RoomSelection, GameOver, Shop}
     public State gameState = State.StartGame;
     public int areaID; // The ID number of the current area, since we only have suburbia rn, this should only ever be 0.
@@ -31,6 +32,14 @@ public class GameDataManager : MonoBehaviour
     private void Start()
     {
         ChangeState(State.StartGame);
+
+        for (int i = 0; i < startingSkills.Count; i++)
+        {
+            if (startingSkills[i] == null)
+            {
+                startingSkills[i] = dl.allPlayerSkills[i];
+            }
+        }
     }
 
     public void ChangeState(State newState)
