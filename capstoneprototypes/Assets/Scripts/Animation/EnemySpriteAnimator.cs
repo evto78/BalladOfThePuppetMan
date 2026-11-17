@@ -15,6 +15,7 @@ public class EnemySpriteAnimator : MonoBehaviour
     [Header("References")]
     public SpriteRenderer sr;
     GameDataManager gdm;
+    Enemy enemyScript;
 
     float hurtTimer;
     float overrideIdleTimer;
@@ -24,6 +25,7 @@ public class EnemySpriteAnimator : MonoBehaviour
 
     private void Start()
     {
+        enemyScript = GetComponent<Enemy>();
         gdm = GameObject.Find("GameDataManager").GetComponent<GameDataManager>();
         sr.sprite = idleAnim[0];
         overrideIdleTimer = 0f;
