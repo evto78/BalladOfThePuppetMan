@@ -111,6 +111,20 @@ public class PlayerActionManager : MonoBehaviour
     {
         energy += 2;
         if (energy > maxEnergy) { energy = maxEnergy; }
+
+        List<StatusEffectInstance> deletedEffects = new List<StatusEffectInstance>();
+        foreach (StatusEffectInstance se in statEffects)
+        {
+            switch (se.data.id)
+            {
+                case 0:
+                    se.stacks--;
+                    if (se.stacks <= 0) { deletedEffects.Add(se); }
+                    break;
+            }
+        }
+        RemoveEffectsFromList(deletedEffects);
+
         timeSpent = 0f;
     }
 
@@ -324,6 +338,21 @@ public class PlayerActionManager : MonoBehaviour
 
     void StandardAttack(TimelineManager.TimelineEvent attackEvent, PlayerSkill skill, float perfectMult)
     {
+        float bonusMult = 1f;
+        List<StatusEffectInstance> deletedEffects = new List<StatusEffectInstance>();
+        foreach (StatusEffectInstance se in statEffects)
+        {
+            switch (se.data.id)
+            {
+                case 0:
+                    bonusMult = 1f + (0.5f * se.stacks);
+                    Debug.Log($"Focus Used \nBonus Mult: {bonusMult}");
+                    deletedEffects.Add(se);
+                    break;
+            }
+        }
+        RemoveEffectsFromList(deletedEffects);
+
         if (skill.target == PlayerSkill.TargetType.SingleEnemy)
         {
             //If enemy previously targeted is gone, aim for another enemy.
@@ -338,7 +367,7 @@ public class PlayerActionManager : MonoBehaviour
             //If no enemies are left alive, cancel the attack.
             else if (timeline.activeEnemies.Count == 0) { return; }
             //Do the attack.
-            attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType)));
+            attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * bonusMult * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType)));
         }
         else if (skill.target == PlayerSkill.TargetType.AllEnemies)
         {
@@ -439,6 +468,19 @@ public class PlayerActionManager : MonoBehaviour
         GameObject damageIndicatorObj = Instantiate(damageIndicatorPrefab, new Vector3(transform.position.x + 0.75f, transform.position.y, transform.position.z), Quaternion.identity);
         DamageIndicator damageIndicator = damageIndicatorObj.GetComponent<DamageIndicator>();
         damageIndicator.SetDamage(dmg);
+
+        List<StatusEffectInstance> deletedEffects = new List<StatusEffectInstance>();
+        foreach (StatusEffectInstance se in statEffects)
+        {
+            switch (se.data.id)
+            {
+                case 0:
+                    Debug.Log($"Focus LOST!");
+                    deletedEffects.Add(se);
+                    break;
+            }
+        }
+        RemoveEffectsFromList(deletedEffects);
 
         switch (dmg)
         {
@@ -541,5 +583,13 @@ public class PlayerActionManager : MonoBehaviour
 
         memoryAnimActive = false;
         yield return null;
+    }
+
+    void RemoveEffectsFromList(List<StatusEffectInstance> deleted)
+    {
+        foreach (StatusEffectInstance se in deleted)
+        {
+            statEffects.Remove(se);
+        }
     }
 }
