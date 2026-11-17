@@ -274,12 +274,12 @@ public class PlayerActionManager : MonoBehaviour
                 float tempTimer = parryWindow / 2f;
                 while (tempTimer > 0 && attackProcessed == false)
                 {
-                    if (parryActive) { attackProcessed = true; MonsterAttacked(onComingEvent, (parryWindow / 2f) - tempTimer); }
+                    if (parryActive) { attackProcessed = true; GurbyHeal(onComingEvent, (parryWindow / 2f) - tempTimer); }
                     tempTimer -= Time.deltaTime;
                     yield return new WaitForEndOfFrame();
                 }
                 //If the attack still wasn't parried, send it now.
-                if (!attackProcessed) { MonsterAttacked(onComingEvent, (parryWindow / 2f) - tempTimer); }
+                if (!attackProcessed) { GurbyHeal(onComingEvent, (parryWindow / 2f) - tempTimer); }
             }
         }
 
@@ -303,7 +303,16 @@ public class PlayerActionManager : MonoBehaviour
     //Gurby is about to heal the player
     public void GurbyHeal(TimelineManager.TimelineEvent healEvent, float delay)
     {
-
+        if (parryActive)
+        {
+            healEvent.removed = true;
+            TakeDamage(-healEvent.enemyAction.damage);
+            ParryLanded();
+        }
+        else
+        {
+            //TakeDamage(healEvent.enemyAction.damage);
+        }
     }
 
     //One of the players skills are about to activate

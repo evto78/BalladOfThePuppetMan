@@ -163,7 +163,9 @@ public class RoomSelection : MonoBehaviour
                 break; 
 
             case 2: //HEAL
-                gdm.player.HealRoom(); 
+                gdm.enemySpawnMan.SpawnEncounter(10); //Run encounter 10, wich is Gurby.
+                gdm.ChangeState(GameDataManager.State.StartCombat);
+                //gdm.player.HealRoom(); 
                 break;
 
             case 3: //COMBAT
