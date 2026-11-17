@@ -47324,7 +47324,7 @@ PrefabInstance:
     - target: {fileID: 1347452795832196805, guid: 1f4c0f0d2401d0941aa011fc17fe0a9d, type: 3}
       propertyPath: startingSkills.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: cffceb8e2c519c04597e536c484c1eef, type: 2}
+      objectReference: {fileID: 11400000, guid: 747ef5a16c96a4743a410afb104203e0, type: 2}
     - target: {fileID: 1347452795832196805, guid: 1f4c0f0d2401d0941aa011fc17fe0a9d, type: 3}
       propertyPath: startingSkills.Array.data[1]
       value: 
@@ -47336,7 +47336,7 @@ PrefabInstance:
     - target: {fileID: 1347452795832196805, guid: 1f4c0f0d2401d0941aa011fc17fe0a9d, type: 3}
       propertyPath: startingSkills.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: c1ca2c352ae34e44f8a331bf34df78c1, type: 2}
+      objectReference: {fileID: 11400000, guid: 9ad5b487061685e4c95105ebad1b3041, type: 2}
     - target: {fileID: 8586653378842630664, guid: 1f4c0f0d2401d0941aa011fc17fe0a9d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.9124813

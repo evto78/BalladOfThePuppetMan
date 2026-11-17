@@ -371,7 +371,7 @@ public class PlayerActionManager : MonoBehaviour
         }
         else if (skill.target == PlayerSkill.TargetType.AllEnemies)
         {
-            foreach (Enemy e in timeline.activeEnemies) { e.TakeDamage(Mathf.CeilToInt(skill.intensity * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); }
+            foreach (Enemy e in timeline.activeEnemies) { e.TakeDamage(Mathf.CeilToInt(skill.intensity * bonusMult * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); }
         }
     }
 
