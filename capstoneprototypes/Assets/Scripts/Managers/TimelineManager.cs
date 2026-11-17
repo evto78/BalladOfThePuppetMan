@@ -25,7 +25,7 @@ public class TimelineManager : MonoBehaviour
         public Enemy enemyTargeted;
         public GameObject skillBlock;
     }
-    public enum EventType { EnemyAtk, PlayerAtk, SpeedUp, SpeedDown, None, ReverseStart, ReverseEnd, PortalStart, PortalEnd }
+    public enum EventType { EnemyAtk, PlayerAtk, SpeedUp, SpeedDown, None, Heal, ReverseStart, ReverseEnd, PortalStart, PortalEnd }
 
     [Header("Timekeeping")]
     public float combatTime;
@@ -549,6 +549,7 @@ public class TimelineManager : MonoBehaviour
             case EventType.SpeedUp: combatSpeed += tEvent.enemyAction.damage; break;
             case EventType.SpeedDown: combatSpeed /= 1f+tEvent.enemyAction.damage; break;
             case EventType.None: break;
+            case EventType.Heal: player.StartCoroutine(player.ReactableEvent(tEvent)); break;
             case EventType.ReverseStart: break;
             case EventType.ReverseEnd: break;
             case EventType.PortalStart: break;

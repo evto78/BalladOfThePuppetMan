@@ -250,6 +250,25 @@ public class PlayerActionManager : MonoBehaviour
             }
         }
 
+        else if (onComingEvent.eventType == TimelineManager.EventType.Heal)
+        {
+            if (parryActive) { GurbyHeal(onComingEvent, 0f); }
+            else
+            {
+                //Otherwise, Wait for up to half of the parry window, and check again.
+                bool attackProcessed = false;
+                float tempTimer = parryWindow / 2f;
+                while (tempTimer > 0 && attackProcessed == false)
+                {
+                    if (parryActive) { attackProcessed = true; MonsterAttacked(onComingEvent, (parryWindow / 2f) - tempTimer); }
+                    tempTimer -= Time.deltaTime;
+                    yield return new WaitForEndOfFrame();
+                }
+                //If the attack still wasn't parried, send it now.
+                if (!attackProcessed) { MonsterAttacked(onComingEvent, (parryWindow / 2f) - tempTimer); }
+            }
+        }
+
         yield return null;
     }
 
@@ -265,6 +284,12 @@ public class PlayerActionManager : MonoBehaviour
         {
             TakeDamage(attackEvent.enemyAction.damage);
         }
+    }
+
+    //Gurby is about to heal the player
+    public void GurbyHeal(TimelineManager.TimelineEvent healEvent, float delay)
+    {
+
     }
 
     //One of the players skills are about to activate
