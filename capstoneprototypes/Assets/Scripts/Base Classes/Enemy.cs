@@ -297,6 +297,8 @@ public class Enemy : MonoBehaviour
     {
         anim.HurtAnim();
 
+        if (myData.id == 5 && recluseGaurd) { damage /= 4; if (damage < 1) { damage = 1; } }
+
         switch (damage)
         {
             case < 3: gAnim.StartCoroutine(gAnim.Shake(Vector3.right * 0.2f, 8f, 3f, -Vector3.one)); break;
