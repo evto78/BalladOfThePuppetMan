@@ -26,6 +26,8 @@ MonoBehaviour:
       delayBeforeAction: 1
       delayAfterAction: 0
       playAnim: 0
+      animOverrideBefore: -1
+      animOverrideAfter: -1
       animWindupStart: 0
       animWinddownEnd: 0
     - actionType: 0
@@ -34,8 +36,20 @@ MonoBehaviour:
       delayBeforeAction: 1
       delayAfterAction: 1
       playAnim: 1
+      animOverrideBefore: 0
+      animOverrideAfter: -1
       animWindupStart: 0.5
-      animWinddownEnd: 0.5
+      animWinddownEnd: 0
+    - actionType: 0
+      oneOff: 0
+      damage: 5
+      delayBeforeAction: 1
+      delayAfterAction: 1
+      playAnim: 1
+      animOverrideBefore: 1
+      animOverrideAfter: -1
+      animWindupStart: 0.5
+      animWinddownEnd: 0
   patternByRound: 00000000
   enemyName: Recluse
   enemyDescription: Recluse. Low HP, it can only take damage after it attacks.

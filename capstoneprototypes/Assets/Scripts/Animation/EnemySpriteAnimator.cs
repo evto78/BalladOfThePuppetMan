@@ -40,6 +40,10 @@ public class EnemySpriteAnimator : MonoBehaviour
 
         if (gdm != null && gdm.timeline.combatPause) { overrideIdleTimer -= Time.deltaTime; } //if its paused, stop overwriting idle anim
 
+        if (enemyScript == null) { enemyScript = GetComponent<Enemy>(); }
+
+        if (enemyScript.myData.id == 5) { hurtTimer = 0; } //if enemy is the recluse, ignore the hurt animations.
+
         if (overrideIdleTimer <= 0) 
         { 
             overrideIdleTimer = 0f; 
@@ -62,6 +66,13 @@ public class EnemySpriteAnimator : MonoBehaviour
                     activeAnimIndex = Mathf.FloorToInt((hurtTimer * 2f) * (hurtAnim.Count - 1));
                 }
             }
+        }
+
+        //if recluse, overwrite idle anims
+        if (enemyScript.myData.id == 5 && activeAnim == idleAnim)
+        {
+            if (enemyScript.recluseGaurd) { activeAnim = idleAnim; activeAnimIndex = 0; }
+            else { activeAnim = hurtAnim; activeAnimIndex = 0; }
         }
 
         //Set sprite to proper anim frame

@@ -26,6 +26,8 @@ MonoBehaviour:
       delayBeforeAction: 1.5
       delayAfterAction: 0.5
       playAnim: 1
+      animOverrideBefore: -1
+      animOverrideAfter: -1
       animWindupStart: 1
       animWinddownEnd: 0.25
   - timelineChangePriority: 5
@@ -38,6 +40,8 @@ MonoBehaviour:
       delayBeforeAction: 0.25
       delayAfterAction: 0.25
       playAnim: 1
+      animOverrideBefore: -1
+      animOverrideAfter: -1
       animWindupStart: 0.125
       animWinddownEnd: 0.125
   - timelineChangePriority: 5
@@ -50,6 +54,8 @@ MonoBehaviour:
       delayBeforeAction: 0.5
       delayAfterAction: 0.5
       playAnim: 1
+      animOverrideBefore: -1
+      animOverrideAfter: -1
       animWindupStart: 0.25
       animWinddownEnd: 0.25
     - actionType: 4
@@ -58,6 +64,8 @@ MonoBehaviour:
       delayBeforeAction: 1
       delayAfterAction: 0
       playAnim: 0
+      animOverrideBefore: -1
+      animOverrideAfter: -1
       animWindupStart: 0
       animWinddownEnd: 0
     - actionType: 0
@@ -66,6 +74,8 @@ MonoBehaviour:
       delayBeforeAction: 1.5
       delayAfterAction: 0.5
       playAnim: 1
+      animOverrideBefore: -1
+      animOverrideAfter: -1
       animWindupStart: 1
       animWinddownEnd: 0.25
     - actionType: 4
@@ -74,6 +84,8 @@ MonoBehaviour:
       delayBeforeAction: 1
       delayAfterAction: 0
       playAnim: 0
+      animOverrideBefore: -1
+      animOverrideAfter: -1
       animWindupStart: 0
       animWinddownEnd: 0
   patternByRound: 00000000010000000000000002000000

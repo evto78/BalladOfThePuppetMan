@@ -60,6 +60,9 @@ public class Enemy : MonoBehaviour
     int curLoop; //Number of times that the action sequence has looped this round.
     public List<int> patternByRound;
 
+    [Header("Enemy Spesific")]
+    public bool recluseGaurd = false;
+
     [Header("References")]
     public GameObject damageIndicatorPrefab;
 
@@ -109,6 +112,8 @@ public class Enemy : MonoBehaviour
         mhp = myData.maxHP;
         hp = mhp;
         elementalType = myData.type;
+
+        if (myData.id == 5) { recluseGaurd = true; } else { recluseGaurd = false; }
 
         attackPatterns = new List<AttackPattern>();
         AttackPattern newPattern = new AttackPattern();
@@ -279,6 +284,8 @@ public class Enemy : MonoBehaviour
     {
         if (player == null || !player.isActiveAndEnabled) { return; }
         player.StartCoroutine(player.ReactableEvent(attackEvent));
+
+        if (myData.id == 5) { recluseGaurd = !recluseGaurd; } // if Recluse, toggle gaurd.
     }
 
     public void PrepareForNextRound()

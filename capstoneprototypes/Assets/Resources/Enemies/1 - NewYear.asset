@@ -26,6 +26,8 @@ MonoBehaviour:
       delayBeforeAction: 2
       delayAfterAction: 0
       playAnim: 0
+      animOverrideBefore: -1
+      animOverrideAfter: -1
       animWindupStart: 0
       animWinddownEnd: 0
     - actionType: 2
@@ -34,6 +36,8 @@ MonoBehaviour:
       delayBeforeAction: 1
       delayAfterAction: 1
       playAnim: 1
+      animOverrideBefore: -1
+      animOverrideAfter: -1
       animWindupStart: 0.5
       animWinddownEnd: 0.5
   - timelineChangePriority: 2
@@ -46,6 +50,8 @@ MonoBehaviour:
       delayBeforeAction: 1
       delayAfterAction: 1
       playAnim: 1
+      animOverrideBefore: -1
+      animOverrideAfter: -1
       animWindupStart: 0.5
       animWinddownEnd: 0.5
   patternByRound: 0000000001000000

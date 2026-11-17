@@ -26,6 +26,8 @@ MonoBehaviour:
       delayBeforeAction: 0.5
       delayAfterAction: 0
       playAnim: 0
+      animOverrideBefore: -1
+      animOverrideAfter: -1
       animWindupStart: 0
       animWinddownEnd: 0
     - actionType: 0
@@ -34,6 +36,8 @@ MonoBehaviour:
       delayBeforeAction: 0.5
       delayAfterAction: 0.5
       playAnim: 1
+      animOverrideBefore: -1
+      animOverrideAfter: -1
       animWindupStart: 0.25
       animWinddownEnd: 0.25
   patternByRound: 00000000

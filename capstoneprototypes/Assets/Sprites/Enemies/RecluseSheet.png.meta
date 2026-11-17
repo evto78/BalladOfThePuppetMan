@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Recluse_Idle_0
+      name: Recluse_Idle_GAURD
       rect:
         serializedVersion: 2
         x: 0
@@ -118,7 +118,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Recluse_Idle_1
+      name: Recluse_spinOut_0
       rect:
         serializedVersion: 2
         x: 0
@@ -139,7 +139,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Recluse_Idle_2
+      name: Recluse_spinOut_1
       rect:
         serializedVersion: 2
         x: 0
@@ -160,7 +160,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Recluse_Idle_3
+      name: Recluse_spinOut_2
       rect:
         serializedVersion: 2
         x: 0
@@ -181,7 +181,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Recluse_Idle_4
+      name: Recluse_Idle_VAULN
       rect:
         serializedVersion: 2
         x: 0
@@ -202,7 +202,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Recluse_Idle_5
+      name: Recluse_spinIn_0
       rect:
         serializedVersion: 2
         x: 0
@@ -223,7 +223,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Recluse_Idle_6
+      name: Recluse_spinIn_1
       rect:
         serializedVersion: 2
         x: 0
@@ -244,7 +244,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Recluse_Idle_7
+      name: Recluse_spinIn_2
       rect:
         serializedVersion: 2
         x: 0
@@ -275,14 +275,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Recluse_Idle_0: 259604409
-      Recluse_Idle_1: -1016981728
-      Recluse_Idle_2: -853931553
-      Recluse_Idle_3: 1409017696
-      Recluse_Idle_4: -1171389514
-      Recluse_Idle_5: 1089138841
-      Recluse_Idle_6: -272884111
-      Recluse_Idle_7: 1673096031
+      Recluse_Idle_GAURD: 259604409
+      Recluse_Idle_VAULN: -1171389514
+      Recluse_spinIn_0: 1089138841
+      Recluse_spinIn_1: -272884111
+      Recluse_spinIn_2: 1673096031
+      Recluse_spinOut_0: -1016981728
+      Recluse_spinOut_1: -853931553
+      Recluse_spinOut_2: 1409017696
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

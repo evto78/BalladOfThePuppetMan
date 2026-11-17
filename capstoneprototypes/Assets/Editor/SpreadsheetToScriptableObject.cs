@@ -207,6 +207,8 @@ public class SpreadsheetToScriptableObject
                         newAction.animWindupStart = float.Parse(attackPatternSplitData[10]);
                         newAction.animWinddownEnd = float.Parse(attackPatternSplitData[11]);
                         newAction.oneOff = bool.Parse(attackPatternSplitData[12]);
+                        newAction.animOverrideBefore = int.Parse(attackPatternSplitData[13]);
+                        newAction.animOverrideAfter = int.Parse(attackPatternSplitData[14]);
 
                         previousPatten.actionSequence.Add(newAction);
                     }
