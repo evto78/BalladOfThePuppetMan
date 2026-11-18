@@ -43,6 +43,7 @@ public class PlayerActionManager : MonoBehaviour
     public List<PlayerSkill> skillData;
 
     public List<ItemObject> equippedItems;
+    bool damageTakenDuringCombat = false;
 
     public Enemy targetedEnemy;
     public Transform targetUI;
@@ -124,6 +125,23 @@ public class PlayerActionManager : MonoBehaviour
             }
         }
         RemoveEffectsFromList(deletedEffects);
+
+        foreach (ItemObject i in equippedItems)
+        {
+            switch(i.id)
+            {
+                case 0:
+                    if (!damageTakenDuringCombat)
+                    {
+                        hp = Mathf.Clamp(hp += 2, 0, mhp);
+                    }
+                    else
+                    {
+                        damageTakenDuringCombat = false;
+                    }
+                        break;
+            }
+        }
 
         timeSpent = 0f;
     }
