@@ -46080,6 +46080,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1843178997}
     - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
+      propertyPath: parryWindow
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
       propertyPath: smallTarget
       value: 
       objectReference: {fileID: 909273725}
@@ -46087,6 +46091,18 @@ PrefabInstance:
       propertyPath: gameOverAnim
       value: 
       objectReference: {fileID: 422709667}
+    - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
+      propertyPath: parryCooldown
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
+      propertyPath: perfectWindow
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
+      propertyPath: perfectCooldown
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
       propertyPath: damageIndicatorPrefab
       value: 
