@@ -17,4 +17,4 @@ MonoBehaviour:
   isRare: 1
   sprite: {fileID: 994816554, guid: 444d67eac5ff5d44c8d8850f34c3864d, type: 3}
   itemName: Paint Brush
-  itemDescription: Elemental advantage and disadvantage is 1.5x more effective.
+  itemDescription: Elemental advantage is 50% more effective.

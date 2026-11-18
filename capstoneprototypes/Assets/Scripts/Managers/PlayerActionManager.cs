@@ -435,12 +435,12 @@ public class PlayerActionManager : MonoBehaviour
                     float coinMult = 0;
                     if (curMemories > 0)
                     {
-                        coinMult = Mathf.Clamp(coinMult += 1f * curMemories, 0, 1f);
+                        coinMult = Mathf.Clamp(coinMult += 0.01f * curMemories, 0f, 1f);
                         bonusMult += coinMult;
                     }
                     else if (curMemories < 0)
                     {
-                        coinMult = Mathf.Clamp(coinMult += 0.5f * curMemories, 0, 1f);
+                        coinMult = Mathf.Clamp(coinMult += 0.005f * curMemories, -0.5f, 0f);
                         bonusMult += coinMult;
                     }
                     Debug.Log(coinMult);
