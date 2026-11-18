@@ -44,11 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f9bb721e8a6f5a40bcfcd029ac1b9cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemData: []
   startingSkills:
-  - {fileID: 11400000, guid: cffceb8e2c519c04597e536c484c1eef, type: 2}
+  - {fileID: 11400000, guid: 747ef5a16c96a4743a410afb104203e0, type: 2}
   - {fileID: 11400000, guid: a869c62217e5ae94cb906ee8944e808b, type: 2}
   - {fileID: 11400000, guid: f0f93e43decb1b94ca1c75b227cbaca3, type: 2}
-  - {fileID: 11400000, guid: e603506f7eb4b1d4cb61a3690e9b4e05, type: 2}
+  - {fileID: 11400000, guid: 9ad5b487061685e4c95105ebad1b3041, type: 2}
+  dl: {fileID: 11400000, guid: ef6111f1f439079409a923c15985f764, type: 2}
   gameState: 0
   areaID: 0
   player: {fileID: 0}
@@ -57,4 +59,5 @@ MonoBehaviour:
   enemySpawnMan: {fileID: 0}
   roomSelection: {fileID: 0}
   rewardManager: {fileID: 0}
+  shopManager: {fileID: 0}
   camGlide: {fileID: 0}

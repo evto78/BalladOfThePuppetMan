@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6592e973e8624c42b9ccc7753b4af3e, type: 3}
   m_Name: 1 - Parry
   m_EditorClassIdentifier: 
-  id: 0
-  clip: {fileID: 8300000, guid: 2d20a01c4871499459c2760126254706, type: 3}
+  id: 1
+  clip: {fileID: 8300000, guid: 077316972f0650a4498364cc4e80f6af, type: 3}
   clipType: 1
