@@ -35,7 +35,7 @@ public class ElementalMods
         }
         else if (skillElement == ElementalTypes.Corruption)
         {
-            if (enemyElement == ElementalTypes.Power || skillElement == ElementalTypes.Money || skillElement == ElementalTypes.Fame)
+            if (enemyElement == ElementalTypes.Power || enemyElement == ElementalTypes.Money || enemyElement == ElementalTypes.Fame)
             {
                 elementMod = advantage;
             }
