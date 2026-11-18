@@ -46752,6 +46752,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1889606336}
     - target: {fileID: 1347452795832196805, guid: 1f4c0f0d2401d0941aa011fc17fe0a9d, type: 3}
+      propertyPath: tutorialMan
+      value: 
+      objectReference: {fileID: 6072491805692724488}
+    - target: {fileID: 1347452795832196805, guid: 1f4c0f0d2401d0941aa011fc17fe0a9d, type: 3}
       propertyPath: enemySpawnMan
       value: 
       objectReference: {fileID: 1705736182}
@@ -46938,6 +46942,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df77e5f35c870d24b85dbdb712542cfd, type: 3}
+--- !u!114 &6072491805692724488 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2875909736190598846, guid: df77e5f35c870d24b85dbdb712542cfd, type: 3}
+  m_PrefabInstance: {fileID: 6072491805692724487}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f41fafae33794f3459104055466caac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7127766643632251983
 PrefabInstance:
   m_ObjectHideFlags: 0
