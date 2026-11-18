@@ -47,7 +47,7 @@ public class PlayerSpriteAnimator : MonoBehaviour
         }
 
         if (parryActive) { activeSprite = 2; }
-        else if (player.curParryCooldown > 0) { activeSprite = 1; }
+        else if (player.curParryCooldownVisual > 0) { activeSprite = 1; }
 
         //WIP!! ADD PRIORITIES! ADD GETTING HIT! AND PARRIES!!!
         if (nextSkill != null)
@@ -67,7 +67,7 @@ public class PlayerSpriteAnimator : MonoBehaviour
 
         if (hitOverrideTimer > 0) { activeSprite = 10; hitOverrideTimer -= Time.deltaTime; }
 
-        if (parryLanded) { activeSprite = 3; parryOverrideTimer = 0.1f; }
+        if (parryLanded || player.curParryCooldownVisual > player.curParryCooldown) { activeSprite = 3; parryOverrideTimer = 0.1f; }
         else if (parryOverrideTimer > 0) { activeSprite = 3; parryOverrideTimer -= Time.deltaTime; }
 
     }

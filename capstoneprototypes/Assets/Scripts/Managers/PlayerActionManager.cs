@@ -29,12 +29,14 @@ public class PlayerActionManager : MonoBehaviour
     public float parryWindow;
     public float parryCooldown;
     public float curParryCooldown = 0;
+    public float curParryCooldownVisual = 0;
     bool parryActive;
     bool parryLanded;
 
     public float perfectWindow;
     public float perfectCooldown;
     public float curPerfectCooldown = 0;
+    public float curPerfectCooldownVisual = 0;
     bool perfectActive;
     bool perfectLanded;
 
@@ -102,10 +104,12 @@ public class PlayerActionManager : MonoBehaviour
         memoryCount.transform.parent.gameObject.SetActive(false);
 
         curParryCooldown = 0f;
+        curParryCooldownVisual = 0f;
         parryActive = false;
         parryLanded = false;
 
         curPerfectCooldown = 0f;
+        curPerfectCooldownVisual = 0f;
         perfectActive = false;
         perfectLanded = false;
 
@@ -199,6 +203,8 @@ public class PlayerActionManager : MonoBehaviour
         //Manage Timers
         curParryCooldown -= Time.deltaTime; if (curParryCooldown < 0) { curParryCooldown = 0; }
         curPerfectCooldown -= Time.deltaTime; if (curPerfectCooldown < 0) { curPerfectCooldown = 0; }
+        curParryCooldownVisual -= Time.deltaTime; if (curParryCooldownVisual < 0) { curParryCooldownVisual = 0; }
+        curPerfectCooldownVisual -= Time.deltaTime; if (curPerfectCooldownVisual < 0) { curPerfectCooldownVisual = 0; }
 
         //Check if parry / perfect window is over
         parryActive = parryCooldown - curParryCooldown < parryWindow; if (!parryActive) { parryLanded = false; }
@@ -228,6 +234,7 @@ public class PlayerActionManager : MonoBehaviour
         if (curParryCooldown > 0 && !parryLanded) { return; }
 
         curParryCooldown = parryCooldown;
+        curParryCooldownVisual = parryCooldown;
         parryActive = true;
     }
 
@@ -236,6 +243,7 @@ public class PlayerActionManager : MonoBehaviour
         if (curPerfectCooldown > 0 && !perfectLanded) { return; }
 
         curPerfectCooldown = perfectCooldown;
+        curPerfectCooldownVisual = perfectCooldown;
         perfectActive = true;
     }
 
@@ -633,6 +641,7 @@ public class PlayerActionManager : MonoBehaviour
     void ParryLanded()
     {
         parryLanded = true;
+        curParryCooldown = 0;
         foreach (ParticleSystem ps in parryParticles) { ps.Stop(); ps.Play(); }
         timeline.HitParticles();
         audioMan.PlaySound(1, AudioManager.SFXType.Effect, 1f, 1f);
@@ -654,6 +663,7 @@ public class PlayerActionManager : MonoBehaviour
     void PerfectLanded()
     {
         perfectLanded = true;
+        curPerfectCooldown = 0;
         foreach (ParticleSystem ps in perfectParticles) { ps.Stop(); ps.Play(); }
         timeline.HitParticles();
 

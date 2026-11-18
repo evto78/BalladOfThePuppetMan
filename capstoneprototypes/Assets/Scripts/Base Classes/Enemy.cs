@@ -65,6 +65,7 @@ public class Enemy : MonoBehaviour
 
     [Header("References")]
     public GameObject damageIndicatorPrefab;
+    ReadoutOnHover readout;
 
     private void Awake()
     {
@@ -79,6 +80,7 @@ public class Enemy : MonoBehaviour
         timeline = GameObject.Find("Timeline").GetComponent<TimelineManager>();
         player = GameObject.Find("Player").GetComponent<PlayerActionManager>();
         audioMan = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        readout = GetComponentInChildren<ReadoutOnHover>();
 
         timeline.activeEnemies.Add(this);
     }
@@ -108,6 +110,9 @@ public class Enemy : MonoBehaviour
         else { myData = data; }
 
         if (myData == null) { Debug.LogError("ENEMY DATA NOT FOUND!"); }
+
+        readout = GetComponentInChildren<ReadoutOnHover>();
+        readout.readoutText = myData.enemyDescription;
 
         mhp = myData.maxHP;
         hp = mhp;

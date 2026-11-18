@@ -15,13 +15,24 @@ public class RoomSelection : MonoBehaviour
     public List<SpriteRenderer> timeIcons;
     public List<Vector3> paths = new List<Vector3>();
     public int distance;
+    public int tutorialDistance;
     GameDataManager gdm;
     void Start()
     {
         gdm = GameObject.Find("GameDataManager").GetComponent<GameDataManager>();
 
         distance = 0;
-        if (paths.Count < 5) { GeneratePaths(); }
+        paths = new List<Vector3>();
+
+        tutorialDistance = 0;
+        if (gdm.tutorialMan.CheckTutorial())
+        {
+            GenerateTutorialPaths();
+        }
+        else
+        {
+            GeneratePaths();
+        }
 
         DisplayPaths();
     }
@@ -31,17 +42,17 @@ public class RoomSelection : MonoBehaviour
         {
             Vector3 newPath; 
 
-            if (paths.Count > 6)
+            if (paths.Count > 6 + tutorialDistance)
             {
-                //Past the boss encounter, just place question marks as a placeholder
-                newPath = new Vector3(-1.1f, -1.1f, -1.1f);
+                //Past the boss encounter, just place null rooms as a placeholder
+                newPath = new Vector3(-5.1f, -5.1f, -5.1f);
             }
-            else if (paths.Count == 6) 
+            else if (paths.Count == 6 + tutorialDistance) 
             {
                 //Force the boss encounter on the 6th room
                 newPath = new Vector3(-0.1f, 0.1f, -0.1f);
             }
-            else if (paths.Count == 4)
+            else if (paths.Count == 4 + tutorialDistance)
             {
                 //Always place a shop and 2 heals on the 4th room
                 newPath = new Vector3(2.1f, 4.1f, 2.1f);
@@ -60,6 +71,22 @@ public class RoomSelection : MonoBehaviour
 
             paths.Add(newPath);
         }
+    }
+    void GenerateTutorialPaths()
+    {
+        //Generate a preset tutorial path, surrounded by "Null" rooms that can't be selected.
+        paths = new List<Vector3>();
+
+        paths.Add(new Vector3(-5.1f, 3.1f, -5.1f)); //Combat
+        paths.Add(new Vector3(-5.1f, 2.1f, -5.1f)); //Heal
+        paths.Add(new Vector3(-5.1f, 3.1f, -5.1f)); //Combat
+        paths.Add(new Vector3(-5.1f, 4.1f, -5.1f)); //Shop
+        paths.Add(new Vector3(-5.1f, 3.1f, -5.1f)); //Combat
+        tutorialDistance = 5;
+
+        //Generate the rest of the rooms normally
+        GeneratePaths();
+
     }
     int ReturnRandomWeightedRoom()
     {
@@ -169,13 +196,34 @@ public class RoomSelection : MonoBehaviour
                 break;
 
             case 3: //COMBAT
-                gdm.enemySpawnMan.SpawnRandomEncounter();
+                if (tutorialDistance != 0)
+                {
+                    switch (distance)
+                    {
+                        case 0: gdm.enemySpawnMan.SpawnEncounter(11); break; //Tutorial, Single shameling.
+                        case 2: gdm.enemySpawnMan.SpawnEncounter(2); break; //Tutorial, shameling and shamefool.
+                        case 4: gdm.enemySpawnMan.SpawnEncounter(1); break; //Tutorial, shameling and new year.
+                    }
+                }
+                else
+                {
+                    gdm.enemySpawnMan.SpawnRandomEncounter();
+                }
                 gdm.ChangeState(GameDataManager.State.StartCombat);
                 break;
 
             case 4: //SHOP
                 gdm.ChangeState(GameDataManager.State.Shop);
                 break;
+
+            case 5: //NULL
+                return; //Dont allow this room to be selected.
+        }
+
+        //Play the tutorials for the room, if tutorial is active
+        if (tutorialDistance != 0)
+        {
+            gdm.tutorialMan.PlayTutorial(distance);
         }
 
         distance++;

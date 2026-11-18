@@ -372,7 +372,7 @@ public class TimelineManager : MonoBehaviour
         combatSpeed = 0;
 
         //REWARD memory for winning a fight!
-        player.GainLoseMemory(5 + gdm.roomSelection.distance);
+        player.GainLoseMemory(5 + Mathf.Clamp(gdm.roomSelection.distance - gdm.roomSelection.tutorialDistance, 0, int.MaxValue));
 
         camGlide.isUp = true;
 
@@ -569,7 +569,7 @@ public class TimelineManager : MonoBehaviour
         }
 
         //Min speed is 1/2x and max speed is 4x 
-        combatSpeed = Mathf.Clamp(combatSpeed, 0.5f, 4);
+        combatSpeed = Mathf.Clamp(combatSpeed, 0.5f, 4f);
     }
     public void EnemyDied(Enemy enemy)
     {
