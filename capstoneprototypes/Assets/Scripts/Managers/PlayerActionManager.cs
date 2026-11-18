@@ -135,13 +135,10 @@ public class PlayerActionManager : MonoBehaviour
                     {
                         hp = Mathf.Clamp(hp += 2, 0, mhp);
                     }
-                    else
-                    {
-                        damageTakenDuringCombat = false;
-                    }
                         break;
             }
         }
+        damageTakenDuringCombat = false;
 
         timeSpent = 0f;
     }
@@ -374,7 +371,6 @@ public class PlayerActionManager : MonoBehaviour
             {
                 case 0:
                     bonusMult = 1f + (0.5f * se.stacks);
-                    Debug.Log($"Focus Used \nBonus Mult: {bonusMult}");
                     deletedEffects.Add(se);
                     break;
             }
@@ -503,12 +499,23 @@ public class PlayerActionManager : MonoBehaviour
             switch (se.data.id)
             {
                 case 0:
-                    Debug.Log($"Focus LOST!");
                     deletedEffects.Add(se);
                     break;
             }
         }
         RemoveEffectsFromList(deletedEffects);
+        foreach (ItemObject i in equippedItems)
+        {
+            switch (i.id)
+            {
+                case 0:
+                    if (!damageTakenDuringCombat)
+                    {
+                        damageTakenDuringCombat = true;
+                    }
+                    break;
+            }
+        }
 
         switch (dmg)
         {
