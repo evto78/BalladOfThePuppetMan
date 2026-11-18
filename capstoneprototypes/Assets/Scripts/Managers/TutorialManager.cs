@@ -18,4 +18,20 @@ public class TutorialManager : MonoBehaviour
             PlayerPrefs.SetInt("TutorialPlayed", 2);
         }
     }
+
+    public bool CheckTutorial()
+    {
+        if (!PlayerPrefs.HasKey("TutorialPlayed") || PlayerPrefs.GetInt("TutorialPlayed") <= 1)
+        {
+            //Run tutorial!
+            PlayerPrefs.SetInt("TutorialPlayed", 1);
+        }
+        else
+        {
+            //Skip tutorial
+            PlayerPrefs.SetInt("TutorialPlayed", 2);
+        }
+
+        return PlayerPrefs.GetInt("TutorialPlayed") <= 1;
+    }
 }

@@ -10,6 +10,8 @@ public class MainMenuManager : MonoBehaviour
 
     private void Start()
     {
+        PlayerPrefs.SetInt("TutorialPlayed", 0);
+
         buttonsHolder.SetActive(true);
         tutorialPopUp.SetActive(false);
     }

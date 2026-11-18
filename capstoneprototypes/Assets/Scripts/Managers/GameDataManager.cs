@@ -9,7 +9,7 @@ public class GameDataManager : MonoBehaviour
     public List<ItemObject> itemData;
     public List<PlayerSkill> startingSkills;
     public DataList dl;
-    public enum State { StartGame, StartCombat, TurnBasedCombat, RealTimeCombat, CombatEnd, RewardSelection, RoomSelection, GameOver, Shop}
+    public enum State { StartGame, StartCombat, TurnBasedCombat, RealTimeCombat, CombatEnd, RewardSelection, RoomSelection, GameOver, Shop, Tutorial}
     public State gameState = State.StartGame;
     public int areaID; // The ID number of the current area, since we only have suburbia rn, this should only ever be 0.
 
@@ -22,6 +22,7 @@ public class GameDataManager : MonoBehaviour
     public RewardManager rewardManager;
     public ShopManager shopManager;
     public CameraGlide camGlide;
+    public TutorialManager tutorialMan;
 
     private void Awake()
     {
@@ -31,7 +32,17 @@ public class GameDataManager : MonoBehaviour
 
     private void Start()
     {
-        ChangeState(State.StartGame);
+        Debug.Log("Checking...");
+        if (tutorialMan.CheckTutorial())
+        {
+            //Start with a tutorial
+            ChangeState(State.Tutorial);
+        }
+        else
+        {
+            //Start normally
+            ChangeState(State.StartGame);
+        }
 
         for (int i = 0; i < startingSkills.Count; i++)
         {
@@ -44,6 +55,8 @@ public class GameDataManager : MonoBehaviour
 
     public void ChangeState(State newState)
     {
+        Debug.Log("Changing to: " + newState.ToString());
+
         gameState = newState;
         switch (gameState)
         {
@@ -75,6 +88,10 @@ public class GameDataManager : MonoBehaviour
             case State.Shop:
                 shopManager.gameObject.SetActive(true);
                 shopManager.StartShop();
+                break;
+            case State.Tutorial:
+                player.equippedSkills = startingSkills; //Equip the player
+                audioMan.PlayMusic(0, 1, 1); // Start playing the ambience
                 break;
         }
     }
