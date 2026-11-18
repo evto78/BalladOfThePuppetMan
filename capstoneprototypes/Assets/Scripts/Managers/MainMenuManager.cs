@@ -18,11 +18,18 @@ public class MainMenuManager : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("TutorialPlayed") || PlayerPrefs.GetInt("TutorialPlayed") == 0)
         {
+            //Ask for tutorial
             tutorialPopUp.SetActive(true);
             buttonsHolder.SetActive(false);
         }
+        else if (PlayerPrefs.GetInt("TutorialPlayed") == 2)
+        {
+            //Run without tutorial
+            SceneManager.LoadScene("Combat");
+        }
         else
         {
+            //I honestly don't know how they would get here, but rul without tutorial
             SceneManager.LoadScene("Combat");
         }
     }

@@ -7,12 +7,15 @@ public class TutorialManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (!PlayerPrefs.HasKey("TutorialPlayed") || PlayerPrefs.GetInt("TutorialPlayed") <= 1)
+        {
+            //Run tutorial!
+            PlayerPrefs.SetInt("TutorialPlayed", 1);
+        }
+        else
+        {
+            //Skip tutorial
+            PlayerPrefs.SetInt("TutorialPlayed", 2);
+        }
     }
 }
