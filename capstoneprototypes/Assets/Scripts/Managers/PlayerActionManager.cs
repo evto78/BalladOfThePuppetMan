@@ -372,6 +372,7 @@ public class PlayerActionManager : MonoBehaviour
     void StandardAttack(TimelineManager.TimelineEvent attackEvent, PlayerSkill skill, float perfectMult)
     {
         float bonusMult = 1f;
+        float elementalMult = 1f;
         List<StatusEffectInstance> deletedEffects = new List<StatusEffectInstance>();
         foreach (StatusEffectInstance se in statEffects)
         {
@@ -387,6 +388,20 @@ public class PlayerActionManager : MonoBehaviour
 
         if (skill.target == PlayerSkill.TargetType.SingleEnemy)
         {
+            elementalMult = ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType);
+            foreach (ItemObject i in equippedItems)
+            {
+                switch (i.id)
+                {
+                    case 1:
+                        if (elementalMult > 1f)
+                        {
+                            elementalMult = ((elementalMult - 1) * 1.5f) + 1;
+                        }
+                        break;
+                }
+            }
+
             //If enemy previously targeted is gone, aim for another enemy.
             if (attackEvent.enemyTargeted == null && timeline.activeEnemies.Count > 0)
             {
@@ -399,11 +414,28 @@ public class PlayerActionManager : MonoBehaviour
             //If no enemies are left alive, cancel the attack.
             else if (timeline.activeEnemies.Count == 0) { return; }
             //Do the attack.
-            attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * bonusMult * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType)));
+            attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * bonusMult * perfectMult * elementalMult));
         }
         else if (skill.target == PlayerSkill.TargetType.AllEnemies)
         {
-            foreach (Enemy e in timeline.activeEnemies) { e.TakeDamage(Mathf.CeilToInt(skill.intensity * bonusMult * perfectMult * ElementalMods.Modifier(skill.elementalType, attackEvent.enemyTargeted.elementalType))); }
+            foreach (Enemy e in timeline.activeEnemies) {
+                elementalMult = ElementalMods.Modifier(skill.elementalType, e.elementalType);
+                foreach (ItemObject i in equippedItems)
+                {
+                    switch (i.id)
+                    {
+                        case 1:
+                            if (elementalMult > 1f)
+                            {
+                                elementalMult = ((elementalMult - 1) * 1.5f) + 1;
+                            }
+                            break;
+                    }
+                }
+
+                e.TakeDamage(Mathf.CeilToInt(skill.intensity * bonusMult * perfectMult * elementalMult));
+            }
+            
         }
     }
 
