@@ -19,3 +19,5 @@ Enemy ID,Pattern ID,Timeline Change Priority,Timeline Combat Time Pref,Timeline 
 5,0,1,6,1,None,0,1,0,False,0,0,True,-1,-1
 5,0,1,6,1,EnemyAtk,5,1,1,True,0.5,0,False,0,-1
 5,0,1,6,1,EnemyAtk,5,1,1,True,0.5,0,False,1,-1
+6,0,1,10,1,None,0,1,0,False,0,0,True,-1,-1
+6,0,1,10,1,Heal,1,0.25,0.25,False,0,0,False,-1,-1

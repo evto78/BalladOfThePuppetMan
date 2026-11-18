@@ -42,5 +42,5 @@ MonoBehaviour:
       animWinddownEnd: 0
   patternByRound: 00000000
   enemyName: Gurby
-  enemyDescription: parry to heal
+  enemyDescription: Gurby! Parry to catch silk and heal!
   enemySprite: {fileID: 0}

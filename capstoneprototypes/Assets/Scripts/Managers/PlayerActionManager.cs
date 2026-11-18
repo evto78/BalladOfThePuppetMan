@@ -307,6 +307,7 @@ public class PlayerActionManager : MonoBehaviour
         {
             healEvent.removed = true;
             TakeDamage(-healEvent.enemyAction.damage);
+            if (hp > mhp) { hp = mhp; }
             ParryLanded();
         }
         else
@@ -515,6 +516,7 @@ public class PlayerActionManager : MonoBehaviour
         parryLanded = true;
         foreach (ParticleSystem ps in parryParticles) { ps.Stop(); ps.Play(); }
         timeline.HitParticles();
+        audioMan.PlaySound(1, AudioManager.SFXType.Effect, 1f, 1f);
     }
 
     void PerfectLanded()

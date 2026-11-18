@@ -9,3 +9,4 @@ ID,Enemy 1,Enemy 2,Enemy 3,Enemy 4,Enemy 5,Enemy 1 offset,Enemy 2 offset,Enemy 3
 7,Recluse,None,None,None,None,0,0,0,0,0,Regular
 8,Recluse,NewYear,None,None,None,0,0,0,0,0,Regular
 9,Recluse,NewYear,NewYear,None,None,0,0,0,0,0,Regular
+10,Gurby,None,None,None,None,0,0,0,0,0,Scripted
