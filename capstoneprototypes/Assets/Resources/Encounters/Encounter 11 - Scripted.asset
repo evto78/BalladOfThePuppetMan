@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: badd602edb3a3614ca150cf3a7536ca0, type: 3}
   m_Name: Encounter 11 - Scripted
   m_EditorClassIdentifier: 
-  encounterID: 10
+  encounterID: 11
   enemies:
-  - {fileID: 11400000, guid: 901bc1496ba7b1644897ebda6b1dbb60, type: 2}
+  - {fileID: 11400000, guid: ddd2c1cbbfe30db489ef3e271d0d5c41, type: 2}
   offset:
   - 0
   encounterType: 1
