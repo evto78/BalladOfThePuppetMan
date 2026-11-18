@@ -557,7 +557,7 @@ public class TimelineManager : MonoBehaviour
         }
 
         //Min speed is 1/2x and max speed is 4x 
-        combatSpeed = Mathf.Clamp(combatSpeed, 0.5f, 4);
+        combatSpeed = Mathf.Clamp(combatSpeed, 0.5f, 4f);
     }
     public void EnemyDied(Enemy enemy)
     {

@@ -32,7 +32,6 @@ public class GameDataManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Checking...");
         if (tutorialMan.CheckTutorial())
         {
             //Start with a tutorial
@@ -55,8 +54,6 @@ public class GameDataManager : MonoBehaviour
 
     public void ChangeState(State newState)
     {
-        Debug.Log("Changing to: " + newState.ToString());
-
         gameState = newState;
         switch (gameState)
         {

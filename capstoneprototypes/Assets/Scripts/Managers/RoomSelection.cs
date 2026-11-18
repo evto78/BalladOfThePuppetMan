@@ -220,6 +220,12 @@ public class RoomSelection : MonoBehaviour
                 return; //Dont allow this room to be selected.
         }
 
+        //Play the tutorials for the room, if tutorial is active
+        if (tutorialDistance != 0)
+        {
+            gdm.tutorialMan.PlayTutorial(distance);
+        }
+
         distance++;
 
         if (distance >= paths.Count-5)

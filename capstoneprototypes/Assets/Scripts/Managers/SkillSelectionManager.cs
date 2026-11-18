@@ -153,6 +153,9 @@ public class SkillSelectionManager : MonoBehaviour
             case PlayerSkill.TargetType.AllEnemies: player.AttemptUseSkill(skillSlot); break;
             case PlayerSkill.TargetType.SingleEnemy: targetingSkill = skillSlot; break;
         }
+
+        //Tutorial checking stuff
+        if (gdm.tutorialMan.waitingFor == 1) { gdm.tutorialMan.progress++; }
     }
 
     public bool IsTouchingMouse(GameObject g)
