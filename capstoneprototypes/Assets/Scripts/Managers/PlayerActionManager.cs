@@ -70,7 +70,7 @@ public class PlayerActionManager : MonoBehaviour
     public SpriteRenderer sr;
     public Image fillBar;
     public GameOverAnim gameOverAnim;
-    GameDataManager gdm;
+    public GameDataManager gdm;
     public TextMeshProUGUI memoryCount;
     public GameObject damageIndicatorPrefab;
 

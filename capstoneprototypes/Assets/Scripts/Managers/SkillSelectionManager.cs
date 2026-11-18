@@ -91,6 +91,10 @@ public class SkillSelectionManager : MonoBehaviour
                         {
                             player.AttemptUseSkill(targetingSkill);
                             StartTargetingSkill(-1);
+
+                            //Tutorial checking stuff
+                            if (gdm.tutorialMan.waitingFor == 2) { gdm.tutorialMan.progress++; }
+
                             break;
                         }
                     }

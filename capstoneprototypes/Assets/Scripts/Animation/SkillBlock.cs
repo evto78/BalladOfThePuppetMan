@@ -49,7 +49,13 @@ public class SkillBlock : MonoBehaviour
             sr.color = Color.Lerp(idleColor, hoverColor, hoverTime);
         }
 
-        if (isHoveredOver && Input.GetMouseButtonUp(0) && representedEvent != null) { player.AttemptRemoveSkill(representedEvent); }
+        if (isHoveredOver && Input.GetMouseButtonUp(0) && representedEvent != null) 
+        { 
+            player.AttemptRemoveSkill(representedEvent);
+
+            //Tutorial checking stuff
+            if (player.gdm.tutorialMan.waitingFor == 3) { player.gdm.tutorialMan.progress++; }
+        }
     }
 
     public bool IsTouchingMouse(GameObject g)

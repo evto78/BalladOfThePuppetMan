@@ -49,6 +49,19 @@ public class TutorialManager : MonoBehaviour
         return PlayerPrefs.GetInt("TutorialPlayed") <= 1;
     }
 
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            switch (waitingFor)
+            {
+                case 4: progress++; break;
+                case 5: progress++; break;
+                case 7: progress++; break;
+            }
+        }
+    }
+
     public void PlayTutorial(int index)
     {
         switch (index)
@@ -81,14 +94,21 @@ public class TutorialManager : MonoBehaviour
             for (int i = 0; i < tutorialUI_0.transform.GetChild(0).childCount; i++) { tutorialUI_0.transform.GetChild(0).GetChild(i).gameObject.SetActive(false); }
             tutorialUI_0.transform.GetChild(0).GetChild(progress).gameObject.SetActive(true);
 
-            switch (progress)
-            {
-                case 0: waitingFor = 1; break;
-                case 1: waitingFor = 2; break;
-            }
+            waitingFor = progress + 1;
+
+            if (progress == 6) 
+            { nextRoundBtn.interactable = true; nextRoundBtn.transform.GetComponent<SpriteChangeOnMouse>().enabled = true; }
+            else { nextRoundBtn.interactable = false; nextRoundBtn.transform.GetComponent<SpriteChangeOnMouse>().enabled = false; }
 
             yield return new WaitForEndOfFrame();
         }
+
+        progress = 0;
+        waitingFor = 0;
+        nextRoundBtn.interactable = true;
+        nextRoundBtn.transform.GetComponent<SpriteChangeOnMouse>().enabled = true;
+        tutorialUI_0.SetActive(false);
+        tutorialUI.gameObject.SetActive(false);
 
         yield return null;
     }
