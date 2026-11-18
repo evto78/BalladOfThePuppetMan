@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerActionManager : MonoBehaviour
 {
@@ -41,9 +42,12 @@ public class PlayerActionManager : MonoBehaviour
     public List<StatusEffect> statData;
     public List<PlayerSkill> equippedSkills;
     public List<PlayerSkill> skillData;
+    public List<PlayerSkill> modifiedSkills;
 
     public List<ItemObject> equippedItems;
     bool damageTakenDuringCombat = false;
+    public bool firstRoundofCombat = true;
+    public int memoryGain = 0;
 
     public Enemy targetedEnemy;
     public Transform targetUI;
@@ -110,8 +114,8 @@ public class PlayerActionManager : MonoBehaviour
 
     public void SkillSelectStart()
     {
-        energy += 2;
-        if (energy > maxEnergy) { energy = maxEnergy; }
+        energy = Mathf.Clamp(energy += 2, 0, maxEnergy);
+        memoryGain = 0;
 
         List<StatusEffectInstance> deletedEffects = new List<StatusEffectInstance>();
         foreach (StatusEffectInstance se in statEffects)
@@ -136,10 +140,23 @@ public class PlayerActionManager : MonoBehaviour
                         hp = Mathf.Clamp(hp += 2, 0, mhp);
                     }
                         break;
+                case 4:
+                    if (firstRoundofCombat)
+                    {
+                        energy += 2;
+                    }
+                    break;
+                case 5:
+                    if (!firstRoundofCombat)
+                    {
+                        energy = Mathf.Clamp(energy += 1, 0, maxEnergy);
+                    }
+                    break;
             }
         }
         damageTakenDuringCombat = false;
 
+        if (firstRoundofCombat) { firstRoundofCombat = false; }
         timeSpent = 0f;
     }
 
@@ -371,12 +388,57 @@ public class PlayerActionManager : MonoBehaviour
             switch (se.data.id)
             {
                 case 0:
-                    bonusMult = 1f + (0.5f * se.stacks);
+                    bonusMult += 0.5f * se.stacks;
                     deletedEffects.Add(se);
                     break;
             }
         }
         RemoveEffectsFromList(deletedEffects);
+        foreach (ItemObject i in equippedItems)
+        {
+            switch (i.id)
+            {
+                case 6:
+                    if (skill.elementalType == ElementalTypes.Power)
+                    {
+                        bonusMult += 0.5f;
+                    }
+                    break;
+                case 7:
+                    if (skill.elementalType == ElementalTypes.Money)
+                    {
+                        bonusMult += 0.5f;
+                    }
+                    break;
+                case 8:
+                    if (skill.elementalType == ElementalTypes.Fame)
+                    {
+                        bonusMult += 0.5f;
+                    }
+                    break;
+                case 13:
+                    if (skill.elementalType == ElementalTypes.Corruption)
+                    {
+                        bonusMult += 0.5f;
+                        TakeDamage(1);
+                    }
+                    break;
+                case 16:
+                    float coinMult = 0;
+                    if (curMemories > 0)
+                    {
+                        coinMult = Mathf.Clamp(coinMult += 1f * curMemories, 0, 1f);
+                        bonusMult += coinMult;
+                    }
+                    else if (curMemories < 0)
+                    {
+                        coinMult = Mathf.Clamp(coinMult += 0.5f * curMemories, 0, 1f);
+                        bonusMult += coinMult;
+                    }
+                    Debug.Log(coinMult);
+                    break;
+            }
+        }
 
         if (skill.target == PlayerSkill.TargetType.SingleEnemy)
         {
@@ -574,6 +636,19 @@ public class PlayerActionManager : MonoBehaviour
         foreach (ParticleSystem ps in parryParticles) { ps.Stop(); ps.Play(); }
         timeline.HitParticles();
         audioMan.PlaySound(1, AudioManager.SFXType.Effect, 1f, 1f);
+
+        foreach (ItemObject i in equippedItems)
+        {
+            switch (i.id)
+            {
+                case 3:
+                    hp = Mathf.Clamp(hp+=1, 0, mhp);
+                    break;
+                case 9:
+                    memoryGain++;
+                    break;
+            }
+        }
     }
 
     void PerfectLanded()
@@ -581,6 +656,19 @@ public class PlayerActionManager : MonoBehaviour
         perfectLanded = true;
         foreach (ParticleSystem ps in perfectParticles) { ps.Stop(); ps.Play(); }
         timeline.HitParticles();
+
+        foreach (ItemObject i in equippedItems)
+        {
+            switch (i.id)
+            {
+                case 3:
+                    hp = Mathf.Clamp(hp+=1, 0, mhp);
+                    break;
+                case 9:
+                    memoryGain++;
+                    break;
+            }
+        }
     }
 
     //Ran when a healing room is selected
@@ -658,6 +746,60 @@ public class PlayerActionManager : MonoBehaviour
         foreach (StatusEffectInstance se in deleted)
         {
             statEffects.Remove(se);
+        }
+    }
+
+    public void UpdateSkillsByItem()
+    {
+        for (int si = 0; si < equippedSkills.Count; si++)
+        {
+            bool itemAltered = false;
+            PlayerSkill modifiedSkill = Instantiate(equippedSkills[si]);
+
+            foreach (ItemObject i in equippedItems)
+            {
+                switch (i.id)
+                {
+                    case 10:
+                        if (equippedSkills[si].elementalType == ElementalTypes.Money)
+                        {
+                            modifiedSkill.elementalType = ElementalTypes.Corruption;
+                            itemAltered = true;
+                        }
+                        break;
+                    case 11:
+                        if (equippedSkills[si].elementalType == ElementalTypes.Power)
+                        {
+                            modifiedSkill.elementalType = ElementalTypes.Corruption;
+                            itemAltered = true;
+                        }
+                        break;
+                    case 12:
+                        if (equippedSkills[si].elementalType == ElementalTypes.Fame)
+                        {
+                            modifiedSkill.elementalType = ElementalTypes.Corruption;
+                            itemAltered = true;
+                        }
+                        break;
+                    case 14:
+                        if (si == 0)
+                        {
+                            modifiedSkill.cost = skillData[modifiedSkill.id].cost - 1;
+                            itemAltered = true;
+                        }
+                        else if (si == 2)
+                        {
+                            modifiedSkill.cost = skillData[modifiedSkill.id].cost + 1;
+                            itemAltered = true;
+                        }
+                        break;
+                }
+            }
+
+            if (itemAltered) {
+                equippedSkills[si] = modifiedSkill;
+                modifiedSkills.Add(modifiedSkill);
+            }
         }
     }
 }

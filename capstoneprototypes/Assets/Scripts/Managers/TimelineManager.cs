@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Timeline;
 using UnityEngine.UI;
@@ -235,6 +236,7 @@ public class TimelineManager : MonoBehaviour
         PrepareNextRound();
         foreach (Enemy enemy in activeEnemies) { enemy.SetupMarkers(); }
 
+        player.firstRoundofCombat = true;
         player.energy = player.maxEnergy;
         player.SkillSelectStart();
 
@@ -275,6 +277,16 @@ public class TimelineManager : MonoBehaviour
         }
 
         eventList = new List<TimelineEvent>();
+
+        foreach (ItemObject i in player.equippedItems)
+        {
+            switch (i.id)
+            {
+                case 9:
+                    player.GainLoseMemory(player.memoryGain);
+                    break;
+            }
+        }
 
         //Check if all enemies are dead. If they are, then end the combat.
         bool combatOver = true;

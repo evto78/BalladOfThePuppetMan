@@ -64,7 +64,7 @@ public class RewardManager : MonoBehaviour
 
                 for (int j = 0; j < player.equippedSkills.Count; j++)
                 {
-                    if (skills[i] != player.equippedSkills[j])
+                    if (skills[i].id != player.equippedSkills[j].id)
                     {
                         differenceCount++;
                     }
@@ -138,7 +138,6 @@ public class RewardManager : MonoBehaviour
             }
         }
         skipButton.SetActive(false);
-
     }
 
     public void ReplaceSkill(int slotIndex)
@@ -159,6 +158,8 @@ public class RewardManager : MonoBehaviour
 
     public void SkipSelection()
     {
+        player.UpdateSkillsByItem();
+
         for (int i = 0; i < skillReplacement.Length; i++)
         {
             skillReplacement[i].interactable = true;
