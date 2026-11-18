@@ -22,4 +22,4 @@ MonoBehaviour:
   skillName: Focus
   skillDescription: Your next attack will do 50% more damage for each stack of Focus.
     Lose all Focus when taking damage.
-  perfectable: 0
+  perfectable: 1
