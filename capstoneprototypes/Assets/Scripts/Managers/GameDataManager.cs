@@ -92,6 +92,7 @@ public class GameDataManager : MonoBehaviour
             case State.Tutorial:
                 player.equippedSkills = startingSkills; //Equip the player
                 audioMan.PlayMusic(0, 1, 1); // Start playing the ambience
+                ChangeState(State.RoomSelection); // Open up room selection
                 break;
         }
     }
