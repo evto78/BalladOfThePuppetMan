@@ -443,7 +443,6 @@ public class PlayerActionManager : MonoBehaviour
                         coinMult = Mathf.Clamp(coinMult += 0.005f * curMemories, -0.5f, 0f);
                         bonusMult += coinMult;
                     }
-                    Debug.Log(coinMult);
                     break;
             }
         }
