@@ -74,6 +74,7 @@ public class PlayerActionManager : MonoBehaviour
     public SpriteRenderer sr;
     public Image fillBar;
     public TextMeshProUGUI healthTxt;
+    public TextMeshProUGUI maxHealthTxt;
     public GameOverAnim gameOverAnim;
     public GameDataManager gdm;
     public TextMeshProUGUI memoryCount;
@@ -257,6 +258,7 @@ public class PlayerActionManager : MonoBehaviour
         healthBar.sprite = healthBarStates[Mathf.FloorToInt(((float)hp/(float)mhp)*(healthBarStates.Count-1))];
 
         healthTxt.text = hp.ToString();
+        maxHealthTxt.text = mhp.ToString();
     }
 
     void LateUpdate()
