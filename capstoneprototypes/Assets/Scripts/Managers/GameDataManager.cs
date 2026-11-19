@@ -9,7 +9,7 @@ public class GameDataManager : MonoBehaviour
     public List<ItemObject> itemData;
     public List<PlayerSkill> startingSkills;
     public DataList dl;
-    public enum State { StartGame, StartCombat, TurnBasedCombat, RealTimeCombat, CombatEnd, RewardSelection, RoomSelection, GameOver, Shop, Tutorial}
+    public enum State { StartGame, StartCombat, TurnBasedCombat, RealTimeCombat, CombatEnd, RewardSelection, RoomSelection, GameOver, Shop, Tutorial, Event}
     public State gameState = State.StartGame;
     public int areaID; // The ID number of the current area, since we only have suburbia rn, this should only ever be 0.
 
@@ -23,6 +23,7 @@ public class GameDataManager : MonoBehaviour
     public ShopManager shopManager;
     public CameraGlide camGlide;
     public TutorialManager tutorialMan;
+    public EventManager eventMan;
 
     private void Awake()
     {
@@ -90,6 +91,9 @@ public class GameDataManager : MonoBehaviour
                 player.equippedSkills = startingSkills; //Equip the player
                 audioMan.PlayMusic(0, 1, 1); // Start playing the ambience
                 ChangeState(State.RoomSelection); // Open up room selection
+                break;
+            case State.Event:
+                camGlide.isUp = true;
                 break;
         }
     }

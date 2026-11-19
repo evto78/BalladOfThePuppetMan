@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro; //can delete after
 using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
@@ -8,11 +7,6 @@ public class EnemySpawnManager : MonoBehaviour
     public Transform[] spawns;
     public DataList dl;
     public GameObject[] enemies;
-
-    void Awake()
-    {
-        //SpawnRandomEncounter();
-    }
 
     public void SpawnEncounter(int encounterIndex)
     {

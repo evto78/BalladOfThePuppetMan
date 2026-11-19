@@ -187,6 +187,8 @@ public class RoomSelection : MonoBehaviour
                 break; 
 
             case 1: //EVENT
+                gdm.ChangeState(GameDataManager.State.Event);
+                gdm.eventMan.StartEvent(Random.Range(0, gdm.eventMan.eventObjects.Count));
                 break; 
 
             case 2: //HEAL
@@ -196,7 +198,7 @@ public class RoomSelection : MonoBehaviour
                 break;
 
             case 3: //COMBAT
-                if (tutorialDistance != 0)
+                if (tutorialDistance != 0 && distance < 5)
                 {
                     switch (distance)
                     {
