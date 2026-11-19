@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerActionManager : MonoBehaviour
 {
@@ -73,6 +73,7 @@ public class PlayerActionManager : MonoBehaviour
     GeneralAnimator gAnim;
     public SpriteRenderer sr;
     public Image fillBar;
+    public TextMeshProUGUI healthTxt;
     public GameOverAnim gameOverAnim;
     public GameDataManager gdm;
     public TextMeshProUGUI memoryCount;
@@ -254,6 +255,8 @@ public class PlayerActionManager : MonoBehaviour
         fillBar.fillAmount = (float)hp / (float)mhp;
         energyFill.fillAmount = (Mathf.CeilToInt((visualEnergyLeft / (float)maxEnergy) * 16f)) / 16f;
         healthBar.sprite = healthBarStates[Mathf.FloorToInt(((float)hp/(float)mhp)*(healthBarStates.Count-1))];
+
+        healthTxt.text = hp.ToString();
     }
 
     void LateUpdate()
