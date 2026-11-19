@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ public class TutorialManager : MonoBehaviour
     public int waitingFor;
 
     [Header("References")]
+    GameDataManager gdm;
     public Button nextRoundBtn;
     public Transform tutorialUI;
     public GameObject tutorialUI_0;
@@ -20,6 +22,8 @@ public class TutorialManager : MonoBehaviour
 
     void Start()
     {
+        gdm = GameObject.Find("GameDataManager").GetComponent<GameDataManager>();
+
         waitingFor = 0;
         progress = 0;
 
@@ -58,6 +62,7 @@ public class TutorialManager : MonoBehaviour
                 case 4: progress++; break;
                 case 5: progress++; break;
                 case 7: progress++; break;
+                case 8: progress++; break;
             }
         }
     }
@@ -96,12 +101,15 @@ public class TutorialManager : MonoBehaviour
 
             waitingFor = progress + 1;
 
-            if (progress == 6) 
+            if (progress >= 5) 
             { nextRoundBtn.interactable = true; nextRoundBtn.transform.GetComponent<SpriteChangeOnMouse>().enabled = true; }
             else { nextRoundBtn.interactable = false; nextRoundBtn.transform.GetComponent<SpriteChangeOnMouse>().enabled = false; }
 
+            if (progress == 6 || progress == 7) { gdm.timeline.combatSpeed = 0; } else if (gdm.timeline.combatSpeed == 0) { gdm.timeline.combatSpeed = 1; }
+
             yield return new WaitForEndOfFrame();
         }
+        gdm.timeline.combatSpeed = 1;
 
         progress = 0;
         waitingFor = 0;

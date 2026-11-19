@@ -168,5 +168,8 @@ public class RewardManager : MonoBehaviour
         timelineObject.SetActive(true);
         liveTimelineObject.SetActive(true);
         gdm.ChangeState(GameDataManager.State.RoomSelection);
+
+        //Tutorial checking stuff
+        if (player.gdm.tutorialMan.waitingFor == 10) { player.gdm.tutorialMan.progress++; }
     }
 }

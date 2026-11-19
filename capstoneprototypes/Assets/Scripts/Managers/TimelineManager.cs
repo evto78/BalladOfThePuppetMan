@@ -257,6 +257,9 @@ public class TimelineManager : MonoBehaviour
         }
 
         camGlide.isUp = true;
+
+        //Tutorial checking stuff
+        if (player.gdm.tutorialMan.waitingFor == 6) { player.gdm.tutorialMan.progress++; }
     }
     void EndRound()
     {
@@ -377,6 +380,9 @@ public class TimelineManager : MonoBehaviour
         camGlide.isUp = true;
 
         gdm.ChangeState(GameDataManager.State.CombatEnd);
+
+        //Tutorial checking stuff
+        if (player.gdm.tutorialMan.waitingFor == 9) { player.gdm.tutorialMan.progress++; }
     }
     void UpdateCombat()
     {
