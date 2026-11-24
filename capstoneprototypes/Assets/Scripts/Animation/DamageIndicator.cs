@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class DamageIndicator : MonoBehaviour
 {
@@ -10,6 +11,12 @@ public class DamageIndicator : MonoBehaviour
 
     public float initialYVelocity = 7.5f;
     public float lifeTime = 0.5f;
+
+    public Color dmgColor;
+    public Color healColor;
+
+    public TMP_FontAsset dmgFont;
+    public TMP_FontAsset healFont;
 
     private void Awake()
     {
@@ -25,6 +32,20 @@ public class DamageIndicator : MonoBehaviour
 
     public void SetDamage(int damage)
     {
-        damageText.text = damage.ToString();
+        string txt;
+        if (damage < 0)
+        {
+            txt = "+"+(-damage).ToString();
+            damageText.color = healColor;
+            damageText.font = healFont;
+        }
+        else
+        {
+            txt = "-"+damage.ToString();
+            damageText.color = dmgColor;
+            damageText.font = dmgFont;
+        }
+
+        damageText.text = txt;
     }
 }

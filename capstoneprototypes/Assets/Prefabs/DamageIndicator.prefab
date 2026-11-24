@@ -74,8 +74,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278518015
-  m_fontColor: {r: 1, g: 0, b: 0.020209312, a: 1}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -311,3 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialYVelocity: 3.5
   lifeTime: 0.75
+  dmgColor: {r: 1, g: 0.2304776, b: 0, a: 1}
+  healColor: {r: 0, g: 1, b: 0.27058825, a: 1}
+  dmgFont: {fileID: 11400000, guid: 7898057d06578b441990d9f15fd904e1, type: 2}
+  healFont: {fileID: 11400000, guid: c6ea5363f6685d249a708e295ebc839d, type: 2}
