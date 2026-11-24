@@ -53,7 +53,7 @@ public class DamageIndicator : MonoBehaviour
         string txt;
         if (damage < 0)
         {
-            txt = "+"+(-damage).ToString();
+            txt = "+" + (-damage).ToString();
             damageText.color = healColor;
             damageText.font = healFont;
         }

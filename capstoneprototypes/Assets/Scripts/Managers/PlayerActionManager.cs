@@ -79,6 +79,8 @@ public class PlayerActionManager : MonoBehaviour
     public GameDataManager gdm;
     public TextMeshProUGUI memoryCount;
     public GameObject damageIndicatorPrefab;
+    public GameObject feedbackIndicatorPrefab;
+    public Transform liveTimelineFeedbackPoint;
 
     private void Awake()
     {
@@ -338,10 +340,20 @@ public class PlayerActionManager : MonoBehaviour
         {
             attackEvent.removed = true;
             ParryLanded();
+            GameObject timingFeedbackObj = Instantiate(feedbackIndicatorPrefab, new Vector3(liveTimelineFeedbackPoint.position.x - 0.25f, liveTimelineFeedbackPoint.position.y, liveTimelineFeedbackPoint.position.z), Quaternion.identity);
+            TimingIndicator timingFeedback = timingFeedbackObj.GetComponent<TimingIndicator>();
+            timingFeedback.feedbackText.font = timingFeedback.hitFont;
+            timingFeedback.feedbackText.color = timingFeedback.hitColor;
+            timingFeedback.SetFeedback("Parry!");
         }
         else
         {
             TakeDamage(attackEvent.enemyAction.damage);
+            GameObject timingFeedbackObj = Instantiate(feedbackIndicatorPrefab, new Vector3(liveTimelineFeedbackPoint.position.x - 0.25f, liveTimelineFeedbackPoint.position.y, liveTimelineFeedbackPoint.position.z), Quaternion.identity);
+            TimingIndicator timingFeedback = timingFeedbackObj.GetComponent<TimingIndicator>();
+            timingFeedback.feedbackText.font = timingFeedback.missFont;
+            timingFeedback.feedbackText.color = timingFeedback.missColor;
+            timingFeedback.SetFeedback("Missed!");
         }
     }
 
