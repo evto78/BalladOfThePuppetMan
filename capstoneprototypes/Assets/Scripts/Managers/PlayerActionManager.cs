@@ -58,6 +58,7 @@ public class PlayerActionManager : MonoBehaviour
     [Header("Visuals")]
     public List<ParticleSystem> parryParticles;
     public List<ParticleSystem> perfectParticles;
+    public List<ParticleSystem> damageParticles;
     public Image energyFill;
     float visualEnergyLeft;
     public SpriteRenderer healthBar;
@@ -598,40 +599,49 @@ public class PlayerActionManager : MonoBehaviour
         DamageIndicator damageIndicator = damageIndicatorObj.GetComponent<DamageIndicator>();
         damageIndicator.SetDamage(dmg);
 
-        List<StatusEffectInstance> deletedEffects = new List<StatusEffectInstance>();
-        foreach (StatusEffectInstance se in statEffects)
+        if (dmg < 0)
         {
-            switch (se.data.id)
-            {
-                case 0:
-                    deletedEffects.Add(se);
-                    break;
-            }
-        }
-        RemoveEffectsFromList(deletedEffects);
-        foreach (ItemObject i in equippedItems)
-        {
-            switch (i.id)
-            {
-                case 0:
-                    if (!damageTakenDuringCombat)
-                    {
-                        damageTakenDuringCombat = true;
-                    }
-                    break;
-            }
-        }
 
-        switch (dmg)
-        {
-            case < 3: gAnim.StartCoroutine(gAnim.Shake(Vector3.right * 0.1f, 8f, 3f, -Vector3.one)); break;
-            case < 5: gAnim.StartCoroutine(gAnim.Shake(Vector3.right * 0.2f, 8f, 3f, -Vector3.one)); break;
-            case < 10: gAnim.StartCoroutine(gAnim.Shake(Vector3.right * 0.3f, 8f, 3f, -Vector3.one)); break;
-            case >= 10: gAnim.StartCoroutine(gAnim.Shake(Vector3.right * 0.6f, 8f, 3f, -Vector3.one)); break;
         }
+        else
+        {
+            List<StatusEffectInstance> deletedEffects = new List<StatusEffectInstance>();
+            foreach (StatusEffectInstance se in statEffects)
+            {
+                switch (se.data.id)
+                {
+                    case 0:
+                        deletedEffects.Add(se);
+                        break;
+                }
+            }
+            RemoveEffectsFromList(deletedEffects);
+            foreach (ItemObject i in equippedItems)
+            {
+                switch (i.id)
+                {
+                    case 0:
+                        if (!damageTakenDuringCombat)
+                        {
+                            damageTakenDuringCombat = true;
+                        }
+                        break;
+                }
+            }
 
-        psAnim.hitOverrideTimer = 0.25f;
-        if (hp <= 0) { Die(); }
+            switch (dmg)
+            {
+                case < 3: gAnim.StartCoroutine(gAnim.Shake(Vector3.right * 0.1f, 8f, 3f, -Vector3.one)); break;
+                case < 5: gAnim.StartCoroutine(gAnim.Shake(Vector3.right * 0.2f, 8f, 3f, -Vector3.one)); break;
+                case < 10: gAnim.StartCoroutine(gAnim.Shake(Vector3.right * 0.3f, 8f, 3f, -Vector3.one)); break;
+                case >= 10: gAnim.StartCoroutine(gAnim.Shake(Vector3.right * 0.6f, 8f, 3f, -Vector3.one)); break;
+            }
+
+            foreach (ParticleSystem ps in damageParticles) { ps.Play(); }
+
+            psAnim.hitOverrideTimer = 0.25f;
+            if (hp <= 0) { Die(); }
+        }
     }
 
     void Die()
