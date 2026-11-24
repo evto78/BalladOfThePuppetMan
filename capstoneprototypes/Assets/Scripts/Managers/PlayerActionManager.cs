@@ -80,8 +80,6 @@ public class PlayerActionManager : MonoBehaviour
     public GameDataManager gdm;
     public TextMeshProUGUI memoryCount;
     public GameObject damageIndicatorPrefab;
-    public GameObject feedbackIndicatorPrefab;
-    public Transform liveTimelineFeedbackPoint;
 
     private void Awake()
     {
@@ -341,20 +339,12 @@ public class PlayerActionManager : MonoBehaviour
         {
             attackEvent.removed = true;
             ParryLanded();
-            GameObject timingFeedbackObj = Instantiate(feedbackIndicatorPrefab, new Vector3(liveTimelineFeedbackPoint.position.x - 0.25f, liveTimelineFeedbackPoint.position.y, liveTimelineFeedbackPoint.position.z), Quaternion.identity);
-            TimingIndicator timingFeedback = timingFeedbackObj.GetComponent<TimingIndicator>();
-            timingFeedback.feedbackText.font = timingFeedback.hitFont;
-            timingFeedback.feedbackText.color = timingFeedback.hitColor;
-            timingFeedback.SetFeedback("Parry!");
+            //Add star particle for hitting a timing (spawn from "liveTimelineFeedbackPoint.position) *MAKE THESE PARTICLES GO RIGHT
         }
         else
         {
             TakeDamage(attackEvent.enemyAction.damage);
-            GameObject timingFeedbackObj = Instantiate(feedbackIndicatorPrefab, new Vector3(liveTimelineFeedbackPoint.position.x - 0.25f, liveTimelineFeedbackPoint.position.y, liveTimelineFeedbackPoint.position.z), Quaternion.identity);
-            TimingIndicator timingFeedback = timingFeedbackObj.GetComponent<TimingIndicator>();
-            timingFeedback.feedbackText.font = timingFeedback.missFont;
-            timingFeedback.feedbackText.color = timingFeedback.missColor;
-            timingFeedback.SetFeedback("Missed!");
+            //Add "!" particle or "x" particle for missing a timing (spawn from "liveTimelineFeedbackPoint.position) *MAKE THESE PARTICLES GO RIGHT
         }
     }
 
@@ -385,23 +375,29 @@ public class PlayerActionManager : MonoBehaviour
             PerfectLanded();
             attackEvent.removed = true;
             perfectMult = skill.perfectMultiplier;
+            //Add star particle for hitting a timing (spawn from "liveTimelineFeedbackPoint.position) *MAKE THESE PARTICLES GO LEFT
+        }
+        else
+        {
+            TakeDamage(attackEvent.enemyAction.damage);
+            //Add "!" particle or "x" particle for missing a timing (spawn from "liveTimelineFeedbackPoint.position) *MAKE THESE PARTICLES GO LEFT
         }
 
         switch (skill.id)
-        {
-            case 0: StandardAttack(attackEvent, skill, perfectMult); break; //Strike
-            case 1: StandardAttack(attackEvent, skill, perfectMult); break; //Bash
-            case 2: StandardAttack(attackEvent, skill, perfectMult); break; //Heavy Bash
-            case 4: AddStatusEffect(0, Mathf.CeilToInt(skill.intensity * perfectMult)); break; //Focus
-            case 5: StandardAttack(attackEvent, skill, perfectMult); break; //Barrage
-            case 6: StandardAttack(attackEvent, skill, perfectMult); break; //Headbutt
-            case 7: StandardAttack(attackEvent, skill, perfectMult); break; //Calm Punch
-            case 8: StandardAttack(attackEvent, skill, perfectMult); AddStatusEffect(0, Mathf.CeilToInt(skill.intensity * perfectMult)); break; //Focused Strike
-            case 9: StandardAttack(attackEvent, skill, perfectMult); break; //Strong Swing
-            case 10: StandardAttack(attackEvent, skill, perfectMult); break; //Poke
-            case 11: StandardAttack(attackEvent, skill, perfectMult); break; //Devistating Blow
-            case 12: StandardAttack(attackEvent, skill, perfectMult); break; //KILL
-        }
+            {
+                case 0: StandardAttack(attackEvent, skill, perfectMult); break; //Strike
+                case 1: StandardAttack(attackEvent, skill, perfectMult); break; //Bash
+                case 2: StandardAttack(attackEvent, skill, perfectMult); break; //Heavy Bash
+                case 4: AddStatusEffect(0, Mathf.CeilToInt(skill.intensity * perfectMult)); break; //Focus
+                case 5: StandardAttack(attackEvent, skill, perfectMult); break; //Barrage
+                case 6: StandardAttack(attackEvent, skill, perfectMult); break; //Headbutt
+                case 7: StandardAttack(attackEvent, skill, perfectMult); break; //Calm Punch
+                case 8: StandardAttack(attackEvent, skill, perfectMult); AddStatusEffect(0, Mathf.CeilToInt(skill.intensity * perfectMult)); break; //Focused Strike
+                case 9: StandardAttack(attackEvent, skill, perfectMult); break; //Strong Swing
+                case 10: StandardAttack(attackEvent, skill, perfectMult); break; //Poke
+                case 11: StandardAttack(attackEvent, skill, perfectMult); break; //Devistating Blow
+                case 12: StandardAttack(attackEvent, skill, perfectMult); break; //KILL
+            }
     }
 
     void StandardAttack(TimelineManager.TimelineEvent attackEvent, PlayerSkill skill, float perfectMult)

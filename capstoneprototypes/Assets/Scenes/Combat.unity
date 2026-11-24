@@ -2668,6 +2668,7 @@ Transform:
   m_Children:
   - {fileID: 86838766}
   - {fileID: 1669883196}
+  - {fileID: 394248435}
   m_Father: {fileID: 881225007}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &124426491
@@ -5293,6 +5294,9 @@ MonoBehaviour:
   roomSelection: {fileID: 1261328443}
   liveTimelineGAnim: {fileID: 124426491}
   liveTimelineMarker: {fileID: 986754050281149868}
+  onRoundEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &241760519
 GameObject:
   m_ObjectHideFlags: 0
@@ -13347,6 +13351,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 391504554}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &394248434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 394248435}
+  m_Layer: 0
+  m_Name: Feedback Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &394248435
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394248434}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.75, y: -0.35, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 124426490}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &400108681
 GameObject:
   m_ObjectHideFlags: 0
@@ -69231,9 +69266,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1413143058}
     - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
+      propertyPath: feedbackIndicatorPrefab
+      value: 
+      objectReference: {fileID: 9204953870382014862, guid: 007ea4de306dfbf4a870017f02e49a07, type: 3}
+    - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
       propertyPath: liveTimelineGuideGenAnim
       value: 
       objectReference: {fileID: 1516930381}
+    - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
+      propertyPath: liveTimelineFeedbackPoint
+      value: 
+      objectReference: {fileID: 394248435}
     - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
       propertyPath: parryParticles.Array.size
       value: 5
