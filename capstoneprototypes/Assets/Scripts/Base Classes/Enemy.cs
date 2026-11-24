@@ -40,6 +40,7 @@ public class Enemy : MonoBehaviour
     EnemySpriteAnimator anim;
     public GameObject particles;
     public List<ParticleSystem> deathParticles;
+    GameObject damageIndicatorObj;
 
     [Header("Stats")]
     public int mhp;
@@ -313,9 +314,18 @@ public class Enemy : MonoBehaviour
         }
 
         hp -= damage;
-        GameObject damageIndicatorObj = Instantiate(damageIndicatorPrefab, new Vector3(transform.position.x - 0.75f, transform.position.y, transform.position.z), Quaternion.identity);
-        DamageIndicator damageIndicator = damageIndicatorObj.GetComponent<DamageIndicator>();
-        damageIndicator.SetDamage(damage);
+
+        if (damageIndicatorObj == null)
+        {
+            damageIndicatorObj = Instantiate(damageIndicatorPrefab, new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z), Quaternion.identity);
+            DamageIndicator damageIndicator = damageIndicatorObj.GetComponent<DamageIndicator>();
+            damageIndicator.UpdateDamageIndicator(damage);
+        }
+        else
+        {
+            DamageIndicator damageIndicator = damageIndicatorObj.GetComponent<DamageIndicator>();
+            damageIndicator.UpdateDamageIndicator(damage);
+        }
 
         if (hp <= 0) { Die(); }
     }
