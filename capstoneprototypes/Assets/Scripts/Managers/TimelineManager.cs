@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Timeline;
 using UnityEngine.UI;
 using static TimelineManager;
@@ -70,6 +71,7 @@ public class TimelineManager : MonoBehaviour
     Transform liveTimeline;
     public GameObject liveTimelineMarker;
     List<MarkerObject> liveMarkers;
+    public UnityEvent onRoundEnd;
 
     private void Awake()
     {
@@ -304,6 +306,7 @@ public class TimelineManager : MonoBehaviour
         player.SkillSelectStart();
 
         camGlide.isUp = false;
+        onRoundEnd?.Invoke();
     }
     void PrepareNextRound()
     {

@@ -594,8 +594,9 @@ public class PlayerActionManager : MonoBehaviour
     void TakeDamage(int dmg)
     {
         hp -= dmg;
-        GameObject damageIndicatorObj = Instantiate(damageIndicatorPrefab, new Vector3(transform.position.x + 0.75f, transform.position.y, transform.position.z), Quaternion.identity);
+        GameObject damageIndicatorObj = Instantiate(damageIndicatorPrefab, new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z), Quaternion.identity);
         DamageIndicator damageIndicator = damageIndicatorObj.GetComponent<DamageIndicator>();
+        damageIndicator.untilRoundEnd = false;
         damageIndicator.SetDamage(dmg);
 
         List<StatusEffectInstance> deletedEffects = new List<StatusEffectInstance>();
