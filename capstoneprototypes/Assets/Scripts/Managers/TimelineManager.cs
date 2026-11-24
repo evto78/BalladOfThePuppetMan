@@ -386,6 +386,7 @@ public class TimelineManager : MonoBehaviour
 
         //Tutorial checking stuff
         if (player.gdm.tutorialMan.waitingFor == 9) { player.gdm.tutorialMan.progress++; }
+        onRoundEnd?.Invoke();
     }
     void UpdateCombat()
     {

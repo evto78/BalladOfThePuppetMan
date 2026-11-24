@@ -75,7 +75,7 @@ public class DamageIndicator : MonoBehaviour
 
     void DestoryNumbers()
     {
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 1.5f);
     }
 
     public void OnDestroy()
