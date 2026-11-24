@@ -65,12 +65,13 @@ MonoBehaviour:
   markerSprites:
   - {fileID: 21300000, guid: 44ee6d0c2e041f34ea88b30f7dd0d35e, type: 3}
   - {fileID: 21300000, guid: def8e6778ee575848a2466d75909d19f, type: 3}
-  - {fileID: 21300000, guid: 1ef0d22deb90b374b9efefb0dd86d5d3, type: 3}
-  - {fileID: 21300000, guid: 522d7cd5b5b541f4e9d2f0b04547156f, type: 3}
+  - {fileID: -339754927, guid: fa70e9268b642af4a90b4a78027f516d, type: 3}
+  - {fileID: -1079366552, guid: fa70e9268b642af4a90b4a78027f516d, type: 3}
   - {fileID: 0}
   baseSortingOrder: 50
   bgSr: {fileID: 4646061820852217743}
   myReadout: {fileID: 7399167942500756297}
+  standardYPos: 0
   bobbingCurve:
     serializedVersion: 2
     m_Curve:
