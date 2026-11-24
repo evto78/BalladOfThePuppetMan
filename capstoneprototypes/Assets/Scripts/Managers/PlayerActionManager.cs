@@ -347,6 +347,7 @@ public class PlayerActionManager : MonoBehaviour
             {
                 //Add particle spawn for GOOD timing going RIGHT
             }
+            Debug.Log(delay);
         }
         else
         {
@@ -372,6 +373,7 @@ public class PlayerActionManager : MonoBehaviour
             {
                 //Add particle spawn for GOOD timing going LEFT
             }
+            Debug.Log(delay);
         }
         else
         {
