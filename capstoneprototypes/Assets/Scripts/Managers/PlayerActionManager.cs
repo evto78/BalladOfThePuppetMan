@@ -59,6 +59,10 @@ public class PlayerActionManager : MonoBehaviour
     public List<ParticleSystem> parryParticles;
     public List<ParticleSystem> perfectParticles;
     public List<ParticleSystem> damageParticles;
+    public ParticleSystem starRight;
+    public ParticleSystem starLeft;
+    public ParticleSystem goodRight;
+    public ParticleSystem goodLeft;
     public Image energyFill;
     float visualEnergyLeft;
     public SpriteRenderer healthBar;
@@ -238,6 +242,8 @@ public class PlayerActionManager : MonoBehaviour
         curParryCooldown = parryCooldown;
         curParryCooldownVisual = parryCooldown;
         parryActive = true;
+
+
     }
 
     void AttemptPerfect()
@@ -267,69 +273,69 @@ public class PlayerActionManager : MonoBehaviour
         psAnim.UpdateVisuals(parryActive, parryLanded, perfectActive, perfectLanded);
     }
 
+    bool trueParry; bool truePerfect;
     public IEnumerator ReactableEvent(TimelineManager.TimelineEvent onComingEvent)
     {
-        //return;
-        //timeline.timePassed;
-        //timeline.TimeFromIndex(onComingEvent.timelineIndex);
+        trueParry = false; truePerfect = false;
 
         //If player is already parrying, then resolve this now.
         if (onComingEvent.eventType == TimelineManager.EventType.EnemyAtk)
         {
-            if (parryActive) { MonsterAttacked(onComingEvent, curParryCooldown - parryCooldown); }
+            bool attackProcessed = false;
+            float tempTimer = parryWindow;
+            if (parryActive) 
+            {
+                MonsterAttacked(onComingEvent, (parryWindow) - tempTimer);
+            }
             else
             {
                 //Otherwise, Wait for up to half of the parry window, and check again.
-                bool attackProcessed = false;
-                float tempTimer = parryWindow / 2f;
                 while (tempTimer > 0 && attackProcessed == false)
                 {
-                    if (parryActive) { attackProcessed = true; MonsterAttacked(onComingEvent, (parryWindow / 2f) - tempTimer); }
+                    if (parryActive)
+                    { parryActive = true; trueParry = true; attackProcessed = true; MonsterAttacked(onComingEvent, (parryWindow) - tempTimer); }
                     tempTimer -= Time.deltaTime;
                     yield return new WaitForEndOfFrame();
                 }
+                tempTimer = 0;
                 //If the attack still wasn't parried, send it now.
-                if (!attackProcessed) { MonsterAttacked(onComingEvent, (parryWindow / 2f) - tempTimer); }
+                if (!attackProcessed) { MonsterAttacked(onComingEvent, (parryWindow) - tempTimer); }
             }
         }
 
         //If player is already perfecting, then resolve this now.
         else if (onComingEvent.eventType == TimelineManager.EventType.PlayerAtk)
         {
-            if (perfectActive) { PlayerActivateSkill(onComingEvent, curPerfectCooldown - perfectCooldown); }
-            else
+            //Otherwise, Wait for up to half of the perfect window, and check again.
+            bool attackProcessed = false;
+            float tempTimer = perfectWindow;
+            while (tempTimer > 0 && attackProcessed == false)
             {
-                //Otherwise, Wait for up to half of the perfect window, and check again.
-                bool attackProcessed = false;
-                float tempTimer = perfectWindow / 2f;
-                while (tempTimer > 0 && attackProcessed == false)
-                {
-                    if (perfectActive) { attackProcessed = true; PlayerActivateSkill(onComingEvent, (perfectWindow / 2f) - tempTimer); }
-                    tempTimer -= Time.deltaTime;
-                    yield return new WaitForEndOfFrame();
-                }
-                //If the attack still wasn't parried, send it now.
-                if (!attackProcessed) { PlayerActivateSkill(onComingEvent, (perfectWindow / 2f) - tempTimer); }
+                if (perfectActive) 
+                { perfectActive = true; truePerfect = true; attackProcessed = true; PlayerActivateSkill(onComingEvent, (perfectWindow) - tempTimer); }
+                tempTimer -= Time.deltaTime;
+                yield return new WaitForEndOfFrame();
             }
+            tempTimer = 0;
+            //If the attack still wasn't parried, send it now.
+            if (!attackProcessed) { PlayerActivateSkill(onComingEvent, (perfectWindow) - tempTimer); }
         }
 
         else if (onComingEvent.eventType == TimelineManager.EventType.Heal)
         {
-            if (parryActive) { GurbyHeal(onComingEvent, curParryCooldown - parryCooldown); }
-            else
+            //Otherwise, Wait for up to half of the parry window, and check again.
+            bool attackProcessed = false;
+            float tempTimer = parryWindow;
+            while (tempTimer > 0 && attackProcessed == false)
             {
-                //Otherwise, Wait for up to half of the parry window, and check again.
-                bool attackProcessed = false;
-                float tempTimer = parryWindow / 2f;
-                while (tempTimer > 0 && attackProcessed == false)
-                {
-                    if (parryActive) { attackProcessed = true; GurbyHeal(onComingEvent, (parryWindow / 2f) - tempTimer); }
-                    tempTimer -= Time.deltaTime;
-                    yield return new WaitForEndOfFrame();
-                }
-                //If the attack still wasn't parried, send it now.
-                if (!attackProcessed) { GurbyHeal(onComingEvent, (parryWindow / 2f) - tempTimer); }
+                if (parryActive) 
+                { parryActive = true; trueParry = true; attackProcessed = true; GurbyHeal(onComingEvent, (parryWindow) - tempTimer); }
+                tempTimer -= Time.deltaTime;
+                yield return new WaitForEndOfFrame();
             }
+            tempTimer = 0;
+            //If the attack still wasn't parried, send it now.
+            if (!attackProcessed) { GurbyHeal(onComingEvent, (parryWindow) - tempTimer); }
         }
 
         yield return null;
@@ -338,19 +344,18 @@ public class PlayerActionManager : MonoBehaviour
     //An enemy is about to hit the player
     public void MonsterAttacked(TimelineManager.TimelineEvent attackEvent, float delay)
     {
-        if (parryActive)
+        if (trueParry)
         {
             attackEvent.removed = true;
             ParryLanded();
-            if (delay >= -0.025f && delay <= 0.025f)
+            if (delay > parryWindow * 0.4f && delay < parryWindow * 0.6f)
             {
-                //Add particle spawn for PERFECT timing going RIGHT
+                starRight.Play();
             }
             else
             {
-                //Add particle spawn for GOOD timing going RIGHT
+                goodRight.Play();
             }
-            Debug.Log(delay);
         }
         else
         {
@@ -362,19 +367,19 @@ public class PlayerActionManager : MonoBehaviour
     //Gurby is about to heal the player
     public void GurbyHeal(TimelineManager.TimelineEvent healEvent, float delay)
     {
-        if (parryActive)
+        if (trueParry)
         {
             healEvent.removed = true;
             TakeDamage(-healEvent.enemyAction.damage);
             if (hp > mhp) { hp = mhp; }
             ParryLanded();
-            if (delay >= -0.025f && delay <= 0.025f)
+            if (delay > parryWindow * 0.4f && delay < parryWindow * 0.6f)
             {
-                //Add particle spawn for PERFECT timing going LEFT
+                starRight.Play();
             }
             else
             {
-                //Add particle spawn for GOOD timing going LEFT
+                goodRight.Play();
             }
             Debug.Log(delay);
         }
@@ -390,16 +395,24 @@ public class PlayerActionManager : MonoBehaviour
         PlayerSkill skill = attackEvent.playerSkill;
         float perfectMult = 1;
 
-        if (skill.perfectable && perfectActive)
+        if (skill.perfectable && truePerfect)
         {
             PerfectLanded();
             attackEvent.removed = true;
             perfectMult = skill.perfectMultiplier;
             //Add star particle for hitting a timing (spawn from "liveTimelineFeedbackPoint.position) *MAKE THESE PARTICLES GO LEFT
+
+            if (delay > perfectWindow * 0.4f && delay < perfectWindow * 0.6f)
+            {
+                starLeft.Play();
+            }
+            else
+            {
+                goodLeft.Play();
+            }
         }
         else
         {
-            TakeDamage(attackEvent.enemyAction.damage);
             //Add "!" particle or "x" particle for missing a timing (spawn from "liveTimelineFeedbackPoint.position) *MAKE THESE PARTICLES GO LEFT
         }
 

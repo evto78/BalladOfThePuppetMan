@@ -83851,13 +83851,29 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
+      propertyPath: goodLeft
+      value: 
+      objectReference: {fileID: 1775260284}
+    - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
+      propertyPath: starLeft
+      value: 
+      objectReference: {fileID: 1108171290}
+    - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
       propertyPath: targetUI
       value: 
       objectReference: {fileID: 810190192}
     - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
+      propertyPath: goodRight
+      value: 
+      objectReference: {fileID: 369311130}
+    - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
       propertyPath: healthTxt
       value: 
       objectReference: {fileID: 1839921791}
+    - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
+      propertyPath: starRight
+      value: 
+      objectReference: {fileID: 407323760}
     - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
       propertyPath: energyFill
       value: 
@@ -83872,7 +83888,7 @@ PrefabInstance:
       objectReference: {fileID: 1843178997}
     - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
       propertyPath: parryWindow
-      value: 0.3
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
       propertyPath: smallTarget
@@ -83888,7 +83904,7 @@ PrefabInstance:
       objectReference: {fileID: 1413143058}
     - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
       propertyPath: parryCooldown
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
       propertyPath: feedbackIndicatorPrefab
@@ -83904,7 +83920,7 @@ PrefabInstance:
       objectReference: {fileID: 394248435}
     - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
       propertyPath: parryParticles.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
       propertyPath: damageParticles.Array.size
@@ -83912,7 +83928,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
       propertyPath: perfectParticles.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
       propertyPath: parryParticles.Array.data[4]

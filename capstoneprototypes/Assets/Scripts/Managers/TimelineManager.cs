@@ -390,6 +390,7 @@ public class TimelineManager : MonoBehaviour
     void UpdateCombat()
     {
         eventIndex = Mathf.FloorToInt((timePassed / combatTime) * resolution);
+        int previewIndex = eventIndex + IndexFromTime(player.parryWindow/2f);
 
         //Don't run the same event index multiple times but run all events that still need to be run
         int catchUp = eventIndex - prevEventIndex;
@@ -397,7 +398,20 @@ public class TimelineManager : MonoBehaviour
         {
             foreach (TimelineEvent e in eventList)
             {
-                if (!e.removed && (e.timelineIndex == eventIndex || (e.timelineIndex < eventIndex && e.timelineIndex > eventIndex-catchUp))) { RunEvent(e); }
+                if (e.eventType == EventType.EnemyAtk || e.eventType == EventType.PlayerAtk || e.eventType == EventType.Heal)
+                {
+                    if (!e.removed && (e.timelineIndex == previewIndex || (e.timelineIndex < previewIndex && e.timelineIndex > previewIndex - catchUp)))
+                    {
+                        RunEvent(e);
+                    }
+                }
+                else
+                {
+                    if (!e.removed && (e.timelineIndex == eventIndex || (e.timelineIndex < eventIndex && e.timelineIndex > eventIndex - catchUp)))
+                    {
+                        RunEvent(e);
+                    }
+                }
             }
         }
 
