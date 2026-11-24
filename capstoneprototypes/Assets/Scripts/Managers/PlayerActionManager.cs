@@ -269,6 +269,7 @@ public class PlayerActionManager : MonoBehaviour
 
     public IEnumerator ReactableEvent(TimelineManager.TimelineEvent onComingEvent)
     {
+        //return;
         //timeline.timePassed;
         //timeline.TimeFromIndex(onComingEvent.timelineIndex);
 
@@ -314,7 +315,7 @@ public class PlayerActionManager : MonoBehaviour
 
         else if (onComingEvent.eventType == TimelineManager.EventType.Heal)
         {
-            if (parryActive) { GurbyHeal(onComingEvent, 0f); }
+            if (parryActive) { GurbyHeal(onComingEvent, curParryCooldown - parryCooldown); }
             else
             {
                 //Otherwise, Wait for up to half of the parry window, and check again.
