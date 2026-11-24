@@ -15,6 +15,6 @@ MonoBehaviour:
   id: 7
   cost: 25
   isRare: 0
-  sprite: {fileID: -580280943, guid: 444d67eac5ff5d44c8d8850f34c3864d, type: 3}
+  sprite: {fileID: -2140066119, guid: bb35f95c03ad25943b3d4bebae6924cd, type: 3}
   itemName: Green Paint
   itemDescription: Money skills deal 50% more damage.

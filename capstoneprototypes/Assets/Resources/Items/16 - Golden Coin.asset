@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 16
   cost: 50
   isRare: 1
-  sprite: {fileID: 21300000, guid: 4ae5074efc4d61540993f44ccfb2a561, type: 3}
+  sprite: {fileID: 1098352766, guid: bb35f95c03ad25943b3d4bebae6924cd, type: 3}
   itemName: Golden Coin
   itemDescription: Deal an extra 1% damage for every memory you have and -1% damage
     for every memory you are in debt. (Cap of +100% & -50%)
