@@ -209,8 +209,8 @@ public class PlayerActionManager : MonoBehaviour
         curPerfectCooldownVisual -= Time.deltaTime; if (curPerfectCooldownVisual < 0) { curPerfectCooldownVisual = 0; }
 
         //Check if parry / perfect window is over
-        parryActive = parryCooldown - curParryCooldown < parryWindow; if (!parryActive) { parryLanded = false; }
-        perfectActive = perfectCooldown - curPerfectCooldown < perfectWindow; if (!perfectActive) { perfectLanded = false; }
+        parryActive = parryCooldown - curParryCooldown < parryWindow / 2f; if (!parryActive) { parryLanded = false; }
+        perfectActive = perfectCooldown - curPerfectCooldown < perfectWindow / 2f; if (!perfectActive) { perfectLanded = false; }
 
         GetInputs();
 
@@ -269,10 +269,13 @@ public class PlayerActionManager : MonoBehaviour
 
     public IEnumerator ReactableEvent(TimelineManager.TimelineEvent onComingEvent)
     {
+        //timeline.timePassed;
+        //timeline.TimeFromIndex(onComingEvent.timelineIndex);
+
         //If player is already parrying, then resolve this now.
         if (onComingEvent.eventType == TimelineManager.EventType.EnemyAtk)
         {
-            if (parryActive) { MonsterAttacked(onComingEvent, 0f); }
+            if (parryActive) { MonsterAttacked(onComingEvent, curParryCooldown - parryCooldown); }
             else
             {
                 //Otherwise, Wait for up to half of the parry window, and check again.
@@ -292,7 +295,7 @@ public class PlayerActionManager : MonoBehaviour
         //If player is already perfecting, then resolve this now.
         else if (onComingEvent.eventType == TimelineManager.EventType.PlayerAtk)
         {
-            if (perfectActive) { PlayerActivateSkill(onComingEvent, 0f); }
+            if (perfectActive) { PlayerActivateSkill(onComingEvent, curPerfectCooldown - perfectCooldown); }
             else
             {
                 //Otherwise, Wait for up to half of the perfect window, and check again.

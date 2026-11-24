@@ -83871,6 +83871,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1843178997}
     - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
+      propertyPath: parryWindow
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
       propertyPath: smallTarget
       value: 
       objectReference: {fileID: 909273725}
@@ -83882,6 +83886,10 @@ PrefabInstance:
       propertyPath: maxHealthTxt
       value: 
       objectReference: {fileID: 1413143058}
+    - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
+      propertyPath: parryCooldown
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
       propertyPath: feedbackIndicatorPrefab
       value: 
@@ -83917,7 +83925,7 @@ PrefabInstance:
     - target: {fileID: 632002506906055827, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
       propertyPath: perfectParticles.Array.data[1]
       value: 
-      objectReference: {fileID: 407323760}
+      objectReference: {fileID: 1108171290}
     - target: {fileID: 4450005934008948705, guid: 831809e2b713adb46b508f4b02e282d7, type: 3}
       propertyPath: m_Name
       value: Player
