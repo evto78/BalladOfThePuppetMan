@@ -64885,7 +64885,7 @@ PrefabInstance:
     - target: {fileID: 6127741487800079185, guid: 73ede6cbf15a6c34bb9122816e450d4c, type: 3}
       propertyPath: roomIcons.Array.data[5]
       value: 
-      objectReference: {fileID: 21300000, guid: 8eec52cb703779648ac3c0e28471c8c9, type: 3}
+      objectReference: {fileID: 21300000, guid: 76dddda6aa3001a46982c1077d9d742c, type: 3}
     - target: {fileID: 6127741487800079185, guid: 73ede6cbf15a6c34bb9122816e450d4c, type: 3}
       propertyPath: roomWeights.Array.data[5]
       value: 0
@@ -64897,7 +64897,7 @@ PrefabInstance:
     - target: {fileID: 6127741487800079185, guid: 73ede6cbf15a6c34bb9122816e450d4c, type: 3}
       propertyPath: selectedRoomIcons.Array.data[5]
       value: 
-      objectReference: {fileID: 21300000, guid: 659235770393b45408f148893e5c0252, type: 3}
+      objectReference: {fileID: 21300000, guid: 76dddda6aa3001a46982c1077d9d742c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
