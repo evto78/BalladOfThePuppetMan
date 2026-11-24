@@ -65,6 +65,7 @@ public class PlayerActionManager : MonoBehaviour
     public List<Sprite> healthBarStates;
     public Color positiveMemoriesColor;
     public Color negativeMemoriesColor;
+    public GeneralAnimator liveTimelineGuideGenAnim;
 
     [Header("References")]
     PlayerSpriteAnimator psAnim;
@@ -614,10 +615,11 @@ public class PlayerActionManager : MonoBehaviour
 
         if (dmg < 0)
         {
-
+            //Heal Effects
         }
         else
         {
+            //Damage Effects
             List<StatusEffectInstance> deletedEffects = new List<StatusEffectInstance>();
             foreach (StatusEffectInstance se in statEffects)
             {
@@ -672,6 +674,11 @@ public class PlayerActionManager : MonoBehaviour
         timeline.HitParticles();
         audioMan.PlaySound(1, AudioManager.SFXType.Effect, 1f, 1f);
 
+        liveTimelineGuideGenAnim.transform.localEulerAngles = Vector3.forward * 360f;
+        Quaternion endRot = liveTimelineGuideGenAnim.transform.localRotation;
+        liveTimelineGuideGenAnim.transform.localEulerAngles = Vector3.zero;
+        liveTimelineGuideGenAnim.StartCoroutine(liveTimelineGuideGenAnim.TurnToRot(endRot, 0.5f, false));
+
         foreach (ItemObject i in equippedItems)
         {
             switch (i.id)
@@ -692,6 +699,11 @@ public class PlayerActionManager : MonoBehaviour
         curPerfectCooldown = 0;
         foreach (ParticleSystem ps in perfectParticles) { ps.Stop(); ps.Play(); }
         timeline.HitParticles();
+
+        liveTimelineGuideGenAnim.transform.localEulerAngles = Vector3.forward * 360f;
+        Quaternion endRot = liveTimelineGuideGenAnim.transform.localRotation;
+        liveTimelineGuideGenAnim.transform.localEulerAngles = Vector3.zero;
+        liveTimelineGuideGenAnim.StartCoroutine(liveTimelineGuideGenAnim.TurnToRot(endRot, 0.5f, false));
 
         foreach (ItemObject i in equippedItems)
         {
