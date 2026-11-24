@@ -339,12 +339,19 @@ public class PlayerActionManager : MonoBehaviour
         {
             attackEvent.removed = true;
             ParryLanded();
-            //Add star particle for hitting a timing (spawn from "liveTimelineFeedbackPoint.position) *MAKE THESE PARTICLES GO RIGHT
+            if (delay >= -0.025f && delay <= 0.025f)
+            {
+                //Add particle spawn for PERFECT timing going RIGHT
+            }
+            else
+            {
+                //Add particle spawn for GOOD timing going RIGHT
+            }
         }
         else
         {
             TakeDamage(attackEvent.enemyAction.damage);
-            //Add "!" particle or "x" particle for missing a timing (spawn from "liveTimelineFeedbackPoint.position) *MAKE THESE PARTICLES GO RIGHT
+            //Add arrow color change to red for missed timing
         }
     }
 
@@ -357,10 +364,18 @@ public class PlayerActionManager : MonoBehaviour
             TakeDamage(-healEvent.enemyAction.damage);
             if (hp > mhp) { hp = mhp; }
             ParryLanded();
+            if (delay >= -0.025f && delay <= 0.025f)
+            {
+                //Add particle spawn for PERFECT timing going LEFT
+            }
+            else
+            {
+                //Add particle spawn for GOOD timing going LEFT
+            }
         }
         else
         {
-            //TakeDamage(healEvent.enemyAction.damage);
+            //Add arrow color change to red for missed timing
         }
     }
 
