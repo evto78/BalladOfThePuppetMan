@@ -637,6 +637,7 @@ public class PlayerActionManager : MonoBehaviour
     void TakeDamage(int dmg)
     {
         hp -= dmg;
+        audioMan.PlaySound(7, AudioManager.SFXType.Effect, 0.5f, 1f);
         GameObject damageIndicatorObj = Instantiate(damageIndicatorPrefab, new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z), Quaternion.identity);
         DamageIndicator damageIndicator = damageIndicatorObj.GetComponent<DamageIndicator>();
         damageIndicator.untilRoundEnd = false;
@@ -691,6 +692,7 @@ public class PlayerActionManager : MonoBehaviour
     void Die()
     {
         Debug.Log("DEAD!");
+        audioMan.PlaySound(5, AudioManager.SFXType.Effect, 1f, 1f);
         gameObject.SetActive(false);
         gdm.ChangeState(GameDataManager.State.GameOver);
     }

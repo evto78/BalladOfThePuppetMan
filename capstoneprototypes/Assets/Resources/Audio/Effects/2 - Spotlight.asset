@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6592e973e8624c42b9ccc7753b4af3e, type: 3}
   m_Name: 2 - Spotlight
   m_EditorClassIdentifier: 
-  id: 0
-  clip: {fileID: 0}
-  clipType: 0
+  id: 2
+  clip: {fileID: 8300000, guid: 1f2d696ecf3aa1d469670b59fb3dd10c, type: 3}
+  clipType: 1

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6592e973e8624c42b9ccc7753b4af3e, type: 3}
   m_Name: 5 - Death
   m_EditorClassIdentifier: 
-  id: 0
-  clip: {fileID: 0}
-  clipType: 0
+  id: 5
+  clip: {fileID: 8300000, guid: caccff7bb7bd3c84e9ff6a5d16023203, type: 3}
+  clipType: 1

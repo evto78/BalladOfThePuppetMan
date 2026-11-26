@@ -334,7 +334,7 @@ public class Enemy : MonoBehaviour
         foreach(ParticleSystem ps in deathParticles) { ps.Play(); }
         particles.transform.parent = null;
         Destroy(particles, 8f);
-
+        audioMan.PlaySound(6, AudioManager.SFXType.Effect, 1f, 1f);
         Destroy(gameObject, 0.01f);
     }
 }
