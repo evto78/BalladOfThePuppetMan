@@ -175,6 +175,7 @@ public class AudioManager : MonoBehaviour
         musicSource.source.volume = vol; musicSource.source.pitch = pitch;
         musicSource.source.volume *= volMod; musicSource.source.volume *= masterVol;
         musicSource.source.clip = sfxObj.clip;
+        musicSource.source.loop = true;
 
         musicSource.source.Play();
 
