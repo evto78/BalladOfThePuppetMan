@@ -80,6 +80,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5f3c8927a25545649b13d6e5c025edce, type: 2}
   allStatusEffects:
   - {fileID: 11400000, guid: 09c1e903da82d2d4a8dbb0e8d7ea0e72, type: 2}
+  - {fileID: 11400000, guid: de096554bdb5a144ba0bd5f58f4bce28, type: 2}
+  - {fileID: 11400000, guid: 61ab87860af7bbc429ff6f3f18c8db44, type: 2}
+  - {fileID: 11400000, guid: 346a08dd29d3d0e479937618e0a4e924, type: 2}
+  - {fileID: 11400000, guid: 03747e8563a5daa4083b16c74979da3e, type: 2}
   itemSprites:
   - {fileID: -1220463032, guid: bb35f95c03ad25943b3d4bebae6924cd, type: 3}
   - {fileID: -775753074, guid: bb35f95c03ad25943b3d4bebae6924cd, type: 3}

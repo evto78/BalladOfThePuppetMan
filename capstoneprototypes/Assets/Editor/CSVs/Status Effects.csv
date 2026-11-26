@@ -1,2 +1,6 @@
 ID,Status Name,Status Description
 0,Focus,Your next attack will do 50% more damage for each stack of Focus. Lose all Focus when taking damage.
+1,Forgetful,You sometimes forget things. Reduce final damage and healing by 5%.
+2,Scattered,Your thoughts are a complete mess. Reduce final damage and healing by 10%. Reduce max hp by 2.
+3,Lost,"Where am I again? Reduce final damage by 15%, final healing by 20%, max health by 5, and memory gain by 10%."
+4,Amnesia,"Who am I…? Reduce final damage by 25%, final healing by 30%, and memory gain by 25%. Max health is always set to 1 at this state. Positive status effects are halved, while negative ones are doubled."
