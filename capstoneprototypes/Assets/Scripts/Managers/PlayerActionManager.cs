@@ -22,6 +22,11 @@ public class PlayerActionManager : MonoBehaviour
     public int energy;
 
     public int curMemories = 0;
+    public float finalDamageMult = 0;
+    public float finalHealMult = 0;
+    public float finalMemoryGainMult = 0;
+    public float finalStatusEffectMult = 0;
+    public int oldmhp;
 
     float timeSpent;
 
@@ -105,6 +110,7 @@ public class PlayerActionManager : MonoBehaviour
     void Start()
     {
         hp = mhp;
+        oldmhp = mhp;
         energy = maxEnergy;
 
         memoryCount.transform.parent.gameObject.SetActive(false);
@@ -443,7 +449,7 @@ public class PlayerActionManager : MonoBehaviour
             switch (se.data.id)
             {
                 case 0:
-                    bonusMult += 0.5f * se.stacks;
+                    bonusMult += 0.5f * se.stacks * (1+finalStatusEffectMult);
                     deletedEffects.Add(se);
                     break;
             }
@@ -522,7 +528,7 @@ public class PlayerActionManager : MonoBehaviour
             //If no enemies are left alive, cancel the attack.
             else if (timeline.activeEnemies.Count == 0) { return; }
             //Do the attack.
-            attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * bonusMult * perfectMult * elementalMult));
+            attackEvent.enemyTargeted.TakeDamage(Mathf.CeilToInt(skill.intensity * bonusMult * perfectMult * elementalMult * (1 + finalDamageMult)));
         }
         else if (skill.target == PlayerSkill.TargetType.AllEnemies)
         {
@@ -541,7 +547,7 @@ public class PlayerActionManager : MonoBehaviour
                     }
                 }
 
-                e.TakeDamage(Mathf.CeilToInt(skill.intensity * bonusMult * perfectMult * elementalMult));
+                e.TakeDamage(Mathf.CeilToInt(skill.intensity * bonusMult * perfectMult * elementalMult * (1+finalDamageMult)));
             }
             
         }
@@ -748,7 +754,69 @@ public class PlayerActionManager : MonoBehaviour
 
     public void GainLoseMemory(int amount)
     {
-        StartCoroutine(MemoryGainLoseAnim(amount));
+        if (amount > 0)
+        {
+            int newAmount = Mathf.CeilToInt(amount * (1+finalMemoryGainMult));
+            StartCoroutine(MemoryGainLoseAnim(newAmount));
+        }
+        else
+        {
+            StartCoroutine(MemoryGainLoseAnim(amount));
+        }
+
+        List<StatusEffectInstance> removeList = new List<StatusEffectInstance>();
+        int curCurrency = curMemories + amount;
+        mhp = oldmhp;
+        finalDamageMult = 0;
+        finalHealMult = 0;
+        finalMemoryGainMult = 0;
+        finalStatusEffectMult = 0;
+
+        foreach (StatusEffectInstance se in statEffects)
+        {
+            if (se.data.id >= 1 && se.data.id <= 4)
+            {
+                removeList.Add(se);
+            }
+        }
+        foreach (StatusEffectInstance se in removeList)
+        {
+            statEffects.Remove(se);
+        }
+
+        if (curCurrency <= -250)
+        {
+            AddStatusEffect(4, 1);
+            finalDamageMult = -0.25f;
+            finalHealMult = -0.3f;
+            finalMemoryGainMult = -0.25f;
+            finalStatusEffectMult = -0.5f;
+            mhp = 1;
+            hp = Mathf.Clamp(hp, 0, mhp);
+        }
+        else if (curCurrency <= -100)
+        {
+            AddStatusEffect(3, 1);
+            finalDamageMult = -0.15f;
+            finalHealMult = -0.2f;
+            finalMemoryGainMult = -0.1f;
+            mhp -= 5;
+            hp = Mathf.Clamp(hp, 0, mhp);
+        }
+        else if (curCurrency <= -50)
+        {
+            AddStatusEffect(2, 1);
+            finalDamageMult = -0.1f;
+            finalHealMult = -0.1f;
+            mhp -= 2;
+            hp = Mathf.Clamp(hp, 0, mhp);
+        }
+        else if (curCurrency <= -25)
+        {
+            AddStatusEffect(1, 1);
+            finalDamageMult = -0.05f;
+            finalHealMult = -0.05f;
+        }
     }
     bool memoryAnimActive = false;
     IEnumerator MemoryGainLoseAnim(int amount)
