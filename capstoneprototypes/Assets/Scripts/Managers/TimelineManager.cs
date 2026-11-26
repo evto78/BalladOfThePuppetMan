@@ -582,8 +582,8 @@ public class TimelineManager : MonoBehaviour
         {
             case EventType.EnemyAtk: tEvent.enemyOwner.Attack(tEvent); break;
             case EventType.PlayerAtk: player.StartCoroutine(player.ReactableEvent(tEvent)); break;
-            case EventType.SpeedUp: combatSpeed += tEvent.enemyAction.damage; break;
-            case EventType.SpeedDown: combatSpeed /= 1f+tEvent.enemyAction.damage; break;
+            case EventType.SpeedUp: combatSpeed += tEvent.enemyAction.damage; audioMan.PlaySound(3, AudioManager.SFXType.Effect, 0.5f, 1f); break;
+            case EventType.SpeedDown: combatSpeed /= 1f+tEvent.enemyAction.damage; audioMan.PlaySound(4, AudioManager.SFXType.Effect, 0.5f, 1f); break;
             case EventType.None: break;
             case EventType.Heal: player.StartCoroutine(player.ReactableEvent(tEvent)); break;
             case EventType.ReverseStart: break;
@@ -635,11 +635,11 @@ public class TimelineManager : MonoBehaviour
 
             if (halfTick)
             {
-                metronomeSFX = audioMan.PlaySound(0, AudioManager.SFXType.Effect, 1f, combatSpeed);
+                metronomeSFX = audioMan.PlaySound(0, AudioManager.SFXType.Effect, 0.5f, combatSpeed);
             }
             else
             {
-                metronomeSFX = audioMan.PlaySound(0, AudioManager.SFXType.Effect, 1f, combatSpeed);
+                metronomeSFX = audioMan.PlaySound(0, AudioManager.SFXType.Effect, 0.5f, combatSpeed);
             }
             halfTick = !halfTick;
         }

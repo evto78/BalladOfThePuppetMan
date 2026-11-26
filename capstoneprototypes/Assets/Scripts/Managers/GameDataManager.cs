@@ -60,7 +60,7 @@ public class GameDataManager : MonoBehaviour
         {
             case State.StartGame: 
                 player.equippedSkills = startingSkills; //Equip the player
-                audioMan.PlayMusic(0, 1, 1); // Start playing the ambience
+                audioMan.PlayMusic(1, 1, 1); // Start playing the ambience
                 ChangeState(State.RoomSelection); // Open up room selection
                 break;
             case State.StartCombat:
